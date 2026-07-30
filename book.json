@@ -1,6 +1,6 @@
 {
-  "title": "Repositorio de ejemplo GitBook",
-  "description": "Estructura estandarizada de ejemplo para proyectos GitBook, con generación automática de PDF y EPUB y despliegue continuo vía GitHub.",
+  "title": "Apuntes Sistemas Programables - ISC - TecNM",
+  "description": "Apuntes electrónicos para la asignatura de Sistemas Programables de la carrera de Ingeniería en Sistemas Computacionales del TecNM.",
   "author": "Ma. Elena Martínez Durán",
   "language": "es",
   "root": "./",
@@ -18,8 +18,8 @@
   "pdf": {
     "pageNumbers": true,
     "fontSize": 12,
-    "fontFamily": "Arial",
-    "paperSize": "a4",
+    "fontFamily": "Noto Sans",
+    "paperSize": "letter",
     "chapterMark": "pagebreak",
     "margin": {
       "right": 62,
@@ -33,7 +33,7 @@
   },
   "links": {
     "sidebar": {
-      "Repositorio en GitHub": "https://github.com/tu-usuario/gitbook-example"
+      "Repositorio en GitHub": "https://github.com/tu-usuario/apuntes-sistemas-programables"
     }
   }
 }
