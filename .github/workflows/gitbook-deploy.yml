@@ -1,0 +1,51 @@
+name: Build y despliegue del libro (HonKit)
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar HonKit
+        # HonKit es el fork mantenido de GitBook (gitbook-cli fue
+        # descontinuado por su autor original en 2019 y ya no genera
+        # salida funcional en entornos Node/npm modernos). HonKit usa
+        # los mismos archivos book.json y SUMMARY.md sin cambios.
+        # Ver: https://github.com/honkit/honkit
+        run: npm install -g honkit
+
+      - name: Instalar Calibre (requerido para exportar PDF/EPUB)
+        run: sudo apt-get update && sudo apt-get install -y calibre
+
+      - name: Dar permisos de ejecución al script de build
+        run: chmod +x scripts/build.sh
+
+      - name: Generar sitio HTML, PDF y EPUB
+        run: ./scripts/build.sh
+
+      - name: Desplegar sitio HTML a GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_book
+
+      - name: Publicar PDF y EPUB como artefactos de la ejecución
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitbook-exports
+          path: dist/
