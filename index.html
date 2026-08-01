@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <title>Introducción · Apuntes Sistemas Programables (SCC-1023)</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="">
+        <meta name="description" content="Contiene la descripción general de la asignatura">
         <meta name="generator" content="HonKit 6.2.2">
         <meta name="author" content="Ma. Elena Martínez Durán">
         
@@ -122,9 +122,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="chapters/capitulo1/instalacion.md">
+        <li class="chapter " data-level="1.2.1" data-path="capitulo1/1.1-instalacion-del-entorno.html">
             
-                <span>
+                <a href="capitulo1/1.1-instalacion-del-entorno.html">
             
                     
                     1.1 Instalación del entorno
@@ -404,22 +404,39 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="repositorio-de-ejemplo-gitbook">Repositorio de ejemplo GitBook</h1>
-<p>Este repositorio es una plantilla de referencia que muestra una <strong>estructura de carpetas estandarizada</strong> para proyectos de documentación con <a href="https://www.gitbook.com/" target="_blank">GitBook</a>, lista para generar PDF y EPUB de forma automatizada y para desplegarse de forma continua desde GitHub.</p>
+                                <h1 id="introducción">Introducción</h1>
+<p><strong>Sistemas Programables (SCC-1023)</strong> es una asignatura de especial relevancia dentro de la retícula de la carrera de <strong>Ingeniería en Sistemas Computacionales del TecNM (Plan ISIC-2010-224)</strong>, ya que establece el puente crucial entre el software y el hardware. </p>
+<p>Mientras que otras asignaturas se centran en el desarrollo de aplicaciones de alto nivel, esta asignatura <strong>se enfoca</strong> en la capa de interacción y control directo con el mundo físico. </p>
+<p>Esta asignatura <strong>se cursa</strong> en los semestres avanzados (del séptimo en adelante), lo que permite al estudiante aplicar conocimientos previos de Sistemas Digitales, Arquitectura de Computadoras y Lenguajes de Programación. </p>
+<p>Su <strong>propósito fundamental</strong> es que el futuro Ingeniero en Sistemas Computacionales adquiera la competencia para aplicar microcontroladores en el diseño de interfaces hombre-máquina (HMI) y máquina-máquina (MMI), así como en la creación de sistemas programables y sistemas embebidos. </p>
+<p>La <strong>importancia</strong> de la asignatura de Sistemas Programables radica en su contribución directa a las habilidades de evaluación de tecnologías de hardware y el diseño de soluciones de automatización. Al conocer, programar e implementar soluciones con los microcontroladores, el egresado no solo es un desarrollador de software, sino un integrador tecnológico capaz de generar soluciones innovadoras en campos de alta demanda como la Internet de las Cosas (IoT), la robótica y la automatización industrial, asegurando así que el Ingeniero en Sistemas Computacionales pueda implementar aplicaciones computacionales para solucionar problemas de diversos contextos.</p>
+<p>El programa oficial aborda de manera integral los componentes y la metodología para el diseño de sistemas de control inteligente:</p>
+<ul>
+<li>Fundamentos de Sistemas Programables: Introducción a la arquitectura y modelos de programación de microcontroladores.</li>
+<li>Sensores y Actuadores: Estudio de los elementos de entrada y salida que permiten al sistema interactuar con el entorno (adquisición de datos y control físico).</li>
+<li>Puertos de E/S y Buses de Comunicación: Configuración y manejo de los mecanismos de transferencia de datos dentro y fuera del microcontrolador (ej. puertos paralelos, seriales).</li>
+<li>Comunicaciones: Implementación de protocolos seriales como I2C, SPI o UART para la comunicación entre dispositivos o con otros sistemas.</li>
+<li>Interfaces Hombre-Máquina (HMI): Diseño e implementación de hardware y software para la interacción con el usuario (ej. teclados, pantallas, LEDs).</li>
+</ul>
+<p>Puntos importantes:</p>
+<ul>
+<li><a href="chapters/capitulo1/programaoficial.md">1.1 Programa Oficial</a></li>
+<li><a href="chapters/capitulo1/competencias.md">1.2 Competencias</a></li>
+</ul>
 <blockquote>
 <p><strong>Nota:</strong> la generación de PDF/EPUB/HTML usa <a href="https://github.com/honkit/honkit" target="_blank">HonKit</a> en lugar de <code>gitbook-cli</code>. HonKit es el fork mantenido activamente de GitBook — usa los mismos archivos <code>book.json</code> y <code>SUMMARY.md</code> sin cambios. Se adoptó porque <code>gitbook-cli</code> fue descontinuado por su autor original en 2019 y ya no genera salida funcional en versiones modernas de Node/npm (ver <a href="chapters/capitulo5/solucion-problemas.html">capítulo 5, Solución de problemas</a>).</p>
 </blockquote>
 <p>Úsalo como punto de partida: copia la estructura, reemplaza el contenido de prueba de <code>chapters/</code> por el tuyo y ajusta <code>book.json</code> a tu gusto.</p>
 <h2 id="índice-de-este-documento">Índice de este documento</h2>
 <ol>
-<li><a href="#1-estructura-del-repositorio">Estructura del repositorio</a></li>
-<li><a href="#2-requisitos-previos">Requisitos previos</a></li>
-<li><a href="#3-uso-local-previsualizar-el-libro">Uso local: previsualizar el libro</a></li>
-<li><a href="#4-generar-pdf-y-epub-automáticamente">Generar PDF y EPUB automáticamente</a></li>
-<li><a href="#5-sincronizar-el-repositorio-con-github">Sincronizar el repositorio con GitHub</a></li>
-<li><a href="#6-despliegue-continuo-cicd-con-github-actions">Despliegue continuo (CI/CD) con GitHub Actions</a></li>
-<li><a href="#7-personalizar-la-plantilla">Personalizar la plantilla</a></li>
-<li><a href="#8-agregar-un-capítulo-nuevo-con-la-plantilla">Agregar un capítulo nuevo con la plantilla</a></li>
+<li><a href=".#1-estructura-del-repositorio">Estructura del repositorio</a></li>
+<li><a href=".#2-requisitos-previos">Requisitos previos</a></li>
+<li><a href=".#3-uso-local-previsualizar-el-libro">Uso local: previsualizar el libro</a></li>
+<li><a href=".#4-generar-pdf-y-epub-automáticamente">Generar PDF y EPUB automáticamente</a></li>
+<li><a href=".#5-sincronizar-el-repositorio-con-github">Sincronizar el repositorio con GitHub</a></li>
+<li><a href=".#6-despliegue-continuo-cicd-con-github-actions">Despliegue continuo (CI/CD) con GitHub Actions</a></li>
+<li><a href=".#7-personalizar-la-plantilla">Personalizar la plantilla</a></li>
+<li><a href=".#8-agregar-un-capítulo-nuevo-con-la-plantilla">Agregar un capítulo nuevo con la plantilla</a></li>
 </ol>
 <hr></hr>
 <h2 id="1-estructura-del-repositorio">1. Estructura del repositorio</h2>
@@ -505,8 +522,7 @@ brew install calibre
 <h2 id="5-sincronizar-el-repositorio-con-github">5. Sincronizar el repositorio con GitHub</h2>
 <p>Sigue estos pasos para llevar esta plantilla a un repositorio propio en GitHub:</p>
 <ol>
-<li><p><strong>Crea un repositorio vacío en GitHub</strong> (sin README, sin licencia, sin <code>.gitignore</code> — para evitar conflictos de historial con esta plantilla).</p>
-</li>
+<li><strong>Crea un repositorio vacío en GitHub</strong> (sin README, sin licencia, sin <code>.gitignore</code> — para evitar conflictos de historial con esta plantilla).</li>
 <li><p><strong>Inicializa Git localmente</strong> dentro de la carpeta del proyecto (si aún no lo está):</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> gitbook-example
 git init
@@ -520,8 +536,7 @@ git branch -M main
 git push -u origin main
 </code></pre>
 </li>
-<li><p><strong>(Opcional) Conecta el repositorio a un espacio de GitBook.com</strong> usando la integración "GitHub Sync": desde tu espacio en <a href="https://app.gitbook.com" target="_blank">app.gitbook.com</a>, ve a <em>Integrations → GitHub</em>, autoriza el acceso y selecciona este repositorio y la rama <code>main</code>. A partir de ese momento, cada <code>git push</code> a <code>main</code> actualizará automáticamente el contenido publicado en GitBook.com, y los cambios hechos en el editor visual de GitBook se sincronizarán de vuelta como <em>pull requests</em> en este repositorio. El archivo <code>.gitbook.yaml</code> incluido ya indica la ubicación de <code>README.md</code> y <code>SUMMARY.md</code> para esta integración.</p>
-</li>
+<li><strong>(Opcional) Conecta el repositorio a un espacio de GitBook.com</strong> usando la integración "GitHub Sync": desde tu espacio en <a href="https://app.gitbook.com" target="_blank">app.gitbook.com</a>, ve a <em>Integrations → GitHub</em>, autoriza el acceso y selecciona este repositorio y la rama <code>main</code>. A partir de ese momento, cada <code>git push</code> a <code>main</code> actualizará automáticamente el contenido publicado en GitBook.com, y los cambios hechos en el editor visual de GitBook se sincronizarán de vuelta como <em>pull requests</em> en este repositorio. El archivo <code>.gitbook.yaml</code> incluido ya indica la ubicación de <code>README.md</code> y <code>SUMMARY.md</code> para esta integración.</li>
 </ol>
 <p>A partir de este punto, cualquier colaborador puede clonar el repositorio, crear una rama, editar los archivos <code>.md</code> correspondientes y abrir un <em>pull request</em> siguiendo el flujo normal de Git/GitHub.</p>
 <h2 id="6-despliegue-continuo-cicd-con-github-actions">6. Despliegue continuo (CI/CD) con GitHub Actions</h2>
@@ -552,7 +567,7 @@ git push -u origin main
 <h2 id="8-agregar-un-capítulo-nuevo-con-la-plantilla">8. Agregar un capítulo nuevo con la plantilla</h2>
 <p>La carpeta <a href="chapters/_template"><code>chapters/_template/</code></a> contiene una plantilla lista para copiar cada vez que necesites un capítulo nuevo:</p>
 <ul>
-<li><a href="chapters/_template/README.md"><code>chapters/_template/README.md</code></a> — plantilla de introducción del capítulo.</li>
+<li><a href="chapters/_template"><code>chapters/_template/README.md</code></a> — plantilla de introducción del capítulo.</li>
 <li><a href="chapters/_template/seccion-plantilla.md"><code>chapters/_template/seccion-plantilla.md</code></a> — plantilla para cada sección dentro del capítulo.</li>
 </ul>
 <p>Para usarla:</p>
@@ -561,8 +576,7 @@ git push -u origin main
 <pre><code class="lang-bash"><span class="hljs-built_in">cp</span> -r chapters/_template chapters/capitulo4
 </code></pre>
 </li>
-<li><p>Dentro de <code>chapters/capitulo4/</code>, renombra <code>seccion-plantilla.md</code> por cada sección que necesites (por ejemplo <code>introduccion.md</code>, <code>casos-de-uso.md</code>), duplicando el archivo tantas veces como secciones tenga el capítulo.</p>
-</li>
+<li>Dentro de <code>chapters/capitulo4/</code>, renombra <code>seccion-plantilla.md</code> por cada sección que necesites (por ejemplo <code>introduccion.md</code>, <code>casos-de-uso.md</code>), duplicando el archivo tantas veces como secciones tenga el capítulo.</li>
 <li>Edita el <code>README.md</code> del capítulo y cada archivo de sección para reemplazar los títulos y textos de ejemplo, y borra los comentarios <code>&lt;!-- ... --&gt;</code> de instrucciones.</li>
 <li>Actualiza el enlace en el <code>README.md</code> del capítulo para que apunte a cada sección real.</li>
 <li><p>Registra el nuevo capítulo y sus secciones en <a href="SUMMARY.md"><code>SUMMARY.md</code></a>, respetando la sangría de la jerarquía existente:</p>
@@ -571,20 +585,19 @@ git push -u origin main
 <span class="hljs-bullet">    *</span> [<span class="hljs-string">4.2 Segunda sección</span>](<span class="hljs-link">chapters/capitulo4/casos-de-uso.md</span>)
 </code></pre>
 </li>
-<li><p>Guarda y confirma los cambios; si el repositorio ya está sincronizado con GitBook (Git Sync), el nuevo capítulo aparecerá automáticamente en el space tras el commit.</p>
-</li>
+<li>Guarda y confirma los cambios; si el repositorio ya está sincronizado con GitBook (Git Sync), el nuevo capítulo aparecerá automáticamente en el space tras el commit.</li>
 </ol>
 <p>La carpeta <code>_template/</code> en sí <strong>no debe</strong> agregarse a <code>SUMMARY.md</code> — solo sirve como origen para copiar, no como contenido publicado del libro.</p>
 <hr></hr>
 <p>Para más detalles, consulta también:</p>
 <ul>
-<li><a href="chapters/capitulo1/">Capítulo 1: Primeros pasos</a></li>
-<li><a href="chapters/capitulo2/">Capítulo 2: Escritura de contenido</a></li>
-<li><a href="chapters/capitulo3/">Capítulo 3: Generación y despliegue</a></li>
-<li><a href="chapters/capitulo4/">Capítulo 4: Colaboración y buenas prácticas</a></li>
-<li><a href="chapters/capitulo5/">Capítulo 5: Preguntas frecuentes</a></li>
-<li><a href="chapters/capitulo6/">Capítulo 6: Glosario</a></li>
-<li><a href="chapters/capitulo7/">Capítulo 7: Índice temático</a></li>
+<li><a href="chapters/capitulo1">Capítulo 1: Primeros pasos</a></li>
+<li><a href="chapters/capitulo2">Capítulo 2: Escritura de contenido</a></li>
+<li><a href="chapters/capitulo3">Capítulo 3: Generación y despliegue</a></li>
+<li><a href="chapters/capitulo4">Capítulo 4: Colaboración y buenas prácticas</a></li>
+<li><a href="chapters/capitulo5">Capítulo 5: Preguntas frecuentes</a></li>
+<li><a href="chapters/capitulo6">Capítulo 6: Glosario</a></li>
+<li><a href="chapters/capitulo7">Capítulo 7: Índice temático</a></li>
 </ul>
 
                                 
@@ -625,7 +638,7 @@ git push -u origin main
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introducción","level":"1.1","depth":1,"next":{"title":"Capítulo 1: Primeros pasos","level":"1.2","depth":1,"path":"chapters/capitulo1/README.md","ref":"chapters/capitulo1/README.md","articles":[{"title":"1.1 Instalación del entorno","level":"1.2.1","depth":2,"path":"chapters/capitulo1/instalacion.md","ref":"chapters/capitulo1/instalacion.md","articles":[]},{"title":"1.2 Estructura del proyecto","level":"1.2.2","depth":2,"path":"chapters/capitulo1/estructura.md","ref":"chapters/capitulo1/estructura.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"README.md","mtime":"2026-08-01T22:04:48.126Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-01T22:06:07.677Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"description":"Contiene la descripción general de la asignatura","title":"Introducción","level":"1.1","depth":1,"next":{"title":"Capítulo 1: Primeros pasos","level":"1.2","depth":1,"path":"chapters/capitulo1/README.md","ref":"chapters/capitulo1/README.md","articles":[{"title":"1.1 Instalación del entorno","level":"1.2.1","depth":2,"path":"capitulo1/1.1-instalacion-del-entorno.md","ref":"capitulo1/1.1-instalacion-del-entorno.md","articles":[]},{"title":"1.2 Estructura del proyecto","level":"1.2.2","depth":2,"path":"chapters/capitulo1/estructura.md","ref":"chapters/capitulo1/estructura.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"README.md","mtime":"2026-08-01T23:26:14.013Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-01T23:27:23.675Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
