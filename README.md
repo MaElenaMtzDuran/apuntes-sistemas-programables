@@ -92,7 +92,7 @@ Cada capítulo de prueba tiene su propio `README.md` de introducción y archivos
 Clona el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/gitbook-example.git
+git clone https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables.git
 cd gitbook-example
 ```
 
@@ -139,7 +139,7 @@ Sigue estos pasos para llevar esta plantilla a un repositorio propio en GitHub:
 3. **Conecta tu repositorio local con el remoto de GitHub:**
 
    ```bash
-   git remote add origin https://github.com/tu-usuario/gitbook-example.git
+   git remote add origin https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables.git
    git branch -M main
    git push -u origin main
    ```
@@ -164,7 +164,7 @@ Para activarlo en tu propio repositorio:
 1. Sube este proyecto a GitHub siguiendo la sección anterior.
 2. En **Settings → Pages** del repositorio, configura la fuente de GitHub Pages como la rama `gh-pages` (creada automáticamente por la acción en el primer despliegue exitoso).
 3. En **Settings → Actions → General**, asegúrate de que los *workflow permissions* estén configurados como "Read and write permissions", para que la acción pueda publicar en `gh-pages` y subir artefactos.
-4. Haz un `git push` a `main`: la pestaña *Actions* mostrará la ejecución del flujo, y al finalizar el sitio estará disponible en `https://tu-usuario.github.io/gitbook-example/`, con el PDF y el EPUB descargables desde los artefactos de esa ejecución.
+4. Haz un `git push` a `main`: la pestaña *Actions* mostrará la ejecución del flujo, y al finalizar el sitio estará disponible en `https://maelenamtzduran.github.io/apuntes-sistemas-programables/`, con el PDF y el EPUB descargables desde los artefactos de esa ejecución.
 
 Con esto, cada cambio fusionado a `main` se refleja automáticamente en la documentación publicada, sin pasos manuales adicionales.
 
