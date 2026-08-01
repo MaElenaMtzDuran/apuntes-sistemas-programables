@@ -82,7 +82,7 @@
     
         
         <li>
-            <a href="https://github.com/tu-usuario/apuntes-sistemas-programables" target="_blank" class="custom-link">Repositorio en GitHub</a>
+            <a href="https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables" target="_blank" class="custom-link">Repositorio en GitHub</a>
         </li>
     
     
@@ -483,7 +483,7 @@ brew install calibre
 </ul>
 <h2 id="3-uso-local-previsualizar-el-libro">3. Uso local: previsualizar el libro</h2>
 <p>Clona el repositorio:</p>
-<pre><code class="lang-bash">git <span class="hljs-built_in">clone</span> https://github.com/tu-usuario/gitbook-example.git
+<pre><code class="lang-bash">git <span class="hljs-built_in">clone</span> https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables.git
 <span class="hljs-built_in">cd</span> gitbook-example
 </code></pre>
 <p>Levanta un servidor local de previsualización (por defecto en <code>http://localhost:4000</code>):</p>
@@ -515,7 +515,7 @@ git commit -m <span class="hljs-string">"Estructura inicial del repositorio GitB
 </code></pre>
 </li>
 <li><p><strong>Conecta tu repositorio local con el remoto de GitHub:</strong></p>
-<pre><code class="lang-bash">git remote add origin https://github.com/tu-usuario/gitbook-example.git
+<pre><code class="lang-bash">git remote add origin https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables.git
 git branch -M main
 git push -u origin main
 </code></pre>
@@ -539,7 +539,7 @@ git push -u origin main
 <li>Sube este proyecto a GitHub siguiendo la sección anterior.</li>
 <li>En <strong>Settings → Pages</strong> del repositorio, configura la fuente de GitHub Pages como la rama <code>gh-pages</code> (creada automáticamente por la acción en el primer despliegue exitoso).</li>
 <li>En <strong>Settings → Actions → General</strong>, asegúrate de que los <em>workflow permissions</em> estén configurados como "Read and write permissions", para que la acción pueda publicar en <code>gh-pages</code> y subir artefactos.</li>
-<li>Haz un <code>git push</code> a <code>main</code>: la pestaña <em>Actions</em> mostrará la ejecución del flujo, y al finalizar el sitio estará disponible en <code>https://tu-usuario.github.io/gitbook-example/</code>, con el PDF y el EPUB descargables desde los artefactos de esa ejecución.</li>
+<li>Haz un <code>git push</code> a <code>main</code>: la pestaña <em>Actions</em> mostrará la ejecución del flujo, y al finalizar el sitio estará disponible en <code>https://maelenamtzduran.github.io/apuntes-sistemas-programables/</code>, con el PDF y el EPUB descargables desde los artefactos de esa ejecución.</li>
 </ol>
 <p>Con esto, cada cambio fusionado a <code>main</code> se refleja automáticamente en la documentación publicada, sin pasos manuales adicionales.</p>
 <h2 id="7-personalizar-la-plantilla">7. Personalizar la plantilla</h2>
@@ -625,7 +625,7 @@ git push -u origin main
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introducción","level":"1.1","depth":1,"next":{"title":"Capítulo 1: Primeros pasos","level":"1.2","depth":1,"path":"chapters/capitulo1/README.md","ref":"chapters/capitulo1/README.md","articles":[{"title":"1.1 Instalación del entorno","level":"1.2.1","depth":2,"path":"chapters/capitulo1/instalacion.md","ref":"chapters/capitulo1/instalacion.md","articles":[]},{"title":"1.2 Estructura del proyecto","level":"1.2.2","depth":2,"path":"chapters/capitulo1/estructura.md","ref":"chapters/capitulo1/estructura.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables(SCC-1023) - ISC - TecNM","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/tu-usuario/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"README.md","mtime":"2026-07-30T22:59:25.849Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-07-30T23:00:47.180Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introducción","level":"1.1","depth":1,"next":{"title":"Capítulo 1: Primeros pasos","level":"1.2","depth":1,"path":"chapters/capitulo1/README.md","ref":"chapters/capitulo1/README.md","articles":[{"title":"1.1 Instalación del entorno","level":"1.2.1","depth":2,"path":"chapters/capitulo1/instalacion.md","ref":"chapters/capitulo1/instalacion.md","articles":[]},{"title":"1.2 Estructura del proyecto","level":"1.2.2","depth":2,"path":"chapters/capitulo1/estructura.md","ref":"chapters/capitulo1/estructura.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables(SCC-1023) - ISC - TecNM","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"README.md","mtime":"2026-08-01T21:27:42.002Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-01T21:28:51.546Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
