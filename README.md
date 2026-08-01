@@ -22,7 +22,9 @@ El programa oficial aborda de manera integral los componentes y la metodología 
 * Comunicaciones: Implementación de protocolos seriales como I2C, SPI o UART para la comunicación entre dispositivos o con otros sistemas.
 * Interfaces Hombre-Máquina (HMI): Diseño e implementación de hardware y software para la interacción con el usuario (ej. teclados, pantallas, LEDs).
 
-Puntos importantes:
+### Programa oficial.
+
+El contenido de la asignatura esta descrito en el programa oficial que se encuentra en [Programa oficial](https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables/blob/main/chapters/Sistemas%20Programables%20SCC-1023%20ISC.pdf)
 
 * [1.1 Programa Oficial](chapters/capitulo1/programaoficial.md)
 * [1.2 Competencias](chapters/capitulo1/competencias.md)
