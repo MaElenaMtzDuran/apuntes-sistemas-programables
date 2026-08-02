@@ -185,7 +185,7 @@ El temario completo es el siguiente:
 * Capacidad de trabajo en equipo
 * Habilidad para trabajar en forma autónoma
 
-
+El desarrollo de los siguientes apuntes electrónicos consideran una **adaptación en la secuencia de los contenidos**, el tema 3 se desarrollará como tema 1, los temas 1 y 2, serán ahora los temas 2 y 3; los temas 4, 5 y 6 llevarán la misma secuencia.
 
 ***
 
