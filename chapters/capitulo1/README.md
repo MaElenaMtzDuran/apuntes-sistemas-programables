@@ -23,17 +23,12 @@
 
 ### Desarrollo
 
-* [1.1 Características generales](../capitulo2/sintaxis.md)
-* [1.2 Circuitería alternativa para entrada/salida](../capitulo2/configuracion.md)
+* [1.1 Características generales](../../capitulo1/1.1-instalacion-del-entorno.md)
+* [1.2 Circuitería alternativa para entrada/salida](estructura.md)
 
 ### Recursos
 
 ### Actividades de aprendizaje
 
 ### Evaluación
-
-Contenido de este capítulo:
-
-* [1.1 Características generales](../capitulo2/sintaxis.md)
-* [1.2 Circuitería alternativa para entrada/salida](../capitulo2/configuracion.md)
 
