@@ -10,7 +10,7 @@
 * [Tema 3: Actuadores](chapters/capitulo3/README.md)
   * [3.1 Generar PDF y EPUB](chapters/capitulo3/exportacion.md)
   * [3.2 Integración continua con GitHub](chapters/capitulo3/integracion-continua.md)
-* [Capítulo 4: Colaboración y buenas prácticas](chapters/capitulo4/README.md)
+* [Tema 4: Programación de microcontroladores](chapters/capitulo4/README.md)
   * [4.1 Flujo de revisión con pull requests](chapters/capitulo4/revision-cambios.md)
   * [4.2 Buenas prácticas de redacción](chapters/capitulo4/buenas-practicas.md)
 * [Capítulo 5: Preguntas frecuentes](chapters/capitulo5/README.md)
