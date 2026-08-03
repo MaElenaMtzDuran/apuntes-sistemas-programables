@@ -148,7 +148,7 @@ El temario completo es el siguiente:
 
 * _**Comprende y aplica las herramientas básicas de análisis de los sistemas analógicos y digitales para resolver problemas del ámbito computacional.**_ (Principios Eléctricos y Aplicaciones Digitales Clave de la asignatura: SCD-1018)
 *  _**Reconoce diferentes modelos de arquitecturas y recomienda aplicaciones para resolver problemas de su entorno profesional.**_ (Arquitectura de Computadoras. SCD-1003)
-*  _**Desarrolla software para establecer la interfaz hombre-máquina y máquina-máquina.**_
+*  _**Desarrolla software para establecer la interfaz hombre-máquina y máquina-máquina.**_ (Lenguajes de Interfaz. SCC-1014)
 
 #### Competencias especifícas.
 
