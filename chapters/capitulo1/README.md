@@ -11,27 +11,26 @@
 
 1.  Características generales.
 
-    1.1 Introducción    \
-    1.2 Familias    \
-    1.3 Ancho de buses    \
+    1.1 Introducción\
+    1.2 Familias\
+    1.3 Ancho de buses\
     1.4 Memoria
-2.    Circuitería alternativa para entrada/salida    \
+2.  Circuitería alternativa para entrada/salida\
     2.1 Generalidades.
 
-    2.2 Displays LED, LCD y otros dispositivos de visualización.    \
+    2.2 Displays LED, LCD y otros dispositivos de visualización.\
     2.3 Codificadores de posición.
 
 ### Desarrollo
 
-
-
 ### Recursos
-
-
 
 ### Actividades de aprendizaje
 
-
-
 ### Evaluación
+
+Contenido de este capítulo:
+
+* [1.1 Características generales](../capitulo2/sintaxis.md)
+* [1.2 Circuitería alternativa para entrada/salida](../capitulo2/configuracion.md)
 
