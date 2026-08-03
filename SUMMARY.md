@@ -7,7 +7,7 @@
 * [Tema 2: Sensores](chapters/capitulo2/README.md)
   * [2.1 Sintaxis Markdown en GitBook](chapters/capitulo2/sintaxis.md)
   * [2.2 Configuración avanzada (book.json)](chapters/capitulo2/configuracion.md)
-* [Capítulo 3: Generación y despliegue](chapters/capitulo3/README.md)
+* [Tema 3: Actuadores](chapters/capitulo3/README.md)
   * [3.1 Generar PDF y EPUB](chapters/capitulo3/exportacion.md)
   * [3.2 Integración continua con GitHub](chapters/capitulo3/integracion-continua.md)
 * [Capítulo 4: Colaboración y buenas prácticas](chapters/capitulo4/README.md)
