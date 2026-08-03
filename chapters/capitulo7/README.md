@@ -4,15 +4,7 @@ icon: book-open-lines
 
 # Fuentes consultadas
 
-\[1] F. Santiago Espinosa, _El Microcontrolador ATMega328P de Microchip: Programación en Ensamblador, Lenguaje C y un enlace con Arduino_. Huajuapan de León, Oaxaca: Univ. Tecnológica de la Mixteca, 2021.
-
-
-
-
-
-
-
-
+\[1][^1] F. Santiago Espinosa, _El Microcontrolador ATMega328P de Microchip: Programación en Ensamblador, Lenguaje C y un enlace con Arduino_. Huajuapan de León, Oaxaca: Univ. Tecnológica de la Mixteca, 2021.
 
 \#### \[1] Guía rápida por tema para encontrar dónde se trata cada asunto dentro del libro, ordenada alfabéticamente.
 
@@ -54,7 +46,7 @@ icon: book-open-lines
 ### Plantillas para capítulos nuevos
 
 * [`chapters/_template/`](../_template/)
-* [README principal, sección 8](../../#8-agregar-un-capítulo-nuevo-con-la-plantilla)
+* README principal, sección 8
 
 ### Preguntas frecuentes y solución de problemas
 
@@ -69,3 +61,5 @@ icon: book-open-lines
 ### Sintaxis Markdown
 
 * [2.1 Sintaxis Markdown en GitBook](../capitulo2/sintaxis.md)
+
+[^1]: Ref1
