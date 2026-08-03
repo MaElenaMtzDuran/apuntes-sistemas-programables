@@ -2,8 +2,8 @@
 
 * [Introducción](README.md)
 * [Tema 1: Microcontroladores](chapters/capitulo1/README.md)
-  * [1.1 Instalación del entorno](capitulo1/1.1-instalacion-del-entorno.md)
-  * [1.2 Estructura del proyecto](chapters/capitulo1/estructura.md)
+  * [1.1 Características generales](capitulo1/1.1-instalacion-del-entorno.md)
+  * [1.2 Circuitería alternativa para entrada/salida](chapters/capitulo1/estructura.md)
 * [Tema 2: Sensores](chapters/capitulo2/README.md)
   * [2.1 Sintaxis Markdown en GitBook](chapters/capitulo2/sintaxis.md)
   * [2.2 Configuración avanzada (book.json)](chapters/capitulo2/configuracion.md)

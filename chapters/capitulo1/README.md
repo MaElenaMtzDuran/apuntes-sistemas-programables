@@ -23,6 +23,9 @@
 
 ### Desarrollo
 
+* [1.1 Características generales](../capitulo2/sintaxis.md)
+* [1.2 Circuitería alternativa para entrada/salida](../capitulo2/configuracion.md)
+
 ### Recursos
 
 ### Actividades de aprendizaje
