@@ -1,4 +1,8 @@
-# 1.2 Estructura del proyecto
+---
+icon: rotate
+---
+
+# 1.2 Circuitería alternativa para entrada/salida
 
 La plantilla sigue una estructura de carpetas estandarizada, pensada para escalar a libros con muchos capítulos:
 
@@ -31,6 +35,6 @@ gitbook-example/
 
 **Convenciones usadas en esta plantilla:**
 
-- Cada capítulo vive en su propia carpeta dentro de `chapters/`, con un `README.md` como introducción del capítulo y archivos `.md` adicionales para cada sección.
-- `SUMMARY.md` es la única fuente de verdad sobre el orden y la jerarquía de los capítulos; GitBook lo usa para construir el índice y la navegación.
-- Los archivos generados (`_book/`, `dist/`, `node_modules/`) nunca se versionan; están excluidos en `.gitignore`.
+* Cada capítulo vive en su propia carpeta dentro de `chapters/`, con un `README.md` como introducción del capítulo y archivos `.md` adicionales para cada sección.
+* `SUMMARY.md` es la única fuente de verdad sobre el orden y la jerarquía de los capítulos; GitBook lo usa para construir el índice y la navegación.
+* Los archivos generados (`_book/`, `dist/`, `node_modules/`) nunca se versionan; están excluidos en `.gitignore`.
