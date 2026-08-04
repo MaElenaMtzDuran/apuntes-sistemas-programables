@@ -14,7 +14,9 @@ icon: book-open-lines
 
 \[5] L. Parra Reynada, _Microprocesadores_, 1st ed. Red Tercer Milenio, 2012. \[Online]. Available: https://www.aliat.click/BibliotecasDigitales/sistemas/Microprocesadores.pdf
 
+\[6] P. Budris and Fox Andina, “Microcontroladores PIC,” _Técnico En Electrónica Conceptos Fundamentales Y Práctica Profesional_, no. 23, pp. 1–24, 2013.
 
+\[7] J. M. Pestano Herrera, _Microcontrolador STM32: Programación y desarrollo_. Madrid, España: RA-MA Editorial, 2018.
 
 \#### \[1] Guía rápida por tema para encontrar dónde se trata cada asunto dentro del libro, ordenada alfabéticamente.
 
