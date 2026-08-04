@@ -4,7 +4,9 @@ icon: book-open-lines
 
 # Fuentes consultadas
 
-\[1][^1] F. Santiago Espinosa, _El Microcontrolador ATMega328P de Microchip: Programación en Ensamblador, Lenguaje C y un enlace con Arduino_. Huajuapan de León, Oaxaca: Univ. Tecnológica de la Mixteca, 2021.
+\[1][^1] F. S. Espinosa, _El Microcontrolador ATMega328P de Microchip: Programación en Ensamblador, Lenguaje C y un enlace con Arduino_. Huajuapan de León, Oaxaca: Univ. Tecnológica de la Mixteca, 2021.
+
+\[2] F. R. Domínguez, E. P. Municio, and L. J. L. Pérez, _Microcontrolador PIC16F84. Desarrollo de proyectos. 3_<sup>_a_</sup>_&#x20;edición_. Ra-Ma Editorial, 2009.
 
 \#### \[1] Guía rápida por tema para encontrar dónde se trata cada asunto dentro del libro, ordenada alfabéticamente.
 
