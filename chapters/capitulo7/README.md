@@ -8,6 +8,14 @@ icon: book-open-lines
 
 \[2] F. R. Domínguez, E. P. Municio, and L. J. L. Pérez, _Microcontrolador PIC16F84. Desarrollo de proyectos. 3_<sup>_a_</sup>_&#x20;edición_. Ra-Ma Editorial, 2009.
 
+\[3] E. Hernández García, _Antologías de microcontroladores_, 1st ed., vol. 1. Instituto Tecnológico Superior de Zacapoaxtla, 2016. \[Online]. Available: https://www.academia.edu/34783380/Antolog%C3%ADa\_de\_Microcontroladores
+
+\[4] J. M. A. Usategui and I. A. Martínez, _Microcontroladores PIC: diseño práctico de aplicaciones : primera parte, el PIC 16F84, lenguajes PBASIC y Ensamblador_. 2003.
+
+\[5] L. Parra Reynada, _Microprocesadores_, 1st ed. Red Tercer Milenio, 2012. \[Online]. Available: https://www.aliat.click/BibliotecasDigitales/sistemas/Microprocesadores.pdf
+
+
+
 \#### \[1] Guía rápida por tema para encontrar dónde se trata cada asunto dentro del libro, ordenada alfabéticamente.
 
 ### Automatización de exportación (PDF/EPUB)
