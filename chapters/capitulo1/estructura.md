@@ -66,6 +66,24 @@ Físicamente, los microcontroladores académicos suelen presentarse en encapsula
 
 Arduino es un ecosistema que combina hardware abierto, un entorno de desarrollo (IDE) y una comunidad global. Su objetivo es permitir el desarrollo rápido de prototipos sin requerir conocimientos profundos iniciales de los registros del microcontrolador.
 
+Para el desarrollo de esta documentación se adopta **Arduino** como microcontrolador y ecosistema de trabajo por las siguientes razones verificables:
+
+
+
+1. **Hardware abierto y documentado.** Arduino publica esquemáticos, archivos CAD y código fuente bajo licencias abiertas; la placa de referencia usada en este documento es la Arduino Uno Rev3 ([Arduino](https://store-usa.arduino.cc/products/arduino-uno-rev3)).
+2.   **Microcontrolador coherente con la teoría ya desarrollada**. La Arduino Uno Rev3 usa el ATmega328P (Microchip/Atmel, 8 bits, arquitectura Harvard modificada) (Arduino,   \
+   especificaciones técnicas de la UNO Rev3; Microchip/Atmel, ATmega328P Data Sheet).   \
+   Curva de aprendizaje reducida sin abandonar el hardware real. El Arduino IDE compila, enlaza   \
+   y descarga el programa mediante el bootloader residente por USB, sin necesitar un   \
+   programador ICSP independiente para el uso básico, lo que agiliza el ciclo editar-compilarprogramar   \
+   en sesiones de laboratorio con muchos equipos (Arduino IDE Documentation).   \
+   Costo y disponibilidad. Existen múltiples distribuidores y clones compatibles de bajo costo, y   \
+   el diseño abierto permite reproducir o reparar placas sin depender de un proveedor único.   \
+   Ecosistema y comunidad. Bibliotecas oficiales y de terceros para LCD, sensores,   \
+   comunicación y motores reducen el tiempo de integración, documentadas en la referencia   \
+   oficial del lenguaje (Arduino, Language Reference).
+3.
+
 **Los Tres Principales Productos**
 
 1. **Arduino UNO:**
