@@ -18,6 +18,8 @@ icon: book-open-lines
 
 \[7] J. M. Pestano Herrera, _Microcontrolador STM32: Programación y desarrollo_. Madrid, España: RA-MA Editorial, 2018.
 
+\[8] J. R. Clavijo Mendoza, _Diseño y simulación de sistemas microcontrolados en Lenguaje C_, 1st ed. ISIS, 2011.
+
 \#### \[1] Guía rápida por tema para encontrar dónde se trata cada asunto dentro del libro, ordenada alfabéticamente.
 
 ### Automatización de exportación (PDF/EPUB)
