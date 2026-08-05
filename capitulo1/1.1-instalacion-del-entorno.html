@@ -573,14 +573,44 @@
 <p>Si bien esta arquitectura consume más líneas de entrada/salida internas, esto no representa un problema serio en los microcontroladores, ya que tanto la CPU como las memorias comparten el mismo encapsulado de silicio, permitiendo un diseño compacto y de alto rendimiento.</p>
 <h3 id="112-familias">1.1.2 Familias</h3>
 <h4 id="fabricantes-y-familias-de-microcontroladores-actualizada-2026">Fabricantes y Familias de Microcontroladores (Actualizada 2026)</h4>
-<p>A continuación se presenta la tabla actualizada de las principales familias de microcontroladores y sus fabricantes:</p>
-<figure><img src="../.gitbook/assets/Imagen14 FamiliasFabricantes.png" alt=""></img><figcaption></figcaption></figure>
+<p>A continuación se presenta la tabla actualizada de las principales familias de microcontroladores y sus fabricantes [3] [4] [5] [6] [7] [8]:</p>
+<figure><img src="../.gitbook/assets/Imagen16 Tabla Familias Fabricantes.JPG" alt=""></img><figcaption></figcaption></figure>
 
+<p><strong>Observaciones sobre las Familias</strong></p>
+<ul>
+<li><strong>Segmentación por Bits:</strong> La clasificación más común se basa en la longitud de palabra que procesa la ALU (4, 8, 16 o 32 bits). Los dispositivos de <strong>8 bits</strong> siguen siendo los más populares y flexibles para diseños típicos debido a su bajo costo y eficacia.</li>
+<li><strong>Evolución Tecnológica:</strong> Actualmente existe una migración masiva hacia microcontroladores de <strong>32 bits</strong> basados en núcleos <strong>ARM Cortex-M</strong>, liderada por empresas como STMicroelectronics y NXP.</li>
+<li><strong>Arquitecturas Emergentes:</strong> Se observa una tendencia creciente hacia la adopción de la arquitectura abierta <strong>RISC-V</strong> por parte de fabricantes como Infineon y Renesas para ganar soberanía tecnológica y reducir costos de licenciamiento.</li>
+<li><strong>Arquitectura Harvard vs. von Neumann:</strong> La mayoría de las familias modernas (como PIC y AVR) utilizan la <strong>arquitectura Harvard</strong>, que separa la memoria de programa de la de datos para permitir el acceso simultáneo y aumentar la velocidad de ejecución.</li>
+</ul>
+<table data-view="cards"><thead><tr><th data-hidden="" data-card-cover="" data-type="image">Cover image</th></tr></thead><tbody><tr><td><a href="../.gitbook/assets/Imagen18%20RISC-V.jfif">Imagen18 RISC-V.jfif</a></td></tr><tr><td><a href="../.gitbook/assets/Imagen17%20Revolución_del_hardware_abierto%20RISC-V.png">Imagen17 Revolución_del_hardware_abierto RISC-V.png</a></td></tr></tbody></table>
 
-
-
-<p>\
-1.1.3 Ancho de buses</p>
+<h4 id="113-ancho-de-buses">1.1.3 Ancho de buses</h4>
+<p>El mercado de microcontroladores está dominado por un grupo selecto de empresas que han consolidado su posición mediante la innovación tecnológica y la adquisición de competidores.</p>
+<h4 id="principales-fabricantes-y-tamaños-de-microcontroladores">Principales Fabricantes y Tamaños de Microcontroladores</h4>
+<p>Los fabricantes líderes producen dispositivos clasificados principalmente por su longitud de palabra (4, 8, 16 y 32 bits), adaptándose a diversas necesidades industriales y de consumo:</p>
+<ul>
+<li><strong>Microchip Technology:</strong> Es uno de los actores más influyentes, habiendo alcanzado el <strong>segundo puesto en el ranking mundial de ventas</strong>. Produce microcontroladores de <strong>8 bits</strong> (familias PIC10, PIC12, PIC16, PIC18), <strong>16 bits</strong> (PIC24 y dsPIC) y <strong>32 bits</strong> (familia PIC32). En 2016, expandió su dominio al adquirir a <strong>Atmel</strong>, fabricante de la popular arquitectura AVR.</li>
+<li><strong>STMicroelectronics:</strong> Se ha consolidado como pionera en el sector de <strong>32 bits</strong> con su serie <strong>STM32</strong> basada en núcleos ARM Cortex-M, destacando por su alto rendimiento y precios accesibles. También produce dispositivos de <strong>8 bits</strong> como las familias ST6 y ST7.</li>
+<li><strong>NXP Semiconductors (antes Philips):</strong> Fabrica dispositivos de <strong>8 bits</strong> (basados en el estándar 80C51) y de <strong>32 bits</strong> (utilizando arquitecturas ARM como Cortex-M0 y M3).</li>
+<li><strong>Renesas:</strong> Produce una amplia gama que abarca <strong>8 bits</strong> (78K), <strong>16 bits</strong> (R8C, M16C) y <strong>32 bits</strong> (familias RX y V850).</li>
+<li><strong>Texas Instruments (TI):</strong> Es fuerte en los segmentos de <strong>16 bits</strong> con la familia <strong>MSP430</strong> (conocida por su ultra bajo consumo) y en <strong>32 bits</strong> con las líneas C2000 y Cortex-M3.</li>
+<li><strong>Freescale (anteriormente Motorola):</strong> Ofrece soluciones de <strong>8 bits</strong> (68HC05/08), <strong>16 bits</strong> (68HC12) y <strong>32 bits</strong> (arquitecturas PowerPC y ColdFire).</li>
+</ul>
+<h4 id="participación-de-mercado-y-ventas">Participación de Mercado y Ventas</h4>
+<p>Aunque las fuentes no proporcionan una tabla de porcentajes de ventas por fabricante para el año 2026, ofrecen datos estadísticos sobre la distribución del mercado por segmentos y áreas de aplicación:</p>
+<ol>
+<li><strong>Dominio por Segmento de Bits:</strong> Históricamente, las ventas de microcontroladores de <strong>8 bits</strong> han superado ampliamente a los segmentos de 4 bits y 16/32 bits debido a su flexibilidad y bajo costo para aplicaciones típicas.</li>
+<li><strong>Distribución por Áreas de Aplicación:</strong> La producción mundial de estos chips se distribuye de la siguiente manera según los sectores industriales:<ul>
+<li><strong>Comunicaciones:</strong> 30%</li>
+<li><strong>Consumo (Electrodomésticos, juguetes, etc.):</strong> 27%</li>
+<li><strong>Automoción:</strong> 18%</li>
+<li><strong>Computadores (Periféricos):</strong> 15%</li>
+<li><strong>Industria:</strong> 10%</li>
+</ul>
+</li>
+</ol>
+<p><strong>Nota:</strong> Fuera de lo indicado en las fuentes, es importante mencionar que en la industria actual (2024-2026) ha habido una migración masiva hacia los 32 bits liderada por arquitecturas ARM, lo que ha permitido a empresas como STMicroelectronics y NXP ganar una participación de mercado aún mayor en aplicaciones de IoT y sistemas embebidos complejos, información que podrías verificar en reportes financieros de mercado recientes.</p>
 <p>\
 1.1.4 Memoria</p>
 
@@ -626,7 +656,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"icon":"microchip","title":"1.1 Características generales","level":"1.2.1","depth":2,"next":{"title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"path":"chapters/capitulo1/estructura.md","ref":"chapters/capitulo1/estructura.md","articles":[]},"previous":{"title":"Tema 1: Microcontroladores","level":"1.2","depth":1,"path":"chapters/capitulo1/README.md","ref":"chapters/capitulo1/README.md","articles":[{"title":"1.1 Características generales","level":"1.2.1","depth":2,"path":"capitulo1/1.1-instalacion-del-entorno.md","ref":"capitulo1/1.1-instalacion-del-entorno.md","articles":[]},{"title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"path":"chapters/capitulo1/estructura.md","ref":"chapters/capitulo1/estructura.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"capitulo1/1.1-instalacion-del-entorno.md","mtime":"2026-08-04T22:58:34.290Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-04T23:00:02.317Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"icon":"microchip","title":"1.1 Características generales","level":"1.2.1","depth":2,"next":{"title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"path":"chapters/capitulo1/estructura.md","ref":"chapters/capitulo1/estructura.md","articles":[]},"previous":{"title":"Tema 1: Microcontroladores","level":"1.2","depth":1,"path":"chapters/capitulo1/README.md","ref":"chapters/capitulo1/README.md","articles":[{"title":"1.1 Características generales","level":"1.2.1","depth":2,"path":"capitulo1/1.1-instalacion-del-entorno.md","ref":"capitulo1/1.1-instalacion-del-entorno.md","articles":[]},{"title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"path":"chapters/capitulo1/estructura.md","ref":"chapters/capitulo1/estructura.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"capitulo1/1.1-instalacion-del-entorno.md","mtime":"2026-08-05T17:25:23.003Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-05T17:26:22.822Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
