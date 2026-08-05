@@ -191,10 +191,12 @@ El desarrollo de los siguientes apuntes electrónicos consideran una **adaptaci�
 
 Para más detalles, consulta también:
 
-* [Capítulo 1: Primeros pasos](chapters/capitulo1/)
-* [Capítulo 2: Escritura de contenido](chapters/capitulo2/)
-* [Capítulo 3: Generación y despliegue](chapters/capitulo3/)
-* [Capítulo 4: Colaboración y buenas prácticas](chapters/capitulo4/)
-* [Capítulo 5: Preguntas frecuentes](chapters/capitulo5/)
-* [Capítulo 6: Glosario](chapters/capitulo6/)
-* [Capítulo 7: Índice temático](chapters/capitulo7/)
+* [Tema 1: Microcontroladores](chapters/capitulo1/)
+* [Tema 2: Sensores](chapters/capitulo2/)
+* [Tema 3: Actuadores](chapters/capitulo3/)
+* [Tema 4: Programación de microcontroladores](chapters/capitulo4/)
+* [Tema 5: Puertos y buses de comunicación para microcontroladores](chapters/capitulo9/)
+* [Tema 6: Interfaces](chapters/capitulo10/)
+* [Preguntas frecuentes](chapters/capitulo5/)
+* [Glosario](chapters/capitulo6/)
+* [Fuentes consultadas](chapters/capitulo7/)

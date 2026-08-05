@@ -1,3 +1,7 @@
+---
+icon: microchip
+---
+
 # Tema 1: Microcontroladores
 
 ### Competencias a desarrollar
