@@ -70,33 +70,29 @@ Para el desarrollo de esta documentación se adopta **Arduino** como microcontro
 
 
 
-1. **Hardware abierto y documentado.** Arduino publica esquemáticos, archivos CAD y código fuente bajo licencias abiertas; la placa de referencia usada en este documento es la Arduino Uno Rev3 ([Arduino](https://store-usa.arduino.cc/products/arduino-uno-rev3)).
-2.   **Microcontrolador coherente con la teoría ya desarrollada**. La Arduino Uno Rev3 usa el ATmega328P (Microchip/Atmel, 8 bits, arquitectura Harvard modificada) (Arduino,   \
-   especificaciones técnicas de la UNO Rev3; Microchip/Atmel, ATmega328P Data Sheet).   \
-   Curva de aprendizaje reducida sin abandonar el hardware real. El Arduino IDE compila, enlaza   \
-   y descarga el programa mediante el bootloader residente por USB, sin necesitar un   \
-   programador ICSP independiente para el uso básico, lo que agiliza el ciclo editar-compilarprogramar   \
-   en sesiones de laboratorio con muchos equipos (Arduino IDE Documentation).   \
-   Costo y disponibilidad. Existen múltiples distribuidores y clones compatibles de bajo costo, y   \
-   el diseño abierto permite reproducir o reparar placas sin depender de un proveedor único.   \
-   Ecosistema y comunidad. Bibliotecas oficiales y de terceros para LCD, sensores,   \
-   comunicación y motores reducen el tiempo de integración, documentadas en la referencia   \
-   oficial del lenguaje (Arduino, Language Reference).
-3.
+1. **Hardware abierto y documentado.** Arduino publica esquemáticos, archivos CAD y código fuente bajo licencias abiertas; las placas de referencia utilizadas en el desarrollo de las actividades prácticas en este documento son: Arduino Uno Rev3 ([ArduinoUno](https://store-usa.arduino.cc/products/arduino-uno-rev3)), Arduino Mega 2560 Rev3 ([ArduinoMega](https://docs.arduino.cc/hardware/mega-2560/)).
+2.   **Microcontrolador coherente con la teoría ya desarrollada**. La Arduino Uno Rev3 usa el ATmega328P (Microchip/Atmel, 8 bits, arquitectura Harvard modificada) ([ArduinoUno](https://store-usa.arduino.cc/products/arduino-uno-rev3)), mientras que la Arduino Mega 2560 Rev3 usa el ATmega2560 (Microchip/Atmel, 8 bits, arquitectura Harvard modificada)([ArduinoMega](https://docs.arduino.cc/hardware/mega-2560/)).
+3.   **Curva de aprendizaje reducida sin abandonar el hardware real.** El **Arduino IDE** compila, enlaza y descarga el programa mediante el bootloader residente por USB, sin necesitar un programador ICSP independiente para el uso básico, lo que agiliza el ciclo editar-compilar-programar en sesiones de laboratorio con muchos equipos ([Arduino IDE Documentation](https://docs.arduino.cc/software/ide/)).
+4.   **Costo y disponibilidad.** Existen múltiples distribuidores y clones compatibles de bajo costo, y el diseño abierto permite reproducir o reparar placas sin depender de un proveedor único.&#x20;
+5. **Ecosistema y comunidad.** Bibliotecas oficiales y de terceros para LCD, sensores, comunicación y motores reducen el tiempo de integración, documentadas en la referencia oficial del lenguaje ([Arduino Language Reference](https://docs.arduino.cc/language-reference/)).
 
-**Los Tres Principales Productos**
+<details>
 
-1. **Arduino UNO:**
-   * **Chip:** ATMega328P.
-   * **Características:** Es la placa estándar para educación. Posee **14 entradas/salidas digitales** y 6 entradas analógicas. Incluye un adaptador USB a TTL (generalmente un chip ATMega16U2) que facilita la carga de programas desde una PC.
-2. **Arduino Mega 2560:**
-   * **Chip:** ATMega2560.
-   * **Características:** Diseñada para proyectos complejos. Ofrece **54 pines digitales** y **16 entradas analógicas**, además de 4 puertos seriales (UART) por hardware, lo que la hace ideal para robótica e impresoras 3D.
-3. **Arduino Nano / Mini:**
-   * **Chip:** ATMega328P.
-   * **Características:** Versiones compactas destinadas a prototipos finales o espacios reducidos. La Nano incluye conexión USB directa, mientras que la Pro Mini requiere un adaptador externo para su programación, sacrificando conectividad por tamaño.
+<summary><mark style="color:$danger;"><strong>Vamos al cine!!!</strong></mark></summary>
 
-**Nota técnica:** Aunque Arduino facilita el diseño, en niveles académicos avanzados se recomienda que los estudiantes aprendan a manejar directamente los **registros I/O** (como DDRx, PORTx y PINx) para optimizar el uso de recursos y entender la arquitectura real del hardware.
+Para conocer un poco más del surgimiento de la plataforma abierta Arduino, se recomienda ver los siguientes videos:
+
+* [Arduino The Documentary](https://https/www.youtube.com/watch?v=mltWc9_C9gs\&t=9s)
+
+</details>
+
+#### **Los tres principales productos de Arduino**
+
+Los principales productos de la plataforma Arduino son:
+
+<table data-search="false"><thead><tr><th width="154" valign="middle">Característica</th><th align="center">Arduino UNO</th><th align="center">Arduino MEGA 2560</th><th align="center">Arduino Nano/Mini</th></tr></thead><tbody><tr><td valign="middle">Microcontrolador </td><td align="center">ATmega328P</td><td align="center">ATMega2560</td><td align="center">ATMega328P</td></tr><tr><td valign="middle">Arquitectura</td><td align="center">AVR RISC de 8 bits</td><td align="center">AVR RISC de 8 bits</td><td align="center">AVR RISC de 8 bits</td></tr><tr><td valign="middle">Tensión de operación </td><td align="center">5 V</td><td align="center">5 V</td><td align="center">5 V</td></tr><tr><td valign="middle">Tensión de entrada recomendada </td><td align="center">7-12 V</td><td align="center">7-12 V</td><td align="center">7-12 V</td></tr><tr><td valign="middle">Pines digitales E/S </td><td align="center">14 (6 con salida PWM)</td><td align="center">54 (15 con salida PWM)</td><td align="center">14 (6 con salida PWM)</td></tr><tr><td valign="middle">Pines de entrada analógica</td><td align="center"> 6 (A0-A5, ADC de 10 bits)</td><td align="center">16</td><td align="center">8 (encapsulado TQFP)</td></tr><tr><td valign="middle">Puertos seriales</td><td align="center">1 (USART0)</td><td align="center">4 (USART0 a USART3)</td><td align="center">1 (USART0)</td></tr><tr><td valign="middle">Corriente máxima por pin de E/S </td><td align="center">20 mA</td><td align="center">20 mA</td><td align="center">20 mA</td></tr><tr><td valign="middle">Memoria Flash </td><td align="center">32 KB (0.5 KB usados por el bootloader)</td><td align="center">256 KB (8 KB usados por el bootloader)</td><td align="center">32 KB (0.5 KB usados por el bootloader)</td></tr><tr><td valign="middle">SRAM </td><td align="center">2 KB</td><td align="center">8 KB</td><td align="center">2 KB</td></tr><tr><td valign="middle">EEPROM </td><td align="center">1 KB</td><td align="center">4 KB</td><td align="center">1 KB</td></tr><tr><td valign="middle">Frecuencia de reloj </td><td align="center">16 MHz (resonador  cerámico)</td><td align="center"><br>16 MHz</td><td align="center">16 MHz</td></tr></tbody></table>
+
+
 
 2.2 Displays LED, LCD y otros dispositivos de visualización.\
 2.3 Codificadores de posición.
