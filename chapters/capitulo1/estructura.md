@@ -100,11 +100,11 @@ Las especificaciones técnicas del hardware se encuentran en:
 
 <details>
 
-<summary><mark style="color:$danger;"><strong>Tarjeta UNO R3: diagrama, pines y más...</strong></mark></summary>
+<summary><mark style="color:$danger;"><strong>Tarjeta UNO R3: diagrama, pines y más...</strong></mark><img src="../../.gitbook/assets/Imagen23 ArduinoUnoA.png" alt=""></summary>
 
 La tarjeta del Arduino Uno se puede encontrar en este formato:
 
-<figure><img src="../../.gitbook/assets/Imagen23a ArduinoUno.png" alt=""><figcaption><p>Figura 1.2.7 Tarjeta Arduino UNO R3 (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf">https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf</a>)</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Imagen23a ArduinoUno (1).png" alt=""><figcaption><p>Figura 1.2.7 Tarjeta Arduino UNO R3 (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf">https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf</a>)</p></figcaption></figure>
 
 Las conecciones para los pines son las siguientes:
 
@@ -114,9 +114,91 @@ Las conecciones para los pines son las siguientes:
 
 <figure><img src="../../.gitbook/assets/Imagen23d ArduinoUno DPinesDig.png" alt=""><figcaption><p>Figura 1.2.10 Descripción de los pines Digitales (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf">https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf</a>)</p></figcaption></figure>
 
+En el Arduino Uno, el mapa de memoria de su microcontrolador PIC16F887 se encuentra distribuido de la siguiente forma:
+
+*  **Memoria de programa** (Flash): 32 KB, de los cuales 0.5 KB los ocupa el bootloader de Arduino, dejando aproximadamente 31.5 KB disponibles para el sketch del usuario.
+* **SRAM**: 2 KB para variables, pila y buffers en tiempo de ejecución.&#x20;
+*  **EEPROM**: 1 KB no volátil, accesible en Arduino mediante la biblioteca <mark style="background-color:red;">EEPROM.h</mark> o, a nivel de registro, mediante <mark style="background-color:red;">EEDR</mark> , <mark style="background-color:red;">EEARL/EEARH</mark> y <mark style="background-color:red;">EECR</mark>.
+*  **Puertos y registros GPIO**: el ATmega328P organiza sus pines en los puertos B, C y D; cada puerto tiene tres registros de 8 bits: <mark style="background-color:red;">DDRx</mark> (dirección: 1 = salida, 0 = entrada), <mark style="background-color:red;">PORTx</mark> (escritura de salida o activación de pull-up en entrada) y <mark style="background-color:red;">PINx</mark> (lectura del pin).
+*  **Correspondencia pines Arduino ↔ puertos AVR** (según el esquemático oficial): D0-D7 ≈ <mark style="background-color:red;">PORTD</mark> (PD0-PD7), D8-D13 ≈ <mark style="background-color:red;">PORTB</mark> (PB0-PB5), A0-A5 ≈ <mark style="background-color:red;">PORTC</mark> (PC0-PC5).
+*  **ADC**: 10 bits, controlado por <mark style="background-color:red;">ADMUX</mark> (selección de canal y referencia) y <mark style="background-color:red;">ADCSRA</mark> (habilitación, prescaler e inicio de conversión) — los mismos registros que subyacen a la función  \
+  <mark style="background-color:red;">analogRead().</mark>
+* **Temporizadores**: Timer0 (8 bits, usado internamente por <mark style="background-color:red;">millis() / delay()</mark> ), Timer1 (16 bits) y Timer2 (8 bits), cada uno con sus registros <mark style="background-color:red;">TCCRxA/B</mark> , <mark style="background-color:red;">TCNTx</mark> y máscaras de interrupción <mark style="background-color:red;">TIMSKx.</mark>
+
+</details>
+
+<details>
+
+<summary><mark style="color:$danger;"><strong>Tarjeta Mega 2560 Rev3: diagrama,pines y más...</strong></mark><img src="../../.gitbook/assets/Imagen24 ArduinoMegaA (1).png" alt="" data-size="original"></summary>
+
+La tarjeta del Arduino Mega 2560 Rev3 se puede encontrar en este formato:
+
+<figure><img src="../../.gitbook/assets/Imagen24a ArduinoMegaA.png" alt=""><figcaption><p>Figura 1.2.11 Tarjeta Arduino Mega 2560 Rev3 (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf">https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf</a> )</p></figcaption></figure>
+
+Las conecciones para los pines son las siguientes:
+
+<figure><img src="../../.gitbook/assets/Imagen24b ArduinoMegaA DPines.png" alt=""><figcaption><p>Figura 1.2.12 Pines de la tarjeta Arduino Mega 2560 Rev3 (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf">https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf</a> )</p></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/Imagen24b ArduinoMegaA DPinesAna.png" alt=""><figcaption><p>Figura 1.2.13 Descripción de los pines Analógicos (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf">https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf</a>)</p></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/Imagen24b ArduinoMegaA DPinesDig1.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/Imagen24b ArduinoMegaA DPinesDig2.png" alt=""><figcaption><p>Figura 1.2.14 Descripción de los pines Digitales (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf">https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf</a>)</p></figcaption></figure>
+
+Pines adicionales:
+
+<figure><img src="../../.gitbook/assets/Imagen24b ArduinoMegaA DPinesDig2 PA1.png" alt=""><figcaption><p>Figura 1.2.15 Pines Adicionales (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf">https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf</a>)</p></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/Imagen24c ArduinoMegaA DPinesDig2 PA1.png" alt=""><figcaption><p>Figura 1.2.16 Descripción de los pines para ATMEGA16U2 JP5 (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf">https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf</a>)</p></figcaption></figure>
+
+El puerto **JP5** es un conector secundario no soldado de 4 pines, directamente vinculado a los pines de entrada/salida de propósito general (GPIO) no utilizados del microcontrolador **ATmega16U2**.
+
+En las placas oficiales Arduino Mega 2560 R3, este integrado se encarga exclusivamente de la traducción USB a Serial. Sin embargo, este puerto oculto te permite acceder y reprogramar funciones nativas del chip secundario.
+
+Por defecto, estos pines no hacen nada porque el firmware de fábrica de Arduino solo los mantiene inactivos. Al soldar un header de pines en JP5 y modificar el firmware del ATmega16U2, se pueden usar para: \[[Rheingold Heavy](https://rheingoldheavy.com/arduino-from-scratch-part-8-atmega16u2-subsystem/), [Arduino Forum](https://forum.arduino.cc/t/discovered-a-16u2-secret-header-on-uno-and-mega-boards/233876)]
+
+1. **Emulación de Dispositivos USB (HID):** Al instalar un firmware personalizado como [HoodLoader2 en GitHub](https://github.com/NicoHood/HoodLoader2/wiki/Arduino-Uno-Mega-16u2-Pinout), se transforma el chip en un dispositivo USB avanzado (Teclado, Ratón, Joystick o Controlador MIDI). Los pines de JP5 se convierten en entradas digitales físicas (botones o interruptores) para activar macros o comandos USB. \[[Arduino stack exchange](https://arduino.stackexchange.com/questions/49168/why-was-the-atmega16u2-used-on-the-arduino-uno-as-a-usb-to-serial-converter), [NicoHood](https://github.com/NicoHood/HoodLoader2/wiki/Arduino-Uno-Mega-16u2-Pinout), [Pasión Electrónica](https://pasionelectronica.com/pines-y-conectores-de-arduino-uno/), [Arduino Forum](https://forum.arduino.cc/t/discovered-a-16u2-secret-header-on-uno-and-mega-boards/233876)]
+2. **Depuración y Control de Reset:** Puedes programar el chip para que un pin de JP5 actúe como un reset independiente para un Shield, evitando reiniciar la placa completa. \[[Arduino Forum](https://forum.arduino.cc/t/discovered-a-16u2-secret-header-on-uno-and-mega-boards/233876)]
+3. **Procesamiento en Paralelo Extendido:** El ATmega16U2 es un procesador completo de 16 MHz. Puedes programarlo para realizar tareas en segundo plano (como lectura de sensores simples) liberando por completo de carga al microcontrolador principal (ATmega2560). \[[Ag Electrónica](https://agelectronica.lat/pdfs/textos/A/A000067.PDF), [Hetpro](https://hetpro-store.com/atmega16u2-au/?srsltid=AfmBOopXVCYc1ljHQc8ERTjhAipcE2LHLCJtOoP7OBJ2xuS62SSy_Mxg), [Reddit1](https://www.reddit.com/r/arduino/comments/fr3egr/how_to_use_these_jp2_pins_on_arduino_according_to/), [Reddit2](https://www.reddit.com/r/arduino/comments/m9xpad/what_are_the_male_headers_on_the_arduino_uno/)]
+
+<figure><img src="../../.gitbook/assets/Imagen24c ArduinoMegaA DPinesDig2 PA2.png" alt=""><figcaption><p>Figura 1.2.17 Descripción de los pines para ATMEGA16U2 ICSP1 (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf">https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf</a>)</p></figcaption></figure>
+
+El conector **ICSP1** en placas como Arduino Uno R3 o Arduino Mega 2560 está directamente vinculado al microcontrolador **ATmega16U2**. A diferencia del ICSP principal (que programa al chip central ATmega328P o ATmega2560),Este puerto sirve específicamente para **actualizar, reprogramar o recuperar el firmware del chip USB-a-Serie.**. \[[Forum Arduino](https://forum.arduino.cc/t/can-i-program-arduino-due-via-icsp1-spi-of-atmega16u2-mu/691733), [Editronikx](https://www.youtube.com/watch?v=JVvYht2bSoE\&t=5)]
+
+Mirando la placa de frente, con el conector USB hacia la izquierda, el pin 1 se identifica generalmente con un **punto blanco** o un número "1" impreso en el PCB. La configuración estándar de 6 pinos es:texto
+
+```
+  (MISO)  1  ●  ●  2  (VCC)
+   (SCK)  3  ●  ●  4  (MOSI)
+ (RESET)  5  ●  ●  6  (GND)
+```
+
+Utilice el código con precaución.
+
+* **Pin 1 (MISO):** Master In Slave Out (Entrada de datos).
+* **Pin 2 (VCC):** Alimentación positiva (habitualmente +5V desde el bus USB).
+* **Pin 3 (SCK):** Reloj serie (Reloj de sincronización).
+* **Pin 4 (MOSI):** Entrada Master Out Slave (Salida de datos).
+* **Pin 5 (RESET):** Reinicio del ATmega16U2 (Permite tomar control para programarlo).
+* **Pin 6 (GND):** Tierra o referencia común. \[[1](https://aprendiendoarduino.wordpress.com/2016/11/06/icsp/), [2](https://descubrearduino.com/arduino-uno/), [4](https://www.todoelectronica.com/arduino-uno-r3-con-cable-usb-atmega328-compatible-con-arduino-original-p-110170.html?srsltid=AfmBOopSnStHF1mVrpSBPSKIXKH4Qd1FPUKQ8iZQ7Pd8az38C5nZiX2a)]
+
+***
+
+⚙️ ¿Para qué se utiliza este puerto?
+
+1. **Recuperar placas "muertas":** Si tu ordenador dejó de reconocer el puerto COM o arroja fallos de comunicación USB inesperados, suele deberse a la corrupción del firmware en el ATmega16U2. \[[1](https://www.youtube.com/watch?v=JVvYht2bSoE\&t=5)]
+2. **Cambiar la identidad de la placa:** Puedes cargarle firmwares externos (como el popular [proyecto LUFA](https://www.lcsc.com/blog/atmega16u2-microcontroller-guide/) o HoodLoader2) para transformar tu Arduino en un teclado nativo, un ratón MIDI o un joystick USB. \[[1](https://www.lcsc.com/blog/atmega16u2-microcontroller-guide/)]
+3. **Quemar el Bootloader de fábrica:** Se usa un programador externo (como un USBasp o utilizando otro Arduino cargado con el sketch `ArduinoISP`) para reinstalar el firmware original de Arduino. \[[1](https://industrialmonitordirect.com/es/blogs/knowledgebase/atmega328p-bare-metal-avr-c-programming-without-arduino?srsltid=AfmBOooI3FlZUR3GqGMMEizyWnSWBRnds7tkoG1wG0p9ywSXZL8j7JfE)]
+
+
+
+
+
 
 
 </details>
+
+
 
 2.2 Displays LED, LCD y otros dispositivos de visualización.\
 2.3 Codificadores de posición.
