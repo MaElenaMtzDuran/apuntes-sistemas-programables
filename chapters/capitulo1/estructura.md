@@ -161,6 +161,8 @@ Por defecto, estos pines no hacen nada porque el firmware de fábrica de Arduino
 2. **Depuración y Control de Reset:** Puedes programar el chip para que un pin de JP5 actúe como un reset independiente para un Shield, evitando reiniciar la placa completa. \[[Arduino Forum](https://forum.arduino.cc/t/discovered-a-16u2-secret-header-on-uno-and-mega-boards/233876)]
 3. **Procesamiento en Paralelo Extendido:** El ATmega16U2 es un procesador completo de 16 MHz. Puedes programarlo para realizar tareas en segundo plano (como lectura de sensores simples) liberando por completo de carga al microcontrolador principal (ATmega2560). \[[Ag Electrónica](https://agelectronica.lat/pdfs/textos/A/A000067.PDF), [Hetpro](https://hetpro-store.com/atmega16u2-au/?srsltid=AfmBOopXVCYc1ljHQc8ERTjhAipcE2LHLCJtOoP7OBJ2xuS62SSy_Mxg), [Reddit1](https://www.reddit.com/r/arduino/comments/fr3egr/how_to_use_these_jp2_pins_on_arduino_according_to/), [Reddit2](https://www.reddit.com/r/arduino/comments/m9xpad/what_are_the_male_headers_on_the_arduino_uno/)]
 
+***
+
 <figure><img src="../../.gitbook/assets/Imagen24c ArduinoMegaA DPinesDig2 PA2.png" alt=""><figcaption><p>Figura 1.2.17 Descripción de los pines para ATMEGA16U2 ICSP1 (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf">https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf</a>)</p></figcaption></figure>
 
 El conector **ICSP1** en placas como Arduino Uno R3 o Arduino Mega 2560 está directamente vinculado al microcontrolador **ATmega16U2**. A diferencia del ICSP principal (que programa al chip central ATmega328P o ATmega2560),Este puerto sirve específicamente para **actualizar, reprogramar o recuperar el firmware del chip USB-a-Serie.**. \[[Forum Arduino](https://forum.arduino.cc/t/can-i-program-arduino-due-via-icsp1-spi-of-atmega16u2-mu/691733), [Editronikx](https://www.youtube.com/watch?v=JVvYht2bSoE\&t=5)]
@@ -180,25 +182,47 @@ Utilice el código con precaución.
 * **Pin 3 (SCK):** Reloj serie (Reloj de sincronización).
 * **Pin 4 (MOSI):** Entrada Master Out Slave (Salida de datos).
 * **Pin 5 (RESET):** Reinicio del ATmega16U2 (Permite tomar control para programarlo).
-* **Pin 6 (GND):** Tierra o referencia común. \[[1](https://aprendiendoarduino.wordpress.com/2016/11/06/icsp/), [2](https://descubrearduino.com/arduino-uno/), [4](https://www.todoelectronica.com/arduino-uno-r3-con-cable-usb-atmega328-compatible-con-arduino-original-p-110170.html?srsltid=AfmBOopSnStHF1mVrpSBPSKIXKH4Qd1FPUKQ8iZQ7Pd8az38C5nZiX2a)]
+* **Pin 6 (GND):** Tierra o referencia común. \[[Aprendiendo Arduino](https://aprendiendoarduino.wordpress.com/2016/11/06/icsp/), [Descubre Arduino](https://descubrearduino.com/arduino-uno/)]
 
 ***
 
 ⚙️ ¿Para qué se utiliza este puerto?
 
-1. **Recuperar placas "muertas":** Si tu ordenador dejó de reconocer el puerto COM o arroja fallos de comunicación USB inesperados, suele deberse a la corrupción del firmware en el ATmega16U2. \[[1](https://www.youtube.com/watch?v=JVvYht2bSoE\&t=5)]
-2. **Cambiar la identidad de la placa:** Puedes cargarle firmwares externos (como el popular [proyecto LUFA](https://www.lcsc.com/blog/atmega16u2-microcontroller-guide/) o HoodLoader2) para transformar tu Arduino en un teclado nativo, un ratón MIDI o un joystick USB. \[[1](https://www.lcsc.com/blog/atmega16u2-microcontroller-guide/)]
-3. **Quemar el Bootloader de fábrica:** Se usa un programador externo (como un USBasp o utilizando otro Arduino cargado con el sketch `ArduinoISP`) para reinstalar el firmware original de Arduino. \[[1](https://industrialmonitordirect.com/es/blogs/knowledgebase/atmega328p-bare-metal-avr-c-programming-without-arduino?srsltid=AfmBOooI3FlZUR3GqGMMEizyWnSWBRnds7tkoG1wG0p9ywSXZL8j7JfE)]
+1. **Recuperar placas "muertas":** Si tu ordenador dejó de reconocer el puerto COM o arroja fallos de comunicación USB inesperados, suele deberse a la corrupción del firmware en el ATmega16U2. \[[Editronik](https://www.youtube.com/watch?v=JVvYht2bSoE\&t=5)]
+2. **Cambiar la identidad de la placa:** Puedes cargarle firmwares externos (como el popular [proyecto LUFA](https://www.lcsc.com/blog/atmega16u2-microcontroller-guide/) o HoodLoader2) para transformar tu Arduino en un teclado nativo, un ratón MIDI o un joystick USB. \[[LCSC Electronics](https://www.lcsc.com/blog/atmega16u2-microcontroller-guide/)]
+3. **Quemar el Bootloader de fábrica:** Se usa un programador externo (como un USBasp o utilizando otro Arduino cargado con el sketch `ArduinoISP`) para reinstalar el firmware original de Arduino. \[[Industrial Monitor Direct](https://industrialmonitordirect.com/es/blogs/knowledgebase/atmega328p-bare-metal-avr-c-programming-without-arduino?srsltid=AfmBOooI3FlZUR3GqGMMEizyWnSWBRnds7tkoG1wG0p9ywSXZL8j7JfE)]
 
+***
 
+<figure><img src="../../.gitbook/assets/Imagen24c ArduinoMegaA DPinesDig2 PA3.png" alt=""><figcaption><p>Figura 1.2.18 Descripción de los pines D22-D53 LHS (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf">https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf</a>)</p></figcaption></figure>
 
-
-
-
+<figure><img src="../../.gitbook/assets/Imagen24c ArduinoMegaA DPinesDig2 PA5.png" alt=""><figcaption><p>Figura 1.2.19 Descripción de los pines D22- D53 RHS (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf">https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf</a>)</p></figcaption></figure>
 
 </details>
 
+#### Arduino IDE
 
+El **Arduino IDE** será el entorno adoptado como herramienta principal para programar Arduino Uno (ATmega328P) o Arduino Mega 2560 (ATmega2560); **integra editor, compilador** (<mark style="background-color:red;">avr-gcc</mark> por debajo del lenguaje Wiring/C++), **gestor de bibliotecas, Monitor Serie y carga del programa por USB mediante el bootloader residente**, sin requerir un programador ICSP externo para el trabajo básico de laboratorio. Se complementa siempre con la lectura y, cuando se indica en la práctica, la escritura directa de registros del ATmega328P o ATmega2560.
+
+Sin embargo es importante también mencionar que existen otras familias de microcontroladores que se programan mediante herramientas específicas:
+
+* **MPLAB X IDE + MPLAB XC8**: entorno y compilador oficial para PIC/AVR de 8 bits; XC8 admite C y optimizaciones por licencia ([Microchip, MPLAB XC8)](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers/xc8).
+*  **CCS C**: compilador comercial para PIC, con bibliotecas de alto nivel; su sintaxis y directivas no  &#x20;son siempre portables a XC8.
+* **MPLAB SIM**: simulador integrado para observar registros y ejecución, sujeto a los periféricos soportados.
+* **Proteus VSM**: co-simula firmware y circuito, tanto para PIC como para Arduino/AVR; permite instrumentación virtual, pero no reproduce perfectamente ruido, tolerancias, EMI ni todos los modelos físicos ([Labcenter, Proteus VSM](https://www.labcenter.com/whyvsm/)).
+*  **PICkit 4/5 e ICSP**: permiten programar y depurar el PIC16F887 sin retirar el MCU. ICSP requiere VPP/MCLR, VDD, VSS, datos y reloj; el circuito debe evitar cargas que interfieran en esas líneas ([Microchip, conexión ICSP](https://onlinedocs.microchip.com/oxy/GUID-E7CBBF9B-B23F-4E8A-8B9D-C66C24729842-en-US-1/GUID-A9ECF4BE-7607-4646-AFC1-6913F9B1B60A.html)). La Arduino Uno no requiere este programador externo para su uso básico gracias a su bootloader USB.
+
+Ahora que ya tenemos nuestra plataforma de trabajo es importante establecer una **estrategia de verificación** para la programación de nuestro microcontrolador y prototipos:
+
+1. Compilar con advertencias máximas.&#x20;
+2. Simular lógica y temporización básica.&#x20;
+3. Programar hardware.&#x20;
+4. Medir alimentación y reloj.&#x20;
+5. Probar E/S de manera incremental.
+6. Inyectar entradas límite y fallas.
+7. Comparar mediciones contra cálculos y hoja de datos.
+
+Una simulación exitosa no demuestra integridad eléctrica. El prototipo debe incluir desacoplo, reset, tierra correcta y límites de corriente.
 
 2.2 Displays LED, LCD y otros dispositivos de visualización.\
 2.3 Codificadores de posición.
