@@ -550,50 +550,40 @@
 <p>Arduino es un ecosistema que combina hardware abierto, un entorno de desarrollo (IDE) y una comunidad global. Su objetivo es permitir el desarrollo rápido de prototipos sin requerir conocimientos profundos iniciales de los registros del microcontrolador.</p>
 <p>Para el desarrollo de esta documentación se adopta <strong>Arduino</strong> como microcontrolador y ecosistema de trabajo por las siguientes razones verificables:</p>
 <ol>
-<li><strong>Hardware abierto y documentado.</strong> Arduino publica esquemáticos, archivos CAD y código fuente bajo licencias abiertas; la placa de referencia usada en este documento es la Arduino Uno Rev3 (<a href="https://store-usa.arduino.cc/products/arduino-uno-rev3" target="_blank">Arduino</a>).
+<li><strong>Hardware abierto y documentado.</strong> Arduino publica esquemáticos, archivos CAD y código fuente bajo licencias abiertas; las placas de referencia utilizadas en el desarrollo de las actividades prácticas en este documento son: Arduino Uno Rev3 (<a href="https://store-usa.arduino.cc/products/arduino-uno-rev3" target="_blank">ArduinoUno</a>), Arduino Mega 2560 Rev3 (<a href="https://docs.arduino.cc/hardware/mega-2560/" target="_blank">ArduinoMega</a>).
 2.
-<strong>Microcontrolador coherente con la teoría ya desarrollada</strong>. La Arduino Uno Rev3 usa el ATmega328P (Microchip/Atmel, 8 bits, arquitectura Harvard modificada) (Arduino,
-\
-especificaciones técnicas de la UNO Rev3; Microchip/Atmel, ATmega328P Data Sheet).
-\
-Curva de aprendizaje reducida sin abandonar el hardware real. El Arduino IDE compila, enlaza
-\
-y descarga el programa mediante el bootloader residente por USB, sin necesitar un
-\
-programador ICSP independiente para el uso básico, lo que agiliza el ciclo editar-compilarprogramar
-\
-en sesiones de laboratorio con muchos equipos (Arduino IDE Documentation).
-\
-Costo y disponibilidad. Existen múltiples distribuidores y clones compatibles de bajo costo, y
-\
-el diseño abierto permite reproducir o reparar placas sin depender de un proveedor único.
-\
-Ecosistema y comunidad. Bibliotecas oficiales y de terceros para LCD, sensores,
-\
-comunicación y motores reducen el tiempo de integración, documentadas en la referencia
-\
-oficial del lenguaje (Arduino, Language Reference).
-3.</li>
+<strong>Microcontrolador coherente con la teoría ya desarrollada</strong>. La Arduino Uno Rev3 usa el ATmega328P (Microchip/Atmel, 8 bits, arquitectura Harvard modificada) (<a href="https://store-usa.arduino.cc/products/arduino-uno-rev3" target="_blank">ArduinoUno</a>), mientras que la Arduino Mega 2560 Rev3 usa el ATmega2560 (Microchip/Atmel, 8 bits, arquitectura Harvard modificada)(<a href="https://docs.arduino.cc/hardware/mega-2560/" target="_blank">ArduinoMega</a>).
+3.
+<strong>Curva de aprendizaje reducida sin abandonar el hardware real.</strong> El <strong>Arduino IDE</strong> compila, enlaza y descarga el programa mediante el bootloader residente por USB, sin necesitar un programador ICSP independiente para el uso básico, lo que agiliza el ciclo editar-compilar-programar en sesiones de laboratorio con muchos equipos (<a href="https://docs.arduino.cc/software/ide/" target="_blank">Arduino IDE Documentation</a>).
+4.
+<strong>Costo y disponibilidad.</strong> Existen múltiples distribuidores y clones compatibles de bajo costo, y el diseño abierto permite reproducir o reparar placas sin depender de un proveedor único. </li>
+<li><strong>Ecosistema y comunidad.</strong> Bibliotecas oficiales y de terceros para LCD, sensores, comunicación y motores reducen el tiempo de integración, documentadas en la referencia oficial del lenguaje (<a href="https://docs.arduino.cc/language-reference/" target="_blank">Arduino Language Reference</a>).</li>
 </ol>
-<p><strong>Los Tres Principales Productos</strong></p>
-<ol>
-<li><strong>Arduino UNO:</strong><ul>
-<li><strong>Chip:</strong> ATMega328P.</li>
-<li><strong>Características:</strong> Es la placa estándar para educación. Posee <strong>14 entradas/salidas digitales</strong> y 6 entradas analógicas. Incluye un adaptador USB a TTL (generalmente un chip ATMega16U2) que facilita la carga de programas desde una PC.</li>
-</ul>
-</li>
-<li><strong>Arduino Mega 2560:</strong><ul>
-<li><strong>Chip:</strong> ATMega2560.</li>
-<li><strong>Características:</strong> Diseñada para proyectos complejos. Ofrece <strong>54 pines digitales</strong> y <strong>16 entradas analógicas</strong>, además de 4 puertos seriales (UART) por hardware, lo que la hace ideal para robótica e impresoras 3D.</li>
-</ul>
-</li>
-<li><strong>Arduino Nano / Mini:</strong><ul>
-<li><strong>Chip:</strong> ATMega328P.</li>
-<li><strong>Características:</strong> Versiones compactas destinadas a prototipos finales o espacios reducidos. La Nano incluye conexión USB directa, mientras que la Pro Mini requiere un adaptador externo para su programación, sacrificando conectividad por tamaño.</li>
-</ul>
-</li>
-</ol>
-<p><strong>Nota técnica:</strong> Aunque Arduino facilita el diseño, en niveles académicos avanzados se recomienda que los estudiantes aprendan a manejar directamente los <strong>registros I/O</strong> (como DDRx, PORTx y PINx) para optimizar el uso de recursos y entender la arquitectura real del hardware.</p>
+<details>
+
+<summary><mark style="color:$danger;"><strong>Vamos al cine!!!</strong></mark></summary>
+
+Para conocer un poco más del surgimiento de la plataforma abierta Arduino, se recomienda ver los siguientes videos:
+
+* [Arduino The Documentary](https://https/www.youtube.com/watch?v=mltWc9_C9gs\&amp;t=9s)
+
+</details>
+
+<h4 id="los-tres-principales-productos-de-arduino"><strong>Los tres principales productos de Arduino</strong></h4>
+<p>Los principales productos de la plataforma Arduino son:</p>
+<table data-search="false"><thead><tr><th width="154" valign="middle">Característica</th><th align="center">Arduino UNO</th><th align="center">Arduino MEGA 2560</th><th align="center">Arduino Nano/Mini</th></tr></thead><tbody><tr><td valign="middle">Microcontrolador 
+</td><td align="center">ATmega328P</td><td align="center">ATMega2560</td><td align="center">ATMega328P</td></tr><tr><td valign="middle">Arquitectura</td><td align="center">AVR RISC de 8 bits</td><td align="center">AVR RISC de 8 bits</td><td align="center">AVR RISC de 8 bits</td></tr><tr><td valign="middle">Tensión de operación 
+</td><td align="center">5 V</td><td align="center">5 V</td><td align="center">5 V</td></tr><tr><td valign="middle">Tensión de entrada recomendada 
+</td><td align="center">7-12 V</td><td align="center">7-12 V</td><td align="center">7-12 V</td></tr><tr><td valign="middle">Pines digitales E/S 
+</td><td align="center">14 (6 con salida PWM)</td><td align="center">54 (15 con salida PWM)</td><td align="center">14 (6 con salida PWM)</td></tr><tr><td valign="middle">Pines de entrada analógica
+</td><td align="center"> 6 (A0-A5, ADC de 10 bits)</td><td align="center">16</td><td align="center">8 (encapsulado TQFP)</td></tr><tr><td valign="middle">Puertos seriales</td><td align="center">1 (USART0)</td><td align="center">4 (USART0 a USART3)</td><td align="center">1 (USART0)</td></tr><tr><td valign="middle">Corriente máxima por pin de E/S 
+</td><td align="center">20 mA</td><td align="center">20 mA</td><td align="center">20 mA</td></tr><tr><td valign="middle">Memoria Flash 
+</td><td align="center">32 KB (0.5 KB usados por el bootloader)</td><td align="center">256 KB (8 KB usados por el bootloader)</td><td align="center">32 KB (0.5 KB usados por el bootloader)</td></tr><tr><td valign="middle">SRAM 
+</td><td align="center">2 KB</td><td align="center">8 KB</td><td align="center">2 KB</td></tr><tr><td valign="middle">EEPROM 
+</td><td align="center">1 KB</td><td align="center">4 KB</td><td align="center">1 KB</td></tr><tr><td valign="middle">Frecuencia de reloj </td><td align="center">16 MHz (resonador  cerámico)</td><td align="center"><br></br>16 MHz</td><td align="center">16 MHz</td></tr></tbody></table>
+
+
+
 <p>2.2 Displays LED, LCD y otros dispositivos de visualización.\
 2.3 Codificadores de posición.</p>
 
@@ -639,7 +629,7 @@ oficial del lenguaje (Arduino, Language Reference).
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"icon":"rotate","title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"next":{"title":"Tema 2: Sensores","level":"1.3","depth":1,"path":"chapters/capitulo2/README.md","ref":"chapters/capitulo2/README.md","articles":[{"title":"2.1 Sintaxis Markdown en GitBook","level":"1.3.1","depth":2,"path":"chapters/capitulo2/sintaxis.md","ref":"chapters/capitulo2/sintaxis.md","articles":[]},{"title":"2.2 Configuración avanzada (book.json)","level":"1.3.2","depth":2,"path":"chapters/capitulo2/configuracion.md","ref":"chapters/capitulo2/configuracion.md","articles":[]}]},"previous":{"title":"1.1 Características generales","level":"1.2.1","depth":2,"path":"capitulo1/1.1-instalacion-del-entorno.md","ref":"capitulo1/1.1-instalacion-del-entorno.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/estructura.md","mtime":"2026-08-05T22:57:01.213Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-05T22:58:09.130Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"icon":"rotate","title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"next":{"title":"Tema 2: Sensores","level":"1.3","depth":1,"path":"chapters/capitulo2/README.md","ref":"chapters/capitulo2/README.md","articles":[{"title":"2.1 Sintaxis Markdown en GitBook","level":"1.3.1","depth":2,"path":"chapters/capitulo2/sintaxis.md","ref":"chapters/capitulo2/sintaxis.md","articles":[]},{"title":"2.2 Configuración avanzada (book.json)","level":"1.3.2","depth":2,"path":"chapters/capitulo2/configuracion.md","ref":"chapters/capitulo2/configuracion.md","articles":[]}]},"previous":{"title":"1.1 Características generales","level":"1.2.1","depth":2,"path":"capitulo1/1.1-instalacion-del-entorno.md","ref":"capitulo1/1.1-instalacion-del-entorno.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/estructura.md","mtime":"2026-08-06T17:42:22.167Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-06T17:43:43.902Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
