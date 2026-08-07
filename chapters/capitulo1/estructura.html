@@ -721,7 +721,12 @@ Utilice el código con precaución.
 </ol>
 <p>Una simulación exitosa no demuestra integridad eléctrica. El prototipo debe incluir desacoplo, reset, tierra correcta y límites de corriente.</p>
 <h3 id="22-displays-led-lcd-y-otros-dispositivos-de-visualización">2.2 Displays LED, LCD y otros dispositivos de visualización.</h3>
-<h4 id="diodos-emisores-de-luz-led-y-barras-de-leds-">Diodos Emisores de Luz (LED) y Barras de LEDs </h4>
+<h4 id="diodos-emisores-de-luz-led-y-barras-de-leds">Diodos Emisores de Luz (LED) y Barras de LEDs.</h4>
+<p>Un <strong>LED</strong> (diodo emisor de luz) es un componente electrónico semiconductor que transforma la energía eléctrica en luz mediante un proceso llamado electroluminiscencia. Tiene polaridad: la pata larga o <strong>ánodo</strong> es el positivo y la corta o <strong>cátodo</strong> es el negativo. Funciona dejando pasar la corriente en un solo sentido.</p>
+<figure><img src="../../.gitbook/assets/imagen30 led-con-arduino-como-determinar-polaridad.webp" alt=""></img><figcaption><p>Figura 1.2.20 Descripción y símbolo de un led (Tomado de: <a href="https://www.geekfactory.mx/tutoriales-arduino/conectar-un-led-a-tu-arduino/?srsltid=AfmBOoqD9ki6TGR0c_kS9xA7e0_8X03uRtZ_AqoGNi6Avs-pyNxdPQjF" target="_blank">https://www.geekfactory.mx/tutoriales-arduino/conectar-un-led-a-tu-arduino/?srsltid=AfmBOoqD9ki6TGR0c_kS9xA7e0_8X03uRtZ_AqoGNi6Avs-pyNxdPQjF</a>)</p></figcaption></figure>
+
+
+
 <ul>
 <li><strong>Principio de Polarización:</strong> Operación del diodo mediante polarización directa.</li>
 <li><strong>Lógica de Control:</strong><ul>
@@ -730,7 +735,22 @@ Utilice el código con precaución.
  y se enciende cuando el pin drena corriente presentando un 0 lógico (0 V).</li>
 </ul>
 </li>
-<li><strong>Cálculo Eléctrico:</strong> Dimensionamiento de los resistores de limitación de corriente/absorción (típicamente de 330 Ω a 1 kΩ) para proteger las terminales del microcontrolador.</li>
+<li><strong>Funcionamiento:</strong> <ul>
+<li>Usa materiales semiconductores.</li>
+<li>Al pasar corriente eléctrica en sentido positivo, los electrones liberan energía en forma de luz.</li>
+<li>Este proceso se llama electroluminiscencia.</li>
+<li>Si se conecta al revés, la corriente se bloquea y no enciende.</li>
+</ul>
+</li>
+<li><strong>Cálculo Eléctrico:</strong> Dimensionamiento de los resistores de limitación de corriente/absorción (típicamente de 330 Ω a 1 kΩ) para proteger las terminales del microcontrolador. (Para conocer como realizar el cálculo de la resistencia que debe utilizarse de acuerdo al color de cada led consulta <a href="https://es.rs-online.com/web/content/blog-rs/calculadoras-convertidores-unidades/calculadora-resistencia-led" target="_blank">Calculadora de valores de resistencia LED</a>)</li>
+</ul>
+<p><strong>Tipos de LED</strong></p>
+<ul>
+<li><strong>LED estándar:</strong> Los redondos comunes de colores (rojo, verde, azul, amarillo) usados para indicadores.</li>
+<li><strong>LED RGB:</strong> Combina tres colores (Rojo, Verde y Azul) en un solo encapsulado para formar cualquier color.</li>
+<li><strong>LED SMD:</strong> Pequeños chips soldados directo a placas de circuitos impresos.</li>
+<li><strong>LED de alta potencia:</strong> Diseñados para iluminación fuerte (lupas o lámparas).</li>
+<li><strong>LED direccionables (NeoPixels):</strong> Permiten controlar el color y brillo de cada unidad de forma independiente desde un solo pin</li>
 </ul>
 <details>
 
@@ -748,13 +768,24 @@ Pasemos al siguiente nivel, ahora sugerimos realizar una simulación para un Led
 
 </details>
 
-<h4 id="b-displays-de-7-segmentos-y-multiplexación">B. Displays de 7 Segmentos y Multiplexación</h4>
+<h4 id="displays-de-7-segmentos-y-multiplexación">Displays de 7 Segmentos y Multiplexación</h4>
+<p>Un <strong>display de 7 segmentos</strong> es un componente electrónico con forma de "8" formado por siete diodos LED (más un punto opcional). Al encender combinaciones específicas de estos segmentos (llamados A, B, C, D, E, F y G), se pueden mostrar de forma clara los números del 0 al 9.</p>
+<figure><img src="../../.gitbook/assets/imagen31 display7seg.png" alt=""></img><figcaption><p>1.2.21 Display de 7 segmentos</p></figcaption></figure>
+
 <ul>
-<li><strong>Configuraciones Físicas:</strong> Identificación de pines para encapsulados de <strong>Ánodo Común</strong> (común a \(V_{cc}\)) y <strong>Cátodo Común</strong> (común a \(GND\)).</li>
+<li><strong>Configuraciones Físicas:</strong> Identificación de pines para encapsulados de <strong>Ánodo Común</strong> (común a <em><strong>Vcc</strong></em>​) y <strong>Cátodo Común</strong> (común a <em><strong>GND</strong></em>).<ul>
+<li><strong>Ánodo común:</strong> Todos los polos positivos (ánodos) de los LEDs están unidos a un pin común que va a la corriente positiva (5V), y los segmentos se encienden enviando un cero lógico (LOW).</li>
+<li><strong>Cátodo común:</strong> Todos los polos negativos (cátodos) están unidos a un pin común que va a tierra (GND), y los segmentos se encienden enviando un uno lógico (HIGH).</li>
+</ul>
+</li>
+</ul>
+<figure><img src="../../.gitbook/assets/imagen31 display7seg CC AC.png" alt=""></img><figcaption><p>Figura 1.2.22 Display de cátodo común y ánodo común (Tomado de <a href="https://www.mercadolibre.com.mx/display-7-segmentos-12-pulgadas-rojo-anodo-comun/up/MLMU3971460064" target="_blank">https://www.mercadolibre.com.mx/display-7-segmentos-12-pulgadas-rojo-anodo-comun/up/MLMU3971460064</a>)</p></figcaption></figure>
+
+<ul>
 <li><strong>Multiplexación (Barrido Dinámico):</strong> Conexión de los segmentos de múltiples displays a un <strong>bus de datos común</strong>. La habilitación selectiva de cada dígito se realiza de forma temporizada a alta velocidad mediante transistores de conmutación (ej. transistores de propósito general PNP como el BC558 para ánodo común o NPN). Esto permite dar la ilusión óptica de que todos están encendidos simultáneamente mientras se ahorran pines del microcontrolador.</li>
 <li><strong>Integrados de Expansión:</strong><ul>
-<li><strong>Registros de Desplazamiento (MC74HC595A):</strong> Conversión de datos serie a paralelo para controlar displays o matrices con solo 3 pines.</li>
-<li><strong>Controladores Especializados (MAX7219):</strong> Control mediante interfaz de comunicación serie compatible con <strong>SPI</strong> para hasta 8 displays de cátodo común o matrices LED de 8x8.</li>
+<li><strong>Registros de Desplazamiento (</strong><a href="https://www.youtube.com/watch?v=KJaL4YYFNSk" target="_blank"><strong>MC74HC595A</strong></a><strong>):</strong> Conversión de datos serie a paralelo para controlar displays o matrices con solo 3 pines.</li>
+<li><strong>Controladores Especializados (</strong><a href="https://www.youtube.com/watch?v=CmfDe_sG2ws" target="_blank"><strong>MAX7219</strong></a><strong>):</strong> Control mediante interfaz de comunicación serie compatible con <strong>SPI</strong> para hasta 8 displays de cátodo común o matrices LED de 8x8.</li>
 </ul>
 </li>
 </ul>
@@ -969,7 +1000,7 @@ void loop() {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"icon":"rotate","title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"next":{"title":"Tema 2: Sensores","level":"1.3","depth":1,"path":"chapters/capitulo2/README.md","ref":"chapters/capitulo2/README.md","articles":[{"title":"2.1 Sintaxis Markdown en GitBook","level":"1.3.1","depth":2,"path":"chapters/capitulo2/sintaxis.md","ref":"chapters/capitulo2/sintaxis.md","articles":[]},{"title":"2.2 Configuración avanzada (book.json)","level":"1.3.2","depth":2,"path":"chapters/capitulo2/configuracion.md","ref":"chapters/capitulo2/configuracion.md","articles":[]}]},"previous":{"title":"1.1 Características generales","level":"1.2.1","depth":2,"path":"capitulo1/1.1-instalacion-del-entorno.md","ref":"capitulo1/1.1-instalacion-del-entorno.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/estructura.md","mtime":"2026-08-07T19:42:08.610Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-07T19:43:10.232Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"icon":"rotate","title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"next":{"title":"Tema 2: Sensores","level":"1.3","depth":1,"path":"chapters/capitulo2/README.md","ref":"chapters/capitulo2/README.md","articles":[{"title":"2.1 Sintaxis Markdown en GitBook","level":"1.3.1","depth":2,"path":"chapters/capitulo2/sintaxis.md","ref":"chapters/capitulo2/sintaxis.md","articles":[]},{"title":"2.2 Configuración avanzada (book.json)","level":"1.3.2","depth":2,"path":"chapters/capitulo2/configuracion.md","ref":"chapters/capitulo2/configuracion.md","articles":[]}]},"previous":{"title":"1.1 Características generales","level":"1.2.1","depth":2,"path":"capitulo1/1.1-instalacion-del-entorno.md","ref":"capitulo1/1.1-instalacion-del-entorno.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/estructura.md","mtime":"2026-08-07T23:05:06.011Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-07T23:06:20.769Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
