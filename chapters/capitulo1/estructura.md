@@ -226,13 +226,32 @@ Una simulación exitosa no demuestra integridad eléctrica. El prototipo debe in
 
 ### 2.2 Displays LED, LCD y otros dispositivos de visualización.
 
-#### Diodos Emisores de Luz (LED) y Barras de LEDs&#x20;
+#### Diodos Emisores de Luz (LED) y Barras de LEDs.
+
+Un **LED** (diodo emisor de luz) es un componente electrónico semiconductor que transforma la energía eléctrica en luz mediante un proceso llamado electroluminiscencia. Tiene polaridad: la pata larga o **ánodo** es el positivo y la corta o **cátodo** es el negativo. Funciona dejando pasar la corriente en un solo sentido.
+
+<figure><img src="../../.gitbook/assets/imagen30 led-con-arduino-como-determinar-polaridad.webp" alt=""><figcaption><p>Figura 1.2.20 Descripción y símbolo de un led (Tomado de: <a href="https://www.geekfactory.mx/tutoriales-arduino/conectar-un-led-a-tu-arduino/?srsltid=AfmBOoqD9ki6TGR0c_kS9xA7e0_8X03uRtZ_AqoGNi6Avs-pyNxdPQjF">https://www.geekfactory.mx/tutoriales-arduino/conectar-un-led-a-tu-arduino/?srsltid=AfmBOoqD9ki6TGR0c_kS9xA7e0_8X03uRtZ_AqoGNi6Avs-pyNxdPQjF</a>)</p></figcaption></figure>
+
+
 
 * **Principio de Polarización:** Operación del diodo mediante polarización directa.
 * **Lógica de Control:**
   * **Lógica Positiva (Active-High):** El LED se enciende con un 1 lógico (5 V) proporcionado por el pin del puerto.
   * **Lógica Negativa (Active-Low):** El LED se conecta al ánodo a Vcc    &#x20;y se enciende cuando el pin drena corriente presentando un 0 lógico (0 V).
-* **Cálculo Eléctrico:** Dimensionamiento de los resistores de limitación de corriente/absorción (típicamente de 330 Ω a 1 kΩ) para proteger las terminales del microcontrolador.
+* **Funcionamiento:**&#x20;
+  * Usa materiales semiconductores.
+  * Al pasar corriente eléctrica en sentido positivo, los electrones liberan energía en forma de luz.
+  * Este proceso se llama electroluminiscencia.
+  * Si se conecta al revés, la corriente se bloquea y no enciende.
+* **Cálculo Eléctrico:** Dimensionamiento de los resistores de limitación de corriente/absorción (típicamente de 330 Ω a 1 kΩ) para proteger las terminales del microcontrolador. (Para conocer como realizar el cálculo de la resistencia que debe utilizarse de acuerdo al color de cada led consulta [Calculadora de valores de resistencia LED](https://es.rs-online.com/web/content/blog-rs/calculadoras-convertidores-unidades/calculadora-resistencia-led))
+
+**Tipos de LED**
+
+* **LED estándar:** Los redondos comunes de colores (rojo, verde, azul, amarillo) usados para indicadores.
+* **LED RGB:** Combina tres colores (Rojo, Verde y Azul) en un solo encapsulado para formar cualquier color.
+* **LED SMD:** Pequeños chips soldados directo a placas de circuitos impresos.
+* **LED de alta potencia:** Diseñados para iluminación fuerte (lupas o lámparas).
+* **LED direccionables (NeoPixels):** Permiten controlar el color y brillo de cada unidad de forma independiente desde un solo pin
 
 <details>
 
@@ -250,13 +269,22 @@ Pasemos al siguiente nivel, ahora sugerimos realizar una simulación para un Led
 
 </details>
 
-#### B. Displays de 7 Segmentos y Multiplexación
+#### Displays de 7 Segmentos y Multiplexación
 
-* **Configuraciones Físicas:** Identificación de pines para encapsulados de **Ánodo Común** (común a \\(V\_{cc}\\)) y **Cátodo Común** (común a \\(GND\\)).
+Un **display de 7 segmentos** es un componente electrónico con forma de "8" formado por siete diodos LED (más un punto opcional). Al encender combinaciones específicas de estos segmentos (llamados A, B, C, D, E, F y G), se pueden mostrar de forma clara los números del 0 al 9.
+
+<figure><img src="../../.gitbook/assets/imagen31 display7seg.png" alt=""><figcaption><p>1.2.21 Display de 7 segmentos</p></figcaption></figure>
+
+* **Configuraciones Físicas:** Identificación de pines para encapsulados de **Ánodo Común** (común a _**Vcc**_&#x200B;) y **Cátodo Común** (común a _**GND**_).
+  * **Ánodo común:** Todos los polos positivos (ánodos) de los LEDs están unidos a un pin común que va a la corriente positiva (5V), y los segmentos se encienden enviando un cero lógico (LOW).
+  * **Cátodo común:** Todos los polos negativos (cátodos) están unidos a un pin común que va a tierra (GND), y los segmentos se encienden enviando un uno lógico (HIGH).
+
+<figure><img src="../../.gitbook/assets/imagen31 display7seg CC AC.png" alt=""><figcaption><p>Figura 1.2.22 Display de cátodo común y ánodo común (Tomado de <a href="https://www.mercadolibre.com.mx/display-7-segmentos-12-pulgadas-rojo-anodo-comun/up/MLMU3971460064">https://www.mercadolibre.com.mx/display-7-segmentos-12-pulgadas-rojo-anodo-comun/up/MLMU3971460064</a>)</p></figcaption></figure>
+
 * **Multiplexación (Barrido Dinámico):** Conexión de los segmentos de múltiples displays a un **bus de datos común**. La habilitación selectiva de cada dígito se realiza de forma temporizada a alta velocidad mediante transistores de conmutación (ej. transistores de propósito general PNP como el BC558 para ánodo común o NPN). Esto permite dar la ilusión óptica de que todos están encendidos simultáneamente mientras se ahorran pines del microcontrolador.
 * **Integrados de Expansión:**
-  * **Registros de Desplazamiento (MC74HC595A):** Conversión de datos serie a paralelo para controlar displays o matrices con solo 3 pines.
-  * **Controladores Especializados (MAX7219):** Control mediante interfaz de comunicación serie compatible con **SPI** para hasta 8 displays de cátodo común o matrices LED de 8x8.
+  * **Registros de Desplazamiento (**[**MC74HC595A**](https://www.youtube.com/watch?v=KJaL4YYFNSk)**):** Conversión de datos serie a paralelo para controlar displays o matrices con solo 3 pines.
+  * **Controladores Especializados (**[**MAX7219**](https://www.youtube.com/watch?v=CmfDe_sG2ws)**):** Control mediante interfaz de comunicación serie compatible con **SPI** para hasta 8 displays de cátodo común o matrices LED de 8x8.
 
 ```
   [Microcontrolador] --(Bus Común de Datos: 8 líneas)--> [Segmentos A-G, DP]
