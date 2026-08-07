@@ -224,6 +224,216 @@ Ahora que ya tenemos nuestra plataforma de trabajo es importante establecer una 
 
 Una simulación exitosa no demuestra integridad eléctrica. El prototipo debe incluir desacoplo, reset, tierra correcta y límites de corriente.
 
-2.2 Displays LED, LCD y otros dispositivos de visualización.\
+### 2.2 Displays LED, LCD y otros dispositivos de visualización.
+
+#### Diodos Emisores de Luz (LED) y Barras de LEDs&#x20;
+
+* **Principio de Polarización:** Operación del diodo mediante polarización directa.
+* **Lógica de Control:**
+  * **Lógica Positiva (Active-High):** El LED se enciende con un 1 lógico (5 V) proporcionado por el pin del puerto.
+  * **Lógica Negativa (Active-Low):** El LED se conecta al ánodo a Vcc    &#x20;y se enciende cuando el pin drena corriente presentando un 0 lógico (0 V).
+* **Cálculo Eléctrico:** Dimensionamiento de los resistores de limitación de corriente/absorción (típicamente de 330 Ω a 1 kΩ) para proteger las terminales del microcontrolador.
+
+<details>
+
+<summary><mark style="color:$danger;"><strong>Vamos a trabajar, simulación del encendido y apagado de un led!!!</strong></mark></summary>
+
+Visita el siguiente enlace para hacer parpadear un led externo con Arduino Uno en Tinkercad: [Introducción a los Leds](https://descargas.intef.es/experimentacion/eXeLearning/SdAs_2025/ArduinoArteTecnologia/introduccin_a_los_leds.html)
+
+</details>
+
+<details>
+
+<summary><mark style="color:$danger;"><strong>Aumentemos la intensidad... Led RGB con Arduino!!!</strong></mark></summary>
+
+Pasemos al siguiente nivel, ahora sugerimos realizar una simulación para un Led RGB con Arduino Uno en Tinkercad: [Led RGB con Arduino](https://programarfacil.com/blog/arduino-blog/led-rgb/)
+
+</details>
+
+#### B. Displays de 7 Segmentos y Multiplexación
+
+* **Configuraciones Físicas:** Identificación de pines para encapsulados de **Ánodo Común** (común a \\(V\_{cc}\\)) y **Cátodo Común** (común a \\(GND\\)).
+* **Multiplexación (Barrido Dinámico):** Conexión de los segmentos de múltiples displays a un **bus de datos común**. La habilitación selectiva de cada dígito se realiza de forma temporizada a alta velocidad mediante transistores de conmutación (ej. transistores de propósito general PNP como el BC558 para ánodo común o NPN). Esto permite dar la ilusión óptica de que todos están encendidos simultáneamente mientras se ahorran pines del microcontrolador.
+* **Integrados de Expansión:**
+  * **Registros de Desplazamiento (MC74HC595A):** Conversión de datos serie a paralelo para controlar displays o matrices con solo 3 pines.
+  * **Controladores Especializados (MAX7219):** Control mediante interfaz de comunicación serie compatible con **SPI** para hasta 8 displays de cátodo común o matrices LED de 8x8.
+
+```
+  [Microcontrolador] --(Bus Común de Datos: 8 líneas)--> [Segmentos A-G, DP]
+         |
+         +--(Habilitadores Individuales: 4 líneas)------> [Transistores PNP] -> [Comunes 1-4]
+```
+
+#### C. Pantallas de Cristal Líquido (LCD) Alfanuméricas
+
+* **Arquitectura del Controlador (HD44780):** El estándar de la industria. Contiene una DDRAM de 80 bytes para mapear los caracteres de la pantalla, una CGROM con las fuentes predefinidas y una CGRAM para almacenar hasta 8 caracteres personalizados por el usuario.
+* **Distribución de Terminales (Interfaz Estándar de 16 pines):**
+  1. **\\(V\_{ss}\\)**: Tierra (\\(0\text{ V}\\)).
+  2. **\\(V\_{dd}\\)**: Alimentación (\\(+5\text{ V}\\)).
+  3. **\\(V\_{ee}\\) / \\(V\_0\\)**: Ajuste de contraste mediante potenciómetro de \\(10\text{ k}\Omega\\).
+  4. **RS (Register Select)**: Selección de registro (\\(0\\) = Registro de comandos/instrucciones, \\(1\\) = Registro de datos/carácter).
+  5. **R/W (Read/Write)**: Escritura (\\(0\\)) o Lectura (\\(1\\)). Frecuentemente aterrizado permanentemente a \\(GND\\) para operar únicamente en modo escritura.
+  6. **E (Enable)**: Línea de habilitación. La transferencia de datos se sincroniza con el flanco de bajada de un pulso en este pin.
+  7. **D0-D7**: Bus de datos bidireccional de 8 bits.
+  8. **A y K**: Terminales de ánodo y cátodo para la retroiluminación (_backlight_) de la pantalla.
+* **Modos de Interconexión:**
+  * **Modo de 8 bits:** Requiere las 8 líneas de datos más las líneas de control.
+  * **Modo de 4 bits:** Utiliza únicamente las líneas superiores de datos (D4-D7). Los bytes de información se dividen y se transmiten secuencialmente en dos accesos (primero el nibble alto y luego el bajo), ahorrando pines críticos en el microprocesador.
+
+```
+   +------------------+                    +------------------+
+   |  Arduino / MCU   |                    |    LCD 16x2      |
+   |                  |                    |                  |
+   |      PD4-PD7 ----|--(Datos D4-D7)---->| D4-D7 (Pines)    |
+   |      PD2 --------|--(Control RS)----->| RS               |
+   |      PD3 --------|--(Control E)------>| E                |
+   |      GND --------|------------------->| R/W y Vss        |
+   +------------------+                    +------------------+
+```
+
+* **Adaptador LCD a I2C (PCF8574):** Módulo expansor de puertos que reduce la conexión física a solo 2 hilos de comunicación serial (**SDA** y **SCL**). El chip traduce los comandos seriales I2C recibidos del microcontrolador a niveles paralelos para el controlador HD44780.
+
+***
+
+### 3. Estrategia Didáctica: De la Teoría al Ecosistema Arduino
+
+Para garantizar un aprendizaje significativo, se propone un modelo didáctico de **abstracción progresiva**:
+
+1. **Fase 1: Explicación de Registros y Tiempos de Bus:** Estudiar cómo interactúan las señales RS, R/W y E en un ciclo de escritura físico. Analizar por qué se requieren retardos mínimos de microsegundos entre instrucciones para evitar ignorar la bandera de listo (_Busy Flag_) de la LCD.
+2. **Fase 2: Transición al Código Arduino Estándar:** Mostrar cómo las bibliotecas de código abierto (ej. `LiquidCrystal` o `LiquidCrystal_I2C`) encapsulan estas secuencias de temporización complejas dentro de funciones de alto nivel muy intuitivas como `lcd.begin()`, `lcd.print()` o `lcd.setCursor()`.
+3. **Fase 3: Contraste Crítico de Rendimiento:** Evaluar con los estudiantes la pérdida de velocidad de procesamiento y el espacio de memoria que representan las bibliotecas frente a la manipulación directa de registros de hardware.
+
+***
+
+### 4. Prácticas de Laboratorio Propuestas con Arduino
+
+#### Práctica A: Conmutación y Multiplexación de Displays de 7 Segmentos (Ánodo Común)
+
+* **Objetivo:** Desarrollar un contador decimal de dos dígitos utilizando la técnica de multiplexación por software para comprender el manejo de la persistencia de la visión (_POV_).
+* **Hardware:** Placa Arduino, 2 displays de 7 segmentos de ánodo común, 8 resistores de \\(330\ \Omega\\) (bus de datos), 2 transistores PNP BC558, 2 resistores de \\(1\text{ k}\Omega\\) (bases de transistores), 1 potenciómetro (para variar la velocidad del conteo).
+* **Código de Ejemplo (Multiplexado Directo):**
+
+```
+// Códigos de 7 segmentos para dígitos 0-9 (Ánodo común, lógicos en BAJO encienden)
+const uint8_t digitos[] = {
+  0xC0, // 0
+  0xF9, // 1
+  0xA4, // 2
+  0xB0, // 3
+  0x99, // 4
+  0x92, // 5
+  0x82, // 6
+  0xF8, // 7
+  0x80, // 8
+  0x90  // 9
+};
+
+const int pinDigit1 = 10; // Habilitador del dígito izquierdo (decenas)
+const int pinDigit2 = 11; // Habilitador del dígito derecho (unidades)
+int contador = 0;
+unsigned long tiempoAnterior = 0;
+
+void setup() {
+  // Configurar puerto D completo como salida para los segmentos (pines 0 a 7 de Arduino)
+  DDRD = 0xFF;
+  pinMode(pinDigit1, OUTPUT);
+  pinMode(pinDigit2, OUTPUT);
+  digitalWrite(pinDigit1, HIGH); // Apagados inicialmente
+  digitalWrite(pinDigit2, HIGH);
+}
+
+void loop() {
+  // Incrementar contador cada 500 ms de manera no bloqueante
+  if (millis() - tiempoAnterior >= 500) {
+    tiempoAnterior = millis();
+    contador = (contador + 1) % 100;
+  }
+
+  // Desglose de dígitos
+  int decenas = contador / 10;
+  int unidades = contador % 10;
+
+  // Mostrar Decenas
+  PORTD = digitos[decenas];       // Carga dato en el bus
+  digitalWrite(pinDigit1, LOW);   // Enciende display decenas (PNP activa en LOW)
+  delay(5);                       // Retardo para persistencia visual
+  digitalWrite(pinDigit1, HIGH);  // Apaga display decenas para evitar sombras
+
+  // Mostrar Unidades
+  PORTD = digitos[unidades];      // Carga dato en el bus
+  digitalWrite(pinDigit2, LOW);   // Enciende display unidades
+  delay(5);                       // Retardo para persistencia visual
+  digitalWrite(pinDigit2, HIGH);  // Apaga display unidades
+}
+```
+
+***
+
+#### Práctica B: Monitoreo de Temperatura y Visualización en LCD 16x2 mediante Bus I2C
+
+* **Objetivo:** Interconectar un sensor de temperatura analógico LM35 con un display LCD de caracteres utilizando el bus serial I2C para optimizar el uso de terminales.
+* **Hardware:** Placa Arduino, adaptador I2C PCF8574, pantalla LCD 16x2, sensor analógico LM35.
+* **Código de Ejemplo (Arduino):**
+
+```
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h> // Biblioteca basada en el chip PCF8574
+
+// Inicializar la pantalla en dirección hexadecimal 0x27, de 16 columnas por 2 filas
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+const int pinSensor = A0;
+
+void setup() {
+  lcd.init();          // Inicializa el controlador del display
+  lcd.backlight();     // Enciende la retroiluminación LED
+  lcd.setCursor(0, 0); // Establece posición inicial (columna, fila)
+  lcd.print("SISTEMAS PROG.");
+  delay(1500);
+  lcd.clear();         // Limpieza de pantalla
+}
+
+void loop() {
+  // Lectura analógica del sensor LM35 (10 mV/°C)
+  int lecturaADC = analogRead(pinSensor);
+  float milivoltiostem = (lecturaADC * 5000.0) / 1024.0;
+  float temperatura = milivoltiostem / 10.0; // Conversión directa a grados Celsius
+
+  // Actualización del display sin parpadeos innecesarios
+  lcd.setCursor(0, 0);
+  lcd.print("Temp. Ambiente:");
+
+  lcd.setCursor(4, 1);
+  lcd.print(temperatura, 1); // Imprime el valor flotante con un decimal
+  lcd.print(" C  ");
+
+  delay(500); // Muestreo periódico de la variable
+}
+```
+
+***
+
+#### Práctica C (Avanzada): Visualización Gráfica y OLED mediante Protocolo I2C
+
+* **Objetivo:** Introducir tecnologías de visualización de estado sólido modernas (pantallas orgánicas de alta resolución) para aplicaciones de instrumentación avanzadas.
+* **Hardware:** Placa Arduino, pantalla OLED de 0.96 pulgadas con controlador **SSD1306** (comunicación I2C).
+* **Enfoque Didáctico:** Comparar cómo la memoria RAM de datos de la OLED (\\(128\times64\\) puntos individuales) requiere un búfer de datos dinámico completo en la SRAM de Arduino antes de enviar el refresco de pantalla.
+
+***
+
+### 5. Estructura de Evaluación del Subtema
+
+Se propone un esquema de evaluación continua y formativa, siguiendo las directrices del programa de la asignatura:
+
+1. **Examen Teórico Declarativo (30%):**
+   * Preguntas sobre la función de las líneas de control de una pantalla de cristal líquido (RS, R/W, E).
+   * Explicación de las diferencias de velocidad, sincronía y cableado entre la conexión nativa paralela de la LCD frente al bus I2C con expansor de puertos.
+2. **Reportes Técnicos de Prácticas de Laboratorio (40%):**
+   * Evaluados mediante una rúbrica formal que analice la conjetura de diseño del circuito, el algoritmo (diagrama de flujo), el código documentado con comentarios, la limpieza en el prototipado físico y las conclusiones analíticas sobre la eficiencia del código.
+3. **Proyecto de Integración Aplicado (30%):**
+   * Diseño de una interfaz hombre-máquina (HMI) compacta que combine un teclado matricial para entrada de datos y una pantalla LCD/OLED para retroalimentación visual al usuario (ej. un control de temperatura programable o una chapa electrónica).
+
+***
+
+🔍 ¿Qué te parece este diseño temático? Si gustas, puedo generar el código completo de bajo nivel en lenguaje C/C++ para que los estudiantes aprendan a escribir caracteres personalizados directamente en los registros CGRAM de la pantalla LCD sin utilizar funciones de biblioteca.\
 2.3 Codificadores de posición.
 
