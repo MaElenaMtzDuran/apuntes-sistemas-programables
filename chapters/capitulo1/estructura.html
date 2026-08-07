@@ -657,6 +657,8 @@ Por defecto, estos pines no hacen nada porque el firmware de fábrica de Arduino
 2. **Depuración y Control de Reset:** Puedes programar el chip para que un pin de JP5 actúe como un reset independiente para un Shield, evitando reiniciar la placa completa. \[[Arduino Forum](https://forum.arduino.cc/t/discovered-a-16u2-secret-header-on-uno-and-mega-boards/233876)]
 3. **Procesamiento en Paralelo Extendido:** El ATmega16U2 es un procesador completo de 16 MHz. Puedes programarlo para realizar tareas en segundo plano (como lectura de sensores simples) liberando por completo de carga al microcontrolador principal (ATmega2560). \[[Ag Electrónica](https://agelectronica.lat/pdfs/textos/A/A000067.PDF), [Hetpro](https://hetpro-store.com/atmega16u2-au/?srsltid=AfmBOopXVCYc1ljHQc8ERTjhAipcE2LHLCJtOoP7OBJ2xuS62SSy_Mxg), [Reddit1](https://www.reddit.com/r/arduino/comments/fr3egr/how_to_use_these_jp2_pins_on_arduino_according_to/), [Reddit2](https://www.reddit.com/r/arduino/comments/m9xpad/what_are_the_male_headers_on_the_arduino_uno/)]
 
+***
+
 <figure><img src="../../.gitbook/assets/Imagen24c ArduinoMegaA DPinesDig2 PA2.png" alt=""></img><figcaption><p>Figura 1.2.17 Descripción de los pines para ATMEGA16U2 ICSP1 (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf" target="_blank">https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf</a>)</p></figcaption></figure>
 
 El conector **ICSP1** en placas como Arduino Uno R3 o Arduino Mega 2560 está directamente vinculado al microcontrolador **ATmega16U2**. A diferencia del ICSP principal (que programa al chip central ATmega328P o ATmega2560),Este puerto sirve específicamente para **actualizar, reprogramar o recuperar el firmware del chip USB-a-Serie.**. \[[Forum Arduino](https://forum.arduino.cc/t/can-i-program-arduino-due-via-icsp1-spi-of-atmega16u2-mu/691733), [Editronikx](https://www.youtube.com/watch?v=JVvYht2bSoE\&amp;t=5)]
@@ -676,27 +678,253 @@ Utilice el código con precaución.
 * **Pin 3 (SCK):** Reloj serie (Reloj de sincronización).
 * **Pin 4 (MOSI):** Entrada Master Out Slave (Salida de datos).
 * **Pin 5 (RESET):** Reinicio del ATmega16U2 (Permite tomar control para programarlo).
-* **Pin 6 (GND):** Tierra o referencia común. \[[1](https://aprendiendoarduino.wordpress.com/2016/11/06/icsp/), [2](https://descubrearduino.com/arduino-uno/), [4](https://www.todoelectronica.com/arduino-uno-r3-con-cable-usb-atmega328-compatible-con-arduino-original-p-110170.html?srsltid=AfmBOopSnStHF1mVrpSBPSKIXKH4Qd1FPUKQ8iZQ7Pd8az38C5nZiX2a)]
+* **Pin 6 (GND):** Tierra o referencia común. \[[Aprendiendo Arduino](https://aprendiendoarduino.wordpress.com/2016/11/06/icsp/), [Descubre Arduino](https://descubrearduino.com/arduino-uno/)]
 
 ***
 
 ⚙️ ¿Para qué se utiliza este puerto?
 
-1. **Recuperar placas "muertas":** Si tu ordenador dejó de reconocer el puerto COM o arroja fallos de comunicación USB inesperados, suele deberse a la corrupción del firmware en el ATmega16U2. \[[1](https://www.youtube.com/watch?v=JVvYht2bSoE\&amp;t=5)]
-2. **Cambiar la identidad de la placa:** Puedes cargarle firmwares externos (como el popular [proyecto LUFA](https://www.lcsc.com/blog/atmega16u2-microcontroller-guide/) o HoodLoader2) para transformar tu Arduino en un teclado nativo, un ratón MIDI o un joystick USB. \[[1](https://www.lcsc.com/blog/atmega16u2-microcontroller-guide/)]
-3. **Quemar el Bootloader de fábrica:** Se usa un programador externo (como un USBasp o utilizando otro Arduino cargado con el sketch `ArduinoISP`) para reinstalar el firmware original de Arduino. \[[1](https://industrialmonitordirect.com/es/blogs/knowledgebase/atmega328p-bare-metal-avr-c-programming-without-arduino?srsltid=AfmBOooI3FlZUR3GqGMMEizyWnSWBRnds7tkoG1wG0p9ywSXZL8j7JfE)]
+1. **Recuperar placas "muertas":** Si tu ordenador dejó de reconocer el puerto COM o arroja fallos de comunicación USB inesperados, suele deberse a la corrupción del firmware en el ATmega16U2. \[[Editronik](https://www.youtube.com/watch?v=JVvYht2bSoE\&amp;t=5)]
+2. **Cambiar la identidad de la placa:** Puedes cargarle firmwares externos (como el popular [proyecto LUFA](https://www.lcsc.com/blog/atmega16u2-microcontroller-guide/) o HoodLoader2) para transformar tu Arduino en un teclado nativo, un ratón MIDI o un joystick USB. \[[LCSC Electronics](https://www.lcsc.com/blog/atmega16u2-microcontroller-guide/)]
+3. **Quemar el Bootloader de fábrica:** Se usa un programador externo (como un USBasp o utilizando otro Arduino cargado con el sketch `ArduinoISP`) para reinstalar el firmware original de Arduino. \[[Industrial Monitor Direct](https://industrialmonitordirect.com/es/blogs/knowledgebase/atmega328p-bare-metal-avr-c-programming-without-arduino?srsltid=AfmBOooI3FlZUR3GqGMMEizyWnSWBRnds7tkoG1wG0p9ywSXZL8j7JfE)]
 
+***
 
+<figure><img src="../../.gitbook/assets/Imagen24c ArduinoMegaA DPinesDig2 PA3.png" alt=""></img><figcaption><p>Figura 1.2.18 Descripción de los pines D22-D53 LHS (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf" target="_blank">https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf</a>)</p></figcaption></figure>
 
-
-
-
+<figure><img src="../../.gitbook/assets/Imagen24c ArduinoMegaA DPinesDig2 PA5.png" alt=""></img><figcaption><p>Figura 1.2.19 Descripción de los pines D22- D53 RHS (Tomada de <a href="https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf" target="_blank">https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf</a>)</p></figcaption></figure>
 
 </details>
 
+<h4 id="arduino-ide">Arduino IDE</h4>
+<p>El <strong>Arduino IDE</strong> será el entorno adoptado como herramienta principal para programar Arduino Uno (ATmega328P) o Arduino Mega 2560 (ATmega2560); <strong>integra editor, compilador</strong> (<mark style="background-color:red;">avr-gcc</mark> por debajo del lenguaje Wiring/C++), <strong>gestor de bibliotecas, Monitor Serie y carga del programa por USB mediante el bootloader residente</strong>, sin requerir un programador ICSP externo para el trabajo básico de laboratorio. Se complementa siempre con la lectura y, cuando se indica en la práctica, la escritura directa de registros del ATmega328P o ATmega2560.</p>
+<p>Sin embargo es importante también mencionar que existen otras familias de microcontroladores que se programan mediante herramientas específicas:</p>
+<ul>
+<li><strong>MPLAB X IDE + MPLAB XC8</strong>: entorno y compilador oficial para PIC/AVR de 8 bits; XC8 admite C y optimizaciones por licencia (<a href="https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers/xc8" target="_blank">Microchip, MPLAB XC8)</a>.
+<em>
+<em>*CCS C</em></em>: compilador comercial para PIC, con bibliotecas de alto nivel; su sintaxis y directivas no
+ son siempre portables a XC8.</li>
+<li><strong>MPLAB SIM</strong>: simulador integrado para observar registros y ejecución, sujeto a los periféricos soportados.</li>
+<li><strong>Proteus VSM</strong>: co-simula firmware y circuito, tanto para PIC como para Arduino/AVR; permite instrumentación virtual, pero no reproduce perfectamente ruido, tolerancias, EMI ni todos los modelos físicos (<a href="https://www.labcenter.com/whyvsm/" target="_blank">Labcenter, Proteus VSM</a>).
+<em>
+<em>*PICkit 4/5 e ICSP</em></em>: permiten programar y depurar el PIC16F887 sin retirar el MCU. ICSP requiere VPP/MCLR, VDD, VSS, datos y reloj; el circuito debe evitar cargas que interfieran en esas líneas (<a href="https://onlinedocs.microchip.com/oxy/GUID-E7CBBF9B-B23F-4E8A-8B9D-C66C24729842-en-US-1/GUID-A9ECF4BE-7607-4646-AFC1-6913F9B1B60A.html" target="_blank">Microchip, conexión ICSP</a>). La Arduino Uno no requiere este programador externo para su uso básico gracias a su bootloader USB.</li>
+</ul>
+<p>Ahora que ya tenemos nuestra plataforma de trabajo es importante establecer una <strong>estrategia de verificación</strong> para la programación de nuestro microcontrolador y prototipos:</p>
+<ol>
+<li>Compilar con advertencias máximas. </li>
+<li>Simular lógica y temporización básica. </li>
+<li>Programar hardware. </li>
+<li>Medir alimentación y reloj. </li>
+<li>Probar E/S de manera incremental.</li>
+<li>Inyectar entradas límite y fallas.</li>
+<li>Comparar mediciones contra cálculos y hoja de datos.</li>
+</ol>
+<p>Una simulación exitosa no demuestra integridad eléctrica. El prototipo debe incluir desacoplo, reset, tierra correcta y límites de corriente.</p>
+<h3 id="22-displays-led-lcd-y-otros-dispositivos-de-visualización">2.2 Displays LED, LCD y otros dispositivos de visualización.</h3>
+<h4 id="diodos-emisores-de-luz-led-y-barras-de-leds-">Diodos Emisores de Luz (LED) y Barras de LEDs </h4>
+<ul>
+<li><strong>Principio de Polarización:</strong> Operación del diodo mediante polarización directa.</li>
+<li><strong>Lógica de Control:</strong><ul>
+<li><strong>Lógica Positiva (Active-High):</strong> El LED se enciende con un 1 lógico (5 V) proporcionado por el pin del puerto.</li>
+<li><strong>Lógica Negativa (Active-Low):</strong> El LED se conecta al ánodo a Vcc
+ y se enciende cuando el pin drena corriente presentando un 0 lógico (0 V).</li>
+</ul>
+</li>
+<li><strong>Cálculo Eléctrico:</strong> Dimensionamiento de los resistores de limitación de corriente/absorción (típicamente de 330 Ω a 1 kΩ) para proteger las terminales del microcontrolador.</li>
+</ul>
+<details>
 
+<summary><mark style="color:$danger;"><strong>Vamos a trabajar, simulación del encendido y apagado de un led!!!</strong></mark></summary>
 
-<p>2.2 Displays LED, LCD y otros dispositivos de visualización.\
+Visita el siguiente enlace para hacer parpadear un led externo con Arduino Uno en Tinkercad: [Introducción a los Leds](https://descargas.intef.es/experimentacion/eXeLearning/SdAs_2025/ArduinoArteTecnologia/introduccin_a_los_leds.html)
+
+</details>
+
+<details>
+
+<summary><mark style="color:$danger;"><strong>Aumentemos la intensidad... Led RGB con Arduino!!!</strong></mark></summary>
+
+Pasemos al siguiente nivel, ahora sugerimos realizar una simulación para un Led RGB con Arduino Uno en Tinkercad: [Led RGB con Arduino](https://programarfacil.com/blog/arduino-blog/led-rgb/)
+
+</details>
+
+<h4 id="b-displays-de-7-segmentos-y-multiplexación">B. Displays de 7 Segmentos y Multiplexación</h4>
+<ul>
+<li><strong>Configuraciones Físicas:</strong> Identificación de pines para encapsulados de <strong>Ánodo Común</strong> (común a \(V_{cc}\)) y <strong>Cátodo Común</strong> (común a \(GND\)).</li>
+<li><strong>Multiplexación (Barrido Dinámico):</strong> Conexión de los segmentos de múltiples displays a un <strong>bus de datos común</strong>. La habilitación selectiva de cada dígito se realiza de forma temporizada a alta velocidad mediante transistores de conmutación (ej. transistores de propósito general PNP como el BC558 para ánodo común o NPN). Esto permite dar la ilusión óptica de que todos están encendidos simultáneamente mientras se ahorran pines del microcontrolador.</li>
+<li><strong>Integrados de Expansión:</strong><ul>
+<li><strong>Registros de Desplazamiento (MC74HC595A):</strong> Conversión de datos serie a paralelo para controlar displays o matrices con solo 3 pines.</li>
+<li><strong>Controladores Especializados (MAX7219):</strong> Control mediante interfaz de comunicación serie compatible con <strong>SPI</strong> para hasta 8 displays de cátodo común o matrices LED de 8x8.</li>
+</ul>
+</li>
+</ul>
+<pre><code>  [Microcontrolador] --(Bus Común de Datos: 8 líneas)--&gt; [Segmentos A-G, DP]
+         |
+         +--(Habilitadores Individuales: 4 líneas)------&gt; [Transistores PNP] -&gt; [Comunes 1-4]
+</code></pre><h4 id="c-pantallas-de-cristal-líquido-lcd-alfanuméricas">C. Pantallas de Cristal Líquido (LCD) Alfanuméricas</h4>
+<ul>
+<li><strong>Arquitectura del Controlador (HD44780):</strong> El estándar de la industria. Contiene una DDRAM de 80 bytes para mapear los caracteres de la pantalla, una CGROM con las fuentes predefinidas y una CGRAM para almacenar hasta 8 caracteres personalizados por el usuario.</li>
+<li><strong>Distribución de Terminales (Interfaz Estándar de 16 pines):</strong><ol>
+<li><strong>\(V_{ss}\)</strong>: Tierra (\(0\text{ V}\)).</li>
+<li><strong>\(V_{dd}\)</strong>: Alimentación (\(+5\text{ V}\)).</li>
+<li><strong>\(V_{ee}\) / \(V_0\)</strong>: Ajuste de contraste mediante potenciómetro de \(10\text{ k}\Omega\).</li>
+<li><strong>RS (Register Select)</strong>: Selección de registro (\(0\) = Registro de comandos/instrucciones, \(1\) = Registro de datos/carácter).</li>
+<li><strong>R/W (Read/Write)</strong>: Escritura (\(0\)) o Lectura (\(1\)). Frecuentemente aterrizado permanentemente a \(GND\) para operar únicamente en modo escritura.</li>
+<li><strong>E (Enable)</strong>: Línea de habilitación. La transferencia de datos se sincroniza con el flanco de bajada de un pulso en este pin.</li>
+<li><strong>D0-D7</strong>: Bus de datos bidireccional de 8 bits.</li>
+<li><strong>A y K</strong>: Terminales de ánodo y cátodo para la retroiluminación (<em>backlight</em>) de la pantalla.</li>
+</ol>
+</li>
+<li><strong>Modos de Interconexión:</strong><ul>
+<li><strong>Modo de 8 bits:</strong> Requiere las 8 líneas de datos más las líneas de control.</li>
+<li><strong>Modo de 4 bits:</strong> Utiliza únicamente las líneas superiores de datos (D4-D7). Los bytes de información se dividen y se transmiten secuencialmente en dos accesos (primero el nibble alto y luego el bajo), ahorrando pines críticos en el microprocesador.</li>
+</ul>
+</li>
+</ul>
+<pre><code>   +------------------+                    +------------------+
+   |  Arduino / MCU   |                    |    LCD 16x2      |
+   |                  |                    |                  |
+   |      PD4-PD7 ----|--(Datos D4-D7)----&gt;| D4-D7 (Pines)    |
+   |      PD2 --------|--(Control RS)-----&gt;| RS               |
+   |      PD3 --------|--(Control E)------&gt;| E                |
+   |      GND --------|-------------------&gt;| R/W y Vss        |
+   +------------------+                    +------------------+
+</code></pre><ul>
+<li><strong>Adaptador LCD a I2C (PCF8574):</strong> Módulo expansor de puertos que reduce la conexión física a solo 2 hilos de comunicación serial (<strong>SDA</strong> y <strong>SCL</strong>). El chip traduce los comandos seriales I2C recibidos del microcontrolador a niveles paralelos para el controlador HD44780.</li>
+</ul>
+<hr></hr>
+<h3 id="3-estrategia-didáctica-de-la-teoría-al-ecosistema-arduino">3. Estrategia Didáctica: De la Teoría al Ecosistema Arduino</h3>
+<p>Para garantizar un aprendizaje significativo, se propone un modelo didáctico de <strong>abstracción progresiva</strong>:</p>
+<ol>
+<li><strong>Fase 1: Explicación de Registros y Tiempos de Bus:</strong> Estudiar cómo interactúan las señales RS, R/W y E en un ciclo de escritura físico. Analizar por qué se requieren retardos mínimos de microsegundos entre instrucciones para evitar ignorar la bandera de listo (<em>Busy Flag</em>) de la LCD.</li>
+<li><strong>Fase 2: Transición al Código Arduino Estándar:</strong> Mostrar cómo las bibliotecas de código abierto (ej. <code>LiquidCrystal</code> o <code>LiquidCrystal_I2C</code>) encapsulan estas secuencias de temporización complejas dentro de funciones de alto nivel muy intuitivas como <code>lcd.begin()</code>, <code>lcd.print()</code> o <code>lcd.setCursor()</code>.</li>
+<li><strong>Fase 3: Contraste Crítico de Rendimiento:</strong> Evaluar con los estudiantes la pérdida de velocidad de procesamiento y el espacio de memoria que representan las bibliotecas frente a la manipulación directa de registros de hardware.</li>
+</ol>
+<hr></hr>
+<h3 id="4-prácticas-de-laboratorio-propuestas-con-arduino">4. Prácticas de Laboratorio Propuestas con Arduino</h3>
+<h4 id="práctica-a-conmutación-y-multiplexación-de-displays-de-7-segmentos-ánodo-común">Práctica A: Conmutación y Multiplexación de Displays de 7 Segmentos (Ánodo Común)</h4>
+<ul>
+<li><strong>Objetivo:</strong> Desarrollar un contador decimal de dos dígitos utilizando la técnica de multiplexación por software para comprender el manejo de la persistencia de la visión (<em>POV</em>).</li>
+<li><strong>Hardware:</strong> Placa Arduino, 2 displays de 7 segmentos de ánodo común, 8 resistores de \(330\ \Omega\) (bus de datos), 2 transistores PNP BC558, 2 resistores de \(1\text{ k}\Omega\) (bases de transistores), 1 potenciómetro (para variar la velocidad del conteo).</li>
+<li><strong>Código de Ejemplo (Multiplexado Directo):</strong></li>
+</ul>
+<pre><code>// Códigos de 7 segmentos para dígitos 0-9 (Ánodo común, lógicos en BAJO encienden)
+const uint8_t digitos[] = {
+  0xC0, // 0
+  0xF9, // 1
+  0xA4, // 2
+  0xB0, // 3
+  0x99, // 4
+  0x92, // 5
+  0x82, // 6
+  0xF8, // 7
+  0x80, // 8
+  0x90  // 9
+};
+
+const int pinDigit1 = 10; // Habilitador del dígito izquierdo (decenas)
+const int pinDigit2 = 11; // Habilitador del dígito derecho (unidades)
+int contador = 0;
+unsigned long tiempoAnterior = 0;
+
+void setup() {
+  // Configurar puerto D completo como salida para los segmentos (pines 0 a 7 de Arduino)
+  DDRD = 0xFF;
+  pinMode(pinDigit1, OUTPUT);
+  pinMode(pinDigit2, OUTPUT);
+  digitalWrite(pinDigit1, HIGH); // Apagados inicialmente
+  digitalWrite(pinDigit2, HIGH);
+}
+
+void loop() {
+  // Incrementar contador cada 500 ms de manera no bloqueante
+  if (millis() - tiempoAnterior &gt;= 500) {
+    tiempoAnterior = millis();
+    contador = (contador + 1) % 100;
+  }
+
+  // Desglose de dígitos
+  int decenas = contador / 10;
+  int unidades = contador % 10;
+
+  // Mostrar Decenas
+  PORTD = digitos[decenas];       // Carga dato en el bus
+  digitalWrite(pinDigit1, LOW);   // Enciende display decenas (PNP activa en LOW)
+  delay(5);                       // Retardo para persistencia visual
+  digitalWrite(pinDigit1, HIGH);  // Apaga display decenas para evitar sombras
+
+  // Mostrar Unidades
+  PORTD = digitos[unidades];      // Carga dato en el bus
+  digitalWrite(pinDigit2, LOW);   // Enciende display unidades
+  delay(5);                       // Retardo para persistencia visual
+  digitalWrite(pinDigit2, HIGH);  // Apaga display unidades
+}
+</code></pre><hr></hr>
+<h4 id="práctica-b-monitoreo-de-temperatura-y-visualización-en-lcd-16x2-mediante-bus-i2c">Práctica B: Monitoreo de Temperatura y Visualización en LCD 16x2 mediante Bus I2C</h4>
+<ul>
+<li><strong>Objetivo:</strong> Interconectar un sensor de temperatura analógico LM35 con un display LCD de caracteres utilizando el bus serial I2C para optimizar el uso de terminales.</li>
+<li><strong>Hardware:</strong> Placa Arduino, adaptador I2C PCF8574, pantalla LCD 16x2, sensor analógico LM35.</li>
+<li><strong>Código de Ejemplo (Arduino):</strong></li>
+</ul>
+<pre><code>#include &lt;Wire.h&gt;
+#include &lt;LiquidCrystal_I2C.h&gt; // Biblioteca basada en el chip PCF8574
+
+// Inicializar la pantalla en dirección hexadecimal 0x27, de 16 columnas por 2 filas
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+const int pinSensor = A0;
+
+void setup() {
+  lcd.init();          // Inicializa el controlador del display
+  lcd.backlight();     // Enciende la retroiluminación LED
+  lcd.setCursor(0, 0); // Establece posición inicial (columna, fila)
+  lcd.print("SISTEMAS PROG.");
+  delay(1500);
+  lcd.clear();         // Limpieza de pantalla
+}
+
+void loop() {
+  // Lectura analógica del sensor LM35 (10 mV/°C)
+  int lecturaADC = analogRead(pinSensor);
+  float milivoltiostem = (lecturaADC * 5000.0) / 1024.0;
+  float temperatura = milivoltiostem / 10.0; // Conversión directa a grados Celsius
+
+  // Actualización del display sin parpadeos innecesarios
+  lcd.setCursor(0, 0);
+  lcd.print("Temp. Ambiente:");
+
+  lcd.setCursor(4, 1);
+  lcd.print(temperatura, 1); // Imprime el valor flotante con un decimal
+  lcd.print(" C  ");
+
+  delay(500); // Muestreo periódico de la variable
+}
+</code></pre><hr></hr>
+<h4 id="práctica-c-avanzada-visualización-gráfica-y-oled-mediante-protocolo-i2c">Práctica C (Avanzada): Visualización Gráfica y OLED mediante Protocolo I2C</h4>
+<ul>
+<li><strong>Objetivo:</strong> Introducir tecnologías de visualización de estado sólido modernas (pantallas orgánicas de alta resolución) para aplicaciones de instrumentación avanzadas.</li>
+<li><strong>Hardware:</strong> Placa Arduino, pantalla OLED de 0.96 pulgadas con controlador <strong>SSD1306</strong> (comunicación I2C).</li>
+<li><strong>Enfoque Didáctico:</strong> Comparar cómo la memoria RAM de datos de la OLED (\(128\times64\) puntos individuales) requiere un búfer de datos dinámico completo en la SRAM de Arduino antes de enviar el refresco de pantalla.</li>
+</ul>
+<hr></hr>
+<h3 id="5-estructura-de-evaluación-del-subtema">5. Estructura de Evaluación del Subtema</h3>
+<p>Se propone un esquema de evaluación continua y formativa, siguiendo las directrices del programa de la asignatura:</p>
+<ol>
+<li><strong>Examen Teórico Declarativo (30%):</strong><ul>
+<li>Preguntas sobre la función de las líneas de control de una pantalla de cristal líquido (RS, R/W, E).</li>
+<li>Explicación de las diferencias de velocidad, sincronía y cableado entre la conexión nativa paralela de la LCD frente al bus I2C con expansor de puertos.</li>
+</ul>
+</li>
+<li><strong>Reportes Técnicos de Prácticas de Laboratorio (40%):</strong><ul>
+<li>Evaluados mediante una rúbrica formal que analice la conjetura de diseño del circuito, el algoritmo (diagrama de flujo), el código documentado con comentarios, la limpieza en el prototipado físico y las conclusiones analíticas sobre la eficiencia del código.</li>
+</ul>
+</li>
+<li><strong>Proyecto de Integración Aplicado (30%):</strong><ul>
+<li>Diseño de una interfaz hombre-máquina (HMI) compacta que combine un teclado matricial para entrada de datos y una pantalla LCD/OLED para retroalimentación visual al usuario (ej. un control de temperatura programable o una chapa electrónica).</li>
+</ul>
+</li>
+</ol>
+<hr></hr>
+<p>🔍 ¿Qué te parece este diseño temático? Si gustas, puedo generar el código completo de bajo nivel en lenguaje C/C++ para que los estudiantes aprendan a escribir caracteres personalizados directamente en los registros CGRAM de la pantalla LCD sin utilizar funciones de biblioteca.\
 2.3 Codificadores de posición.</p>
 
                                 
@@ -741,7 +969,7 @@ Utilice el código con precaución.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"icon":"rotate","title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"next":{"title":"Tema 2: Sensores","level":"1.3","depth":1,"path":"chapters/capitulo2/README.md","ref":"chapters/capitulo2/README.md","articles":[{"title":"2.1 Sintaxis Markdown en GitBook","level":"1.3.1","depth":2,"path":"chapters/capitulo2/sintaxis.md","ref":"chapters/capitulo2/sintaxis.md","articles":[]},{"title":"2.2 Configuración avanzada (book.json)","level":"1.3.2","depth":2,"path":"chapters/capitulo2/configuracion.md","ref":"chapters/capitulo2/configuracion.md","articles":[]}]},"previous":{"title":"1.1 Características generales","level":"1.2.1","depth":2,"path":"capitulo1/1.1-instalacion-del-entorno.md","ref":"capitulo1/1.1-instalacion-del-entorno.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/estructura.md","mtime":"2026-08-06T22:01:27.837Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-06T22:03:10.497Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"icon":"rotate","title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"next":{"title":"Tema 2: Sensores","level":"1.3","depth":1,"path":"chapters/capitulo2/README.md","ref":"chapters/capitulo2/README.md","articles":[{"title":"2.1 Sintaxis Markdown en GitBook","level":"1.3.1","depth":2,"path":"chapters/capitulo2/sintaxis.md","ref":"chapters/capitulo2/sintaxis.md","articles":[]},{"title":"2.2 Configuración avanzada (book.json)","level":"1.3.2","depth":2,"path":"chapters/capitulo2/configuracion.md","ref":"chapters/capitulo2/configuracion.md","articles":[]}]},"previous":{"title":"1.1 Características generales","level":"1.2.1","depth":2,"path":"capitulo1/1.1-instalacion-del-entorno.md","ref":"capitulo1/1.1-instalacion-del-entorno.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/estructura.md","mtime":"2026-08-07T19:42:08.610Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-07T19:43:10.232Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
