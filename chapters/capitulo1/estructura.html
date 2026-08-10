@@ -792,38 +792,243 @@ Pasemos al siguiente nivel, ahora sugerimos realizar una simulación para un Led
 <pre><code>  [Microcontrolador] --(Bus Común de Datos: 8 líneas)--&gt; [Segmentos A-G, DP]
          |
          +--(Habilitadores Individuales: 4 líneas)------&gt; [Transistores PNP] -&gt; [Comunes 1-4]
-</code></pre><h4 id="c-pantallas-de-cristal-líquido-lcd-alfanuméricas">C. Pantallas de Cristal Líquido (LCD) Alfanuméricas</h4>
+</code></pre><details>
+
+<summary><mark style="color:$danger;"><strong>Reto para aprender: dado electrónico!!!</strong></mark></summary>
+
+Vamos a desarrollar un prototipo de dado electrónico, para ello debes seguir la propuesta siguiente: [Display 7 segmentos y cómo crear un dado electrónico DIY](https://programarfacil.com/blog/arduino-blog/display-7-segmentos-dado/)
+
+</details>
+
+<h4 id="pantallas-de-cristal-líquido-lcd-alfanuméricas">Pantallas de Cristal Líquido (LCD) Alfanuméricas</h4>
+<p>Una pantalla LCD (pantalla de cristal líquido) es un dispositivo plano y delgado formado por celdas de cristal líquido que dejan pasar o bloquean la luz de fondo para formar caracteres o imágenes. El modelo más común para electrónica es el <strong>LCD 16x2</strong>, que muestra 16 columnas y 2 filas de texto.</p>
+<figure><img src="../../.gitbook/assets/imagen32 pantallaLCDreal.png" alt=""></img><figcaption><p>Figura 1.2.23 Pantalla LCD de 2x16 (Tomado de <a href="https://panamahitek.com/uso-de-pantalla-lcd-con-arduino/" target="_blank">https://panamahitek.com/uso-de-pantalla-lcd-con-arduino/</a>)</p></figcaption></figure>
+
+<p>Una capa de cristal líquido recibe pequeñas señales eléctricas. Esto cambia la posición de los cristales para permitir o impedir el paso de la luz generada por una luz trasera (<em>backlight</em>). Un microcontrolador interno (como el estándar compatible con HD44780) traduce los datos enviados por la tarjeta electrónica en puntos visibles que forman letras y símbolos. (<a href="https://orientdisplay.com/knowledge-base/lcd-basics/what-is-lcd-display-arduino/" target="_blank">¿Qué es una pantalla LCD Arduino?</a>)</p>
 <ul>
-<li><strong>Arquitectura del Controlador (HD44780):</strong> El estándar de la industria. Contiene una DDRAM de 80 bytes para mapear los caracteres de la pantalla, una CGROM con las fuentes predefinidas y una CGRAM para almacenar hasta 8 caracteres personalizados por el usuario.</li>
-<li><strong>Distribución de Terminales (Interfaz Estándar de 16 pines):</strong><ol>
-<li><strong>\(V_{ss}\)</strong>: Tierra (\(0\text{ V}\)).</li>
-<li><strong>\(V_{dd}\)</strong>: Alimentación (\(+5\text{ V}\)).</li>
-<li><strong>\(V_{ee}\) / \(V_0\)</strong>: Ajuste de contraste mediante potenciómetro de \(10\text{ k}\Omega\).</li>
-<li><strong>RS (Register Select)</strong>: Selección de registro (\(0\) = Registro de comandos/instrucciones, \(1\) = Registro de datos/carácter).</li>
-<li><strong>R/W (Read/Write)</strong>: Escritura (\(0\)) o Lectura (\(1\)). Frecuentemente aterrizado permanentemente a \(GND\) para operar únicamente en modo escritura.</li>
+<li><strong>Arquitectura del Controlador (HD44780):</strong> El estándar de la industria. Contiene una DDRAM de 80 bytes para mapear los caracteres de la pantalla, una CGROM con las fuentes predefinidas y una CGRAM para almacenar hasta 8 caracteres personalizados por el usuario. (<a href="https://www.panoxdisplay.com/es/knowledge/hd44780-2x16-character-lcd-display.html" target="_blank">¿Qué es el controlador HD44780 2x16 Character?</a>, <a href="https://www.youtube.com/watch?v=jIpwsMq7AAw\&amp;t=302s" target="_blank">¿Cómo funciona una pantalla LCD?</a>)<ul>
+<li><strong>DDRAM (Display Data RAM):</strong><ul>
+<li>Almacena los códigos (usualmente en formato ASCII) de los caracteres que se muestran de forma activa en la pantalla.</li>
+<li>Cuenta con una capacidad habitual de 80 bytes (80 posiciones), lo que permite guardar mensajes más largos que los visibles, usando desplazamiento (<em>scroll</em>).</li>
+<li>Cada dirección de esta memoria se mapea directamente con una posición visual en el panel LCD.</li>
+</ul>
+</li>
+<li><strong>CGROM (Character Generator ROM):</strong><ul>
+<li>Memoria de solo lectura que viene de fábrica.</li>
+<li>Contiene el repertorio predeterminado de formas de caracteres (letras del abecedario en inglés/japonés, números y símbolos básicos).</li>
+<li>Traduce el código binario o ASCII enviado a la DDRAM en la matriz de puntos física (por ejemplo, de 5x8 píxeles) que ilumina la pantalla.</li>
+</ul>
+</li>
+<li><strong>CGRAM (Character Generator RAM):</strong><ul>
+<li>Memoria de acceso aleatorio destinada a que el usuario dibuje y guarde sus propios patrones o símbolos personalizados (típicamente hasta 8 caracteres definidos por el usuario, como íconos o letras con acentos especiales).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Las <strong>pantallas LCD sirven</strong> para mostrar textos, números y valores de sensores en tiempo real; crear interfaces de usuario para menús o configuraciones de dispositivos; facilitar la depuración y lectura de errores sin depender de una computadora.</p>
+<p>Tiene como <strong>características principales:</strong></p>
+<ul>
+<li><strong>Formato:</strong> Los más populares son de 16x2 (16 columnas, 2 filas) o 20x4.</li>
+<li><strong>Bajo consumo:</strong> Requieren muy poca energía eléctrica.</li>
+<li><strong>Retroiluminación:</strong> Luz de fondo (comúnmente verde o azul) para ver en la oscuridad.</li>
+<li><strong>Control de contraste:</strong> Permite ajustar la nitidez de los caracteres mediante un potenciómetro.</li>
+</ul>
+<p><strong>Distribución de Terminales (Interfaz Estándar de 16 pines):</strong></p>
+<ol>
+<li><em><strong>V</strong></em><sub><em><strong>ss</strong></em></sub><sub>​</sub>: Tierra (0 V).</li>
+<li><em><strong>V</strong></em><sub><em><strong>dd</strong></em></sub>: Alimentación (+5 V).</li>
+<li><em><strong>V</strong></em><sub><em><strong>ee</strong></em></sub><strong> / </strong><em><strong>V</strong></em><sub><em><strong>0</strong></em></sub>: Ajuste de contraste mediante potenciómetro de 10 kΩ.</li>
+<li><strong>RS (Register Select)</strong>: Selección de registro (0 = Registro de comandos/instrucciones, 1 = Registro de datos/carácter).</li>
+<li><strong>R/W (Read/Write)</strong>: Escritura (0) o Lectura (1). Frecuentemente aterrizado permanentemente a <em><strong>GND</strong></em> para operar únicamente en modo escritura.</li>
 <li><strong>E (Enable)</strong>: Línea de habilitación. La transferencia de datos se sincroniza con el flanco de bajada de un pulso en este pin.</li>
 <li><strong>D0-D7</strong>: Bus de datos bidireccional de 8 bits.</li>
 <li><strong>A y K</strong>: Terminales de ánodo y cátodo para la retroiluminación (<em>backlight</em>) de la pantalla.</li>
 </ol>
-</li>
+<figure><img src="../../.gitbook/assets/imagen32 pantallaLCD.png" alt=""></img><figcaption><p>Figura 1.2.24 Pantalla LCD: descripción de sus pines (Tomado de <a href="http://ceca.uaeh.edu.mx/informatica/oas_final/red4_arduino/lcd.html" target="_blank">http://ceca.uaeh.edu.mx/informatica/oas_final/red4_arduino/lcd.html</a>)</p></figcaption></figure>
+
+<ul>
 <li><strong>Modos de Interconexión:</strong><ul>
 <li><strong>Modo de 8 bits:</strong> Requiere las 8 líneas de datos más las líneas de control.</li>
-<li><strong>Modo de 4 bits:</strong> Utiliza únicamente las líneas superiores de datos (D4-D7). Los bytes de información se dividen y se transmiten secuencialmente en dos accesos (primero el nibble alto y luego el bajo), ahorrando pines críticos en el microprocesador.</li>
+<li><strong>Modo de 4 bits:</strong> Utiliza únicamente las líneas superiores de datos (D4-D7). Los bytes de información se dividen y se transmiten secuencialmente en dos accesos (primero el nibble alto y luego el bajo), ahorrando pines críticos en el microprocesado.</li>
 </ul>
 </li>
 </ul>
-<pre><code>   +------------------+                    +------------------+
-   |  Arduino / MCU   |                    |    LCD 16x2      |
-   |                  |                    |                  |
-   |      PD4-PD7 ----|--(Datos D4-D7)----&gt;| D4-D7 (Pines)    |
-   |      PD2 --------|--(Control RS)-----&gt;| RS               |
-   |      PD3 --------|--(Control E)------&gt;| E                |
-   |      GND --------|-------------------&gt;| R/W y Vss        |
-   +------------------+                    +------------------+
-</code></pre><ul>
+<details>
+
+<summary><mark style="color:$danger;"><strong>Pantalla LCD y Arduino</strong></mark></summary>
+
+Para conectar una pantalla LCD con Arduino Uno consulta el siguiente video [Aprende a usar Pantalla LCD con Arduino](https://www.youtube.com/watch?v=T5l_3VWqfE4).
+
+</details>
+
+<ul>
 <li><strong>Adaptador LCD a I2C (PCF8574):</strong> Módulo expansor de puertos que reduce la conexión física a solo 2 hilos de comunicación serial (<strong>SDA</strong> y <strong>SCL</strong>). El chip traduce los comandos seriales I2C recibidos del microcontrolador a niveles paralelos para el controlador HD44780.</li>
 </ul>
 <hr></hr>
+<details>
+
+<summary><mark style="color:$danger;"><strong>¿Cómo sucede la magia?: de la instrucción de alto nivel en Arduino a la pantalla LCD</strong></mark> <img src="../../.gitbook/assets/imagen32 pantallaLCDEnsam.png" alt=""></img></summary>
+
+El verdadero aprendizaje de la ingeniería de sistemas programables ocurre cuando comprendemos la **relación directa entre los tiempos físicos del hardware y la abstracción del software.**
+
+Un LCD esta formado por un circuito controlador, este es el encargado de manejar a la pantalla de cristal líquido, generando los niveles de voltaje y realizando su refresco, para mostrar la información de un sistema electrónico. El controlador proporciona una interfaz de las terminales, para ser manejado por un MCU o un microprocesador, por medio de un conjunto de comandos que el controlador es capaz de reconocer y ejecutar. 
+
+El controlador puede diferir de un fabricante a otro, pero la información de su manejo es compatible entre ellos, entre los cuales se encuentran:
+
+* [ST7066U](https://www.alldatasheet.es/datasheet-pdf/pdf/325981/SITRONIX/ST7066U.html) de Sitronix
+* [S6A0069X](http://www.datasheet.hk/view_download.php?id=1052835\&amp;file=0039%5Cs6a0069x_291520.pdf) de Samsung
+* [HD44780](https://www.laskakit.cz/user/related_files/hd44780_datasheet.pdf) de Hitachi
+* [SED1278](https://www.lcd-module.de/eng/pdf/zubehoer/sed1278.pdf) de SMOS
+* [TM161A](https://www.alldatasheet.com/view.jsp?Searchword=TM161A) de Tianma
+
+A continuación analizaremos la interacción de las señales de bajo nivel, las demandas de temporización del controlador HD44780, su encapsulamiento en el ecosistema Arduino y el impacto real en el rendimiento del sistema.
+
+***
+
+#### A. Interacción de Señales Físicas en el Bus del LCD
+
+
+Para controlar un display LCD alfanumérico (basado en el chip estándar HD44780), el microcontrolador debe coordinar un bus bidireccional y tres líneas de control clave:
+
+* **RS (Register Select)**: Determina el destino de la información. Si <mark style="background-color:$danger;">RS = 0</mark>, el dato en el bus se interpreta como un comando de configuración (ej. limpiar pantalla). Si <mark style="background-color:$danger;">RS = 1</mark>, se interpreta como un carácter ASCII a mostrar en pantalla.
+* **R/W (Read/Write)**: Define la dirección del flujo de datos. <mark style="background-color:$danger;">R/W = 0</mark> para operaciones de escritura (enviar datos al LCD) y <mark style="background-color:$danger;">R/W = 1</mark> para lectura (leer el estado interno o la memoria del LCD). En aplicaciones académicas y comerciales típicas, es común conectar esta terminal permanentemente a tierra (<mark style="background-color:$danger;">GND</mark>), forzando al dispositivo a operar únicamente en modo escritura para ahorrar pines del microcontrolador.
+* **E (Enable)**: Es la señal de sincronización o reloj del display. La pantalla de cristal líquido es un dispositivo pasivo que no procesa información de manera continua. Para que acepte un comando o dato, las señales <mark style="background-color:$danger;">RS</mark>, <mark style="background-color:$danger;">R/W</mark> y las líneas de datos deben estabilizarse primero. Posteriormente, se debe aplicar un pulso en alto en la terminal <mark style="background-color:$danger;">E</mark>. La captura real de la información ocurre estrictamente en el flanco de bajada (transición de alto a bajo) de esta señal.
+
+#### **B. Tiempos Críticos del Ciclo de Escritura**
+
+
+De acuerdo con las especificaciones del fabricante del controlador del LCD, las señales deben respetar ventanas de tiempo de nivel de nanosegundos para evitar la corrupción de datos, para el controlador HD44780 se tiene el siguiente diagrama de tiempos para la operación de escritura:
+
+<figure><img src="../../.gitbook/assets/imagen32 pantallaLCDOpeEsc.png" alt=""></img><figcaption><p>Figura 1.2.25 Temporización para la operación de escritura en una pantalla LCD con controlador HD44780U (Tomado de <a href="https://www.laskakit.cz/user/related_files/hd44780_datasheet.pdf" target="_blank">https://www.laskakit.cz/user/related_files/hd44780_datasheet.pdf</a>)</p></figcaption></figure>
+
+1. Tiempo de Configuración de Direcciones (t<sub>AS</sub>​): Las líneas <mark style="background-color:$danger;">RS</mark> y <mark style="background-color:$danger;">R/W</mark> deben estar estables por lo menos 140 ns antes de que la línea <mark style="background-color:$danger;">E</mark> cambie a nivel alto.
+2. Ancho de Pulso de Habilitación (PW<sub>EH</sub>​): La terminal <mark style="background-color:$danger;">E</mark> debe permanecer en estado alto por un tiempo mínimo de 450 ns.
+3. Tiempo de Configuración de Datos (t<sub>DSW</sub>​): El dato colocado en el bus (D0​ a D7​) debe estar completamente estable por lo menos 195 ns antes de que ocurra el flanco de bajada de la señal <mark style="background-color:$danger;">E</mark>.
+4. Tiempo de Retención de Datos (t<sub>H</sub>​): Tras el flanco de bajada de <mark style="background-color:$danger;">E</mark>, el dato debe sostenerse en el bus por un mínimo de 10 ns antes de cambiar.
+
+Si un microcontrolador opera con un oscilador interno de 1 MHz, su ciclo de instrucción de bajo nivel equivale exactamente a 1 μs. Esto significa que ejecutar instrucciones consecutivas de encendido y apagado del pin <mark style="background-color:$danger;">E</mark> (que consumen 1 μs cada una) cubre con creces el requisito mínimo de 450 ns del pulso sin necesidad de agregar retardos por software adicionales.
+
+***
+
+#### **B.** Análisis de Retardos entre Instrucciones (El Cuello de Botella del Hardware)**.**
+
+El procesador interno del LCD tiene una velocidad de respuesta significativamente menor que la de cualquier microcontrolador moderno. Por ello, tras enviar cada comando, el microcontrolador debe respetar tiempos de espera obligatorios para que el controlador de la pantalla procese la información antes de recibir una nueva instrucción:
+
+* **Comandos Estándar** (40 μs): Operaciones como escribir un carácter en la DDRAM, encender/apagar el display o configurar la dirección del cursor requieren un tiempo de procesamiento típico de 40 μs.
+* **Comandos Pesados** (Hasta 1.64 ms): Los comandos de **Limpieza de Display** (<mark style="background-color:$danger;">Clear Display</mark>, código <mark style="background-color:$danger;">0x01</mark>) y **Regreso al Inicio** (<mark style="background-color:$danger;">Return Home</mark>, código <mark style="background-color:$danger;">0x02</mark>) obligan al controlador a escribir espacios en blanco en todas las posiciones de memoria y restablecer el contador de direcciones a cero. Esto requiere una pausa obligatoria de 82 μs a 1.64 ms. No respetar este retardo provocará que el LCD ignore los siguientes datos enviados por el bus.
+
+**La Alternativa Eficiente: Monitoreo de la Bandera de Ocupado (Busy Flag - **<mark style="background-color:$danger;">**BF**</mark>**)**
+
+En lugar de forzar al microcontrolador a realizar pérdidas de tiempo fijas mediante retardos estáticos, el hardware del LCD proporciona un mecanismo de retroalimentación activa:
+
+* Al colocar la señal <mark style="background-color:$danger;">RS = 0</mark> y <mark style="background-color:$danger;">R/W = 1</mark>, la terminal D7​ del bus de datos actúa como la bandera de ocupado (<mark style="background-color:$danger;">BF</mark>).
+* Si D7​=1, el LCD se encuentra ejecutando una instrucción interna. El microcontrolador puede programar un ciclo de sondeo rápido (_polling_) que espere a que D7​ retorne a 0 antes de continuar, logrando una sincronización dinámica y optimizando el tiempo del procesador.
+* _Desventaja pedagógica/física:_ Implementar este monitoreo requiere obligatoriamente cablear la señal <mark style="background-color:$danger;">R/W</mark> a un pin del microcontrolador y configurar constantemente el puerto de datos como entrada y salida de forma alternada, aumentando la complejidad del circuito impreso y del código.
+
+***
+
+#### C. Encapsulamiento de Temporizaciones en el Código de Arduino
+
+La plataforma Arduino simplifica drásticamente el desarrollo de prototipos mediante la abstracción del hardware. Sin embargo, esta simplicidad se logra ocultando toda la complejidad de las temporizaciones dentro de clases de C++. Por ejemplo, al instanciar la biblioteca estándar de LCD en modo de 4 bits:
+
+```
+#include <liquidcrystal.h>
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // RS, E, D4, D5, D6, D7 [33]
+```
+
+La biblioteca asume de manera interna las siguientes tareas críticas que el programador de Arduino suele ignorar:
+
+1. **El Protocolo de Inicialización Forzada:** Cuando el display se enciende, el voltaje de alimentación tarda un tiempo en estabilizarse, lo que puede provocar un estado lógico indeterminado en el controlador. Para solucionar esto, la biblioteca ejecuta un riguroso algoritmo de reinicio por software mediante una secuencia temporizada de comandos de 8 bits antes de conmutar a 4 bits:
+   1. Espera inicial de al menos 15 ms después de que el voltaje de alimentación alcance los 4.5 V.
+   2. Envía el comando de configuración de funciones (<mark style="background-color:$danger;">0x03</mark>) y espera un mínimo de 4.1 ms.
+   3. Envía el mismo comando (<mark style="background-color:$danger;">0x03</mark>) por segunda vez y espera al menos 100 μs.
+   4. Envía el comando (<mark style="background-color:$danger;">0x03</mark>) por tercera vez. En este punto, la interfaz del LCD está garantizada en modo de 8 bits y lista para recibir configuraciones de forma estable.
+   5. Envía el comando <mark style="background-color:$danger;">0x02</mark> para indicar de manera definitiva que el bus operará en modo de 4 bits. A partir de este momento, todos los comandos y caracteres se dividirán y transmitirán en dos bloques secuenciales (el nibble más significativo primero y luego el menos significativo).
+
+<figure><img src="../../.gitbook/assets/imagen32 pantallaLCDInicgemini.png" alt=""></img><figcaption><p>Figura 1.2.26 Proceso de iniciación forzada LCD Arduino (Imagen generada por Gemini)</p></figcaption></figure>
+
+2. **El Desdoblamiento de Datos en 4 Bits.** Cuando el usuario ejecuta la simple instrucción <kbd><mark style="background-color:$danger;">lcd.print('A')<mark style="background-color:$danger;"></mark></mark></kbd> (carácter hexadecimal <mark style="background-color:$danger;">0x41</mark>), la función de la biblioteca desglosa internamente la trama en dos transmisiones independientes a través del bus de 4 bits:
+   1. Configura <mark style="background-color:$danger;">RS = 1</mark>.
+   2. Carga el nibble superior (<mark style="background-color:$danger;">0x04</mark>) en los pines D4​-D7​ y genera un flanco de bajada en <mark style="background-color:$danger;">E</mark>. 
+   3. Genera un retraso implícito de al menos 1 μs (el cual es absorbido naturalmente por el tiempo que toma procesar las propias instrucciones de la CPU).
+   4. Carga el nibble inferior (<mark style="background-color:$danger;">0x01</mark>) en los pines D4​-D7​ y genera un nuevo flanco de bajada en <mark style="background-color:$danger;">E</mark>. 
+   5. Genera un retardo forzado de 40 μs para asegurar que el carácter se grabe correctamente en la memoria RAM del display.
+
+***
+
+#### D. Pérdida de Velocidad de Ejecución y Consumo de Memoria por Abstracción
+
+El uso de las bibliotecas del ecosistema Arduino introduce un costo de rendimiento severo que se debe analizar de cara al diseño de sistemas embebidos de tiempo real.
+
+1. **El Costo de la "Envoltura" de Software.** Funciones como <mark style="background-color:$danger;">digitalWrite()</mark> y <mark style="background-color:$danger;">pinMode()</mark> no modifican directamente los registros del procesador. Para cambiar el estado de un pin, Arduino debe ejecutar rutinas de compatibilidad que realizan búsquedas en tablas en memoria Flash para mapear el pin de Arduino al puerto físico del chip (ej. el Pin 13 de la placa Arduino UNO se mapea al pin físico <mark style="background-color:$danger;">PB5</mark> del puerto B del chip ATMega328P). Estas funciones de envoltura verifican por seguridad si el pin tiene configurada una señal PWM activa para apagarla antes de realizar el cambio.
+   1. **Manipulación Directa de Registros**: La instrucción en C <mark style="background-color:$danger;">PORTD = 0xFF;</mark> se compila directamente en una única instrucción en lenguaje ensamblador (<mark style="background-color:$danger;">OUT 0x0B, R16</mark>) que se ejecuta en **un solo ciclo de reloj de la CPU** (62.5 ns a 16 MHz).
+   2. **Abstracción de Arduino**: La llamada <kbd><mark style="background-color:$danger;">digitalWrite(pin, HIGH)<mark style="background-color:$danger;"></mark></mark></kbd> requiere la ejecución de múltiples subrutinas internas del compilador, consumiendo entre 3 μs y 5 μs para realizar exactamente la misma tarea, lo que representa una **pérdida de velocidad de procesamiento de casi 80 veces**.
+2. **El Impacto en la Memoria Flash y SRAM del Sistema**. Al compilar aplicaciones idénticas de comunicación e interfaz, el peso de las bibliotecas de abstracción frente al código nativo estructurado mediante registros demuestra por qué los sistemas embebidos industriales evitan el software de propósito general:
+
+| **Métrica de Recursos**    | Solución con **Bibliotecas de Arduino (Abstracción)** | Solución con **Acceso Directo a Registros (Nativo)** | **Incremento de Consumo** |
+| -------------------------- | ----------------------------------------------------- | ---------------------------------------------------- | ------------------------- |
+| **Memoria Flash (Código)** | 2,346 bytes (7%)                                      | 726 bytes (2.2%)                                     | **+323%**                 |
+| **Memoria SRAM (Datos)**   | 201 bytes (9%)                                        | 15 bytes (0.7%)                                      | **+1,340%**               |
+
+Este drástico incremento en el consumo de SRAM se debe a que las bibliotecas dinámicas asignan búferes de memoria extendidos y variables globales de estado para simplificar la sintaxis del usuario. En microcontroladores de baja gama o con severas limitaciones de espacio (como la serie PIC12-PIC16 con menos de 2 KB de Flash o la gama AVR Tiny con 1 KB), el uso de estas bibliotecas simplemente imposibilita la implementación del proyecto.
+
+***
+
+#### E. Propuesta de Código Comparativo.
+
+A continuación realizaremos el desarrollo de código para contrastar las diferencias del código para escribir un carácter en la pantalla en modo de 4 bits. El objetivo es demostrar cómo la manipulación directa de registros imita exactamente el comportamiento del hardware físico con una eficiencia óptima.
+
+**Opción A: Implementación Nativa de Bajo Nivel (Acceso a Registros)**
+
+```
+// Definición de pines y puertos directamente sobre registros del microcontrolador
+#define PORT_LCD  PORTD // Usamos el Puerto D para datos (PD0-PD3 a D4-D7 del LCD) [18]
+#define TRIS_LCD  DDRD  // Registro de dirección de datos del Puerto D [44]
+#define PIN_RS    4     // Registro de control RS asignado a PD4
+#define PIN_E     5     // Registro de control E asignado a PD5
+
+void enviarNibble(uint8_t nibble) {
+  // Limpia los 4 bits de datos manteniendo el estado de RS y E
+  PORT_LCD &amp;= 0xF0; 
+  // Carga el nibble en la parte baja del puerto (PD0-PD3)
+  PORT_LCD |= (nibble &amp; 0x0F); 
+
+  // Generación física del pulso Enable (Cumple con los 450 ns requeridos de forma nativa) [11, 17]
+  PORT_LCD |= (1 &lt;&lt; PIN_E);  // E = 1 [17]
+  PORT_LCD &amp;= ~(1 &lt;&lt; PIN_E); // E = 0 (Flanco de bajada que captura el dato) [11, 17]
+}
+
+void escribirCaracterDirecto(char caracter) {
+  PORT_LCD |= (1 &lt;&lt; PIN_RS); // RS = 1 para enviar un dato/carácter [7, 40]
+
+  enviarNibble(caracter &gt;&gt; 4); // Transmisión del nibble alto [38, 40]
+  enviarNibble(caracter);      // Transmisión del nibble bajo [38, 40]
+
+  _delay_us(40); // Retardo obligatorio de procesamiento físico del hardware [26, 40]
+}
+```
+
+**Opción B: Abstracción de Alto Nivel de Arduino (Uso de Biblioteca)**
+
+```
+#include <liquidcrystal.h>
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // RS, E, D4, D5, D6, D7 [33]
+
+void setup() {
+  lcd.begin(16, 2); // Inicialización oculta de registros y retardos de arranque [34]
+}
+
+void loop() {
+  lcd.print('A'); // Función abstracta con sobrecarga de memoria SRAM y Flash [41]
+  delay(1000);
+}
+```
+
+Con el análisis de ambos enfoques, aprendemos no solo a codificar, sino que se adquiere el criterio de ingeniería para decidir cuándo la velocidad de desarrollo de la plataforma abierta justifica el desperdicio de recursos del hardware, y cuándo las demandas críticas del sistema exigen un control riguroso a nivel de registros.
+
+</liquidcrystal.h></liquidcrystal.h></details>
+
 <h3 id="3-estrategia-didáctica-de-la-teoría-al-ecosistema-arduino">3. Estrategia Didáctica: De la Teoría al Ecosistema Arduino</h3>
 <p>Para garantizar un aprendizaje significativo, se propone un modelo didáctico de <strong>abstracción progresiva</strong>:</p>
 <ol>
@@ -1000,7 +1205,7 @@ void loop() {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"icon":"rotate","title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"next":{"title":"Tema 2: Sensores","level":"1.3","depth":1,"path":"chapters/capitulo2/README.md","ref":"chapters/capitulo2/README.md","articles":[{"title":"2.1 Sintaxis Markdown en GitBook","level":"1.3.1","depth":2,"path":"chapters/capitulo2/sintaxis.md","ref":"chapters/capitulo2/sintaxis.md","articles":[]},{"title":"2.2 Configuración avanzada (book.json)","level":"1.3.2","depth":2,"path":"chapters/capitulo2/configuracion.md","ref":"chapters/capitulo2/configuracion.md","articles":[]}]},"previous":{"title":"1.1 Características generales","level":"1.2.1","depth":2,"path":"capitulo1/1.1-instalacion-del-entorno.md","ref":"capitulo1/1.1-instalacion-del-entorno.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/estructura.md","mtime":"2026-08-07T23:05:06.011Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-07T23:06:20.769Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"icon":"rotate","title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"next":{"title":"Tema 2: Sensores","level":"1.3","depth":1,"path":"chapters/capitulo2/README.md","ref":"chapters/capitulo2/README.md","articles":[{"title":"2.1 Sintaxis Markdown en GitBook","level":"1.3.1","depth":2,"path":"chapters/capitulo2/sintaxis.md","ref":"chapters/capitulo2/sintaxis.md","articles":[]},{"title":"2.2 Configuración avanzada (book.json)","level":"1.3.2","depth":2,"path":"chapters/capitulo2/configuracion.md","ref":"chapters/capitulo2/configuracion.md","articles":[]}]},"previous":{"title":"1.1 Características generales","level":"1.2.1","depth":2,"path":"capitulo1/1.1-instalacion-del-entorno.md","ref":"capitulo1/1.1-instalacion-del-entorno.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/estructura.md","mtime":"2026-08-10T23:19:22.703Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-10T23:20:52.221Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
