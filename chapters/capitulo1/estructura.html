@@ -497,7 +497,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="12-circuitería-alternativa-para-entradasalida">1.2 Circuitería alternativa para entrada/salida</h1>
-<h3 id="21-generalidades">2.1 Generalidades.</h3>
+<h3 id="121-generalidades">1.2.1 Generalidades.</h3>
 <p>El uso de microcontroladores en el ámbito académico universitario es fundamental para la enseñanza de <strong>arquitecturas de cómputo, lenguajes de interfaz y sistemas embebidos</strong>. Estos dispositivos, definidos como computadoras completas en un solo chip de silicio, permiten interactuar con el mundo físico mediante sensores y actuadores. La cantidad de microcontroladores que se encuentran en el mercado es amplia, por lo que a continuación se presenta un análisis de los principales microcontroladores que se utilizan en el ambito académico. Los microcontroladores más utilizados en las universidades se seleccionan por su <strong>bajo costo, amplia documentación y facilidad de programación</strong>. Se utilizarán como referencia las hojas técnicas de cada uno de ellos (data sheet)</p>
 <h4 id="familia-pic-microchip-technology"><strong>Familia PIC (Microchip Technology)</strong></h4>
 <p>Es históricamente la familia más difundida en cursos de ingeniería debido a su arquitectura <strong>Harvard y procesador RISC</strong>.</p>
@@ -720,7 +720,7 @@ Utilice el código con precaución.
 <li>Comparar mediciones contra cálculos y hoja de datos.</li>
 </ol>
 <p>Una simulación exitosa no demuestra integridad eléctrica. El prototipo debe incluir desacoplo, reset, tierra correcta y límites de corriente.</p>
-<h3 id="22-displays-led-lcd-y-otros-dispositivos-de-visualización">2.2 Displays LED, LCD y otros dispositivos de visualización.</h3>
+<h3 id="122-displays-led-lcd-y-otros-dispositivos-de-visualización">1.2.2 Displays LED, LCD y otros dispositivos de visualización.</h3>
 <h4 id="diodos-emisores-de-luz-led-y-barras-de-leds">Diodos Emisores de Luz (LED) y Barras de LEDs.</h4>
 <p>Un <strong>LED</strong> (diodo emisor de luz) es un componente electrónico semiconductor que transforma la energía eléctrica en luz mediante un proceso llamado electroluminiscencia. Tiene polaridad: la pata larga o <strong>ánodo</strong> es el positivo y la corta o <strong>cátodo</strong> es el negativo. Funciona dejando pasar la corriente en un solo sentido.</p>
 <figure><img src="../../.gitbook/assets/imagen30 led-con-arduino-como-determinar-polaridad.webp" alt=""></img><figcaption><p>Figura 1.2.20 Descripción y símbolo de un led (Tomado de: <a href="https://www.geekfactory.mx/tutoriales-arduino/conectar-un-led-a-tu-arduino/?srsltid=AfmBOoqD9ki6TGR0c_kS9xA7e0_8X03uRtZ_AqoGNi6Avs-pyNxdPQjF" target="_blank">https://www.geekfactory.mx/tutoriales-arduino/conectar-un-led-a-tu-arduino/?srsltid=AfmBOoqD9ki6TGR0c_kS9xA7e0_8X03uRtZ_AqoGNi6Avs-pyNxdPQjF</a>)</p></figcaption></figure>
@@ -1029,22 +1029,85 @@ Con el análisis de ambos enfoques, aprendemos no solo a codificar, sino que se 
 
 </liquidcrystal.h></liquidcrystal.h></details>
 
-<h3 id="3-estrategia-didáctica-de-la-teoría-al-ecosistema-arduino">3. Estrategia Didáctica: De la Teoría al Ecosistema Arduino</h3>
-<p>Para garantizar un aprendizaje significativo, se propone un modelo didáctico de <strong>abstracción progresiva</strong>:</p>
+<hr></hr>
+<h3 id="123-codificadores-de-posición">1.2.3 Codificadores de posición.</h3>
+<p>A diferencia de los sensores binarios simples (como los interruptores de límite) que solo detectan si una variable superó un umbral, los <strong>codificadores</strong> (o <em>encoder</em>) son sensores analógicos diseñados para codificar una magnitud de desplazamiento físico en una respuesta digital que varía en múltiples pasos a lo largo de su rango de medición [20]. Son componentes fundamentales en aplicaciones industriales, sistemas mecatrónicos y en la realimentación de servomotores para indicar posición angular y velocidad [21]. [<a href="https://www.lbaindustrial.com.mx/que-es-un-encoder/" target="_blank">LBA INDUSTRIAL</a>]</p>
+<p><strong>Características</strong></p>
+<ul>
+<li><strong>Alta resolución</strong>: Mide movimientos muy pequeños con precisión exacta.</li>
+<li><strong>Respuesta rápida</strong>: Entrega datos en tiempo real al sistema de control.</li>
+<li><strong>Señal digital o analógica</strong>: Facilita la conexión con autómatas y computadoras.</li>
+<li><strong>Diseño robusto</strong>: Soporta polvo, vibraciones y temperaturas altas.</li>
+</ul>
+<figure><img src="../../.gitbook/assets/imagen40a EncoderEjemplos.png" alt=""></img><figcaption><p>Figura 1.2.27 Ejemplos de encoders (Tomado de <a href="https://www.servomotorsadjust.com/encoders/" target="_blank">https://www.servomotorsadjust.com/encoders/</a>)</p></figcaption></figure>
+
+<p><strong>¿Cómo funciona un encoder?</strong></p>
+<p>Un <em>encoder</em> se compone básicamente de un disco conectado a un eje giratorio. El disco esta hecho de vidrio o plástico y se encuentra "codificado" con unas partes transparentes y otras opacas que bloquean el paso de la luz emitida por la fuente de luz (típicamente emisores infrarrojos). En la mayoría de los casos, estás áreas bloqueadas (codificadas) están arregladas en forma radial.</p>
+<figure><img src="../../.gitbook/assets/imagen40 Encoder1.png" alt=""></img><figcaption><p>Figura 1.2.28 Elementos de un <em>encoder</em> (Tomado de <a href="https://www.lbaindustrial.com.mx/que-es-un-encoder/" target="_blank">https://www.lbaindustrial.com.mx/que-es-un-encoder/</a>)</p></figcaption></figure>
+
+<p>A medida que el eje rota, el emisor infrarrojo emite luz que es recibida por el sensor óptico (o foto-transistor) generando los pulsos digitales a medida que la luz cruza a través del disco o es bloqueada en diferentes secciones de este. Esto produce una secuencia que puede ser usada para controlar el radio de giro, la dirección del movimiento e incluso la velocidad. [<a href="https://www.lbaindustrial.com.mx/que-es-un-encoder/" target="_blank">LBA INDUSTRIAL</a>]</p>
+<p><strong>Clasificación por Principio y Tipo de Salida</strong></p>
 <ol>
-<li><strong>Fase 1: Explicación de Registros y Tiempos de Bus:</strong> Estudiar cómo interactúan las señales RS, R/W y E en un ciclo de escritura físico. Analizar por qué se requieren retardos mínimos de microsegundos entre instrucciones para evitar ignorar la bandera de listo (<em>Busy Flag</em>) de la LCD.</li>
-<li><strong>Fase 2: Transición al Código Arduino Estándar:</strong> Mostrar cómo las bibliotecas de código abierto (ej. <code>LiquidCrystal</code> o <code>LiquidCrystal_I2C</code>) encapsulan estas secuencias de temporización complejas dentro de funciones de alto nivel muy intuitivas como <code>lcd.begin()</code>, <code>lcd.print()</code> o <code>lcd.setCursor()</code>.</li>
-<li><strong>Fase 3: Contraste Crítico de Rendimiento:</strong> Evaluar con los estudiantes la pérdida de velocidad de procesamiento y el espacio de memoria que representan las bibliotecas frente a la manipulación directa de registros de hardware.</li>
+<li><strong>Codificadores Absolutos</strong>: Entregan un patrón de bits único y específico para cada posición física o ángulo del eje, manteniendo la lectura correcta incluso si el sistema se apaga y se vuelve a encender.<ol>
+<li><strong>Estructura</strong>: Físicamente constan de un disco codificado binariamente montado sobre un eje giratorio, ubicado entre un emisor óptico (como un diodo LED infrarrojo) y un receptor emparejado (como un fototransistor). </li>
+<li><strong>El Problema del Código Binario Natural</strong>: Si el disco se codifica en binario natural, pequeñas desalineaciones físicas en los sensores ópticos durante la transición entre dos posiciones adyacentes pueden provocar que cambien varios bits a la vez. Si el bit más significativo cambia una fracción de milisegundo antes que los otros, el sistema interpretará una lectura errónea instantánea y catastrófica (por ejemplo, un error momentáneo de hasta 180° en la lectura de la posición).</li>
+<li><strong>La Solución mediante Código Gray</strong>: Para solucionar este problema, se emplea estrictamente el Código Gray, un sistema de codificación binaria donde solo un bit cambia entre posiciones consecutivas. Esto elimina cualquier posibilidad de lectura transitoria aberrante debida a tolerancias mecánicas. (<a href="https://www.youtube.com/watch?v=ZPkotAUWYiA" target="_blank">Código Gray</a>)</li>
 </ol>
+</li>
+</ol>
+<pre><code>  Ángulo    Binario Natural    Código Gray     ¿Cuántos bits cambian?
+   0°            000              000                   -
+  45°            001              001                 1 bit
+  90°            010              011                 1 bit (Evita paso por 010 en transición)
+</code></pre><ol>
+<li><strong>Codificadores Incrementales</strong> (Encoder Rotativo) No proporcionan una lectura de posición única al encenderse; en su lugar, generan un tren de pulsos digitales conforme el eje gira. <ol>
+<li><strong>Señales en Cuadratura (A y B)</strong>: Un codificador incremental rotativo genera dos señales digitales cuadradas, denominadas A y B, las cuales están desfasadas físicamente por 90° eléctricos. </li>
+<li><strong>Detección del Sentido de Giro</strong>: Gracias a este desfase de 90° en cuadratura, el microcontrolador puede identificar la dirección de rotación comparando el estado de ambas señales: <ol>
+<li>Si se detecta un flanco de subida en la señal A y la señal B se encuentra en estado <strong>BAJO</strong>, el sentido de giro es <strong>horario (CW)</strong>.</li>
+<li>Si al ocurrir el flanco de subida en A, la señal B ya se encuentra en estado <strong>ALTO</strong>, el sentido de giro es <strong>antihorario (CCW)</strong>.</li>
+</ol>
+</li>
+<li><strong>Riesgo de Error Sistemático</strong>: Los codificadores incrementales son estables e inmunes al ruido eléctrico, pero si el microcontrolador pierde u omite la lectura de algún pulso, se acumulará un <strong>error sistemático de medición</strong>. Por lo tanto, el sistema debe ser referenciado periódicamente a un punto cero físico conocido (proceso de calibración o "zeroing")</li>
+</ol>
+</li>
+</ol>
+<figure><img src="../../.gitbook/assets/imagen40b EncoderSentido.png" alt=""></img><figcaption><p>Figura 1.2.29 Señales de cuadratura (Tomado de <a href="https://www.servomotorsadjust.com/encoders/" target="_blank">https://www.servomotorsadjust.com/encoders/</a>)</p></figcaption></figure>
+
+<ol>
+<li><strong>Otros Sensores de Posición Lineales.</strong> En el ámbito de la automatización se estudian alternativas lineales como:<ul>
+<li><strong>Transductores Resistivos Lineales (LRT / Potenciómetros)</strong>: Dispositivos basados en una resistencia con un cursor deslizante acoplado al movimiento mecánico, que entregan una salida de voltaje analógica de 0 a 10 V proporcional a la posición. Su resolución en el microcontrolador depende directamente del conversor analógico a digital (ADC) de la CPU.</li>
+<li><strong>Transformadores Diferenciales Variables Lineales (LVDT)</strong>: Transductores de posición que generan una señal eléctrica proporcional a la ubicación de un núcleo de hierro de alta permeabilidad que se desplaza sin contacto dentro de devanados primarios y secundarios.</li>
+</ul>
+</li>
+</ol>
+<details>
+
+<summary><mark style="color:$danger;"><strong>Para saber más de los encoders !!!</strong></mark></summary>
+
+En el siguiente video puedes conocer y observar los diferentes tipos de encoders, su funcionamiento y aplicaciones:
+
+[¿Cómo funciona un ENCODER? Lineal y Rotativo, Incremental y Absoluto](https://www.youtube.com/watch?v=QJww3qTlf2g\&amp;t=6s)
+
+Video de la empresa JAES Company, disponible en la plataforma Youtube
+
+</details>
+
 <hr></hr>
 <h3 id="4-prácticas-de-laboratorio-propuestas-con-arduino">4. Prácticas de Laboratorio Propuestas con Arduino</h3>
-<h4 id="práctica-a-conmutación-y-multiplexación-de-displays-de-7-segmentos-ánodo-común">Práctica A: Conmutación y Multiplexación de Displays de 7 Segmentos (Ánodo Común)</h4>
-<ul>
-<li><strong>Objetivo:</strong> Desarrollar un contador decimal de dos dígitos utilizando la técnica de multiplexación por software para comprender el manejo de la persistencia de la visión (<em>POV</em>).</li>
-<li><strong>Hardware:</strong> Placa Arduino, 2 displays de 7 segmentos de ánodo común, 8 resistores de \(330\ \Omega\) (bus de datos), 2 transistores PNP BC558, 2 resistores de \(1\text{ k}\Omega\) (bases de transistores), 1 potenciómetro (para variar la velocidad del conteo).</li>
-<li><strong>Código de Ejemplo (Multiplexado Directo):</strong></li>
-</ul>
-<pre><code>// Códigos de 7 segmentos para dígitos 0-9 (Ánodo común, lógicos en BAJO encienden)
+<details>
+
+<summary><mark style="color:$success;"><strong>Conmutación y Multiplexación de Displays de 7 Segmentos (Ánodo Común)</strong></mark></summary>
+
+* **Objetivo:** Desarrollar un contador decimal de dos dígitos utilizando la técnica de multiplexación por software.
+* **Hardware:** Placa Arduino, 2 displays de 7 segmentos de ánodo común, 14 resistores de 330 Ω (bus de datos), 2 resistores de 220 Ω (selector de display).
+* **Diagrama de conexión propuesto**:
+
+<figure><img src="../../.gitbook/assets/imagen31b DiagramaDisplayTinkercad.png" alt="" width="375"></img><figcaption><p>Figura 1.30 Diagrama de conexión en Tinkercad </p></figcaption></figure>
+
+* **Código de Ejemplo (Multiplexado Directo):**
+
+```cpp
+// Códigos de 7 segmentos para dígitos 0-9 (Ánodo común, lógicos en BAJO encienden)
 const uint8_t digitos[] = {
   0xC0, // 0
   0xF9, // 1
@@ -1095,73 +1158,22 @@ void loop() {
   delay(5);                       // Retardo para persistencia visual
   digitalWrite(pinDigit2, HIGH);  // Apaga display unidades
 }
-</code></pre><hr></hr>
-<h4 id="práctica-b-monitoreo-de-temperatura-y-visualización-en-lcd-16x2-mediante-bus-i2c">Práctica B: Monitoreo de Temperatura y Visualización en LCD 16x2 mediante Bus I2C</h4>
-<ul>
-<li><strong>Objetivo:</strong> Interconectar un sensor de temperatura analógico LM35 con un display LCD de caracteres utilizando el bus serial I2C para optimizar el uso de terminales.</li>
-<li><strong>Hardware:</strong> Placa Arduino, adaptador I2C PCF8574, pantalla LCD 16x2, sensor analógico LM35.</li>
-<li><strong>Código de Ejemplo (Arduino):</strong></li>
-</ul>
-<pre><code>#include &lt;Wire.h&gt;
-#include &lt;LiquidCrystal_I2C.h&gt; // Biblioteca basada en el chip PCF8574
+```
 
-// Inicializar la pantalla en dirección hexadecimal 0x27, de 16 columnas por 2 filas
-LiquidCrystal_I2C lcd(0x27, 16, 2);
-const int pinSensor = A0;
+</details>
 
-void setup() {
-  lcd.init();          // Inicializa el controlador del display
-  lcd.backlight();     // Enciende la retroiluminación LED
-  lcd.setCursor(0, 0); // Establece posición inicial (columna, fila)
-  lcd.print("SISTEMAS PROG.");
-  delay(1500);
-  lcd.clear();         // Limpieza de pantalla
-}
+<details>
 
-void loop() {
-  // Lectura analógica del sensor LM35 (10 mV/°C)
-  int lecturaADC = analogRead(pinSensor);
-  float milivoltiostem = (lecturaADC * 5000.0) / 1024.0;
-  float temperatura = milivoltiostem / 10.0; // Conversión directa a grados Celsius
+<summary></summary>
 
-  // Actualización del display sin parpadeos innecesarios
-  lcd.setCursor(0, 0);
-  lcd.print("Temp. Ambiente:");
 
-  lcd.setCursor(4, 1);
-  lcd.print(temperatura, 1); // Imprime el valor flotante con un decimal
-  lcd.print(" C  ");
 
-  delay(500); // Muestreo periódico de la variable
-}
-</code></pre><hr></hr>
-<h4 id="práctica-c-avanzada-visualización-gráfica-y-oled-mediante-protocolo-i2c">Práctica C (Avanzada): Visualización Gráfica y OLED mediante Protocolo I2C</h4>
-<ul>
-<li><strong>Objetivo:</strong> Introducir tecnologías de visualización de estado sólido modernas (pantallas orgánicas de alta resolución) para aplicaciones de instrumentación avanzadas.</li>
-<li><strong>Hardware:</strong> Placa Arduino, pantalla OLED de 0.96 pulgadas con controlador <strong>SSD1306</strong> (comunicación I2C).</li>
-<li><strong>Enfoque Didáctico:</strong> Comparar cómo la memoria RAM de datos de la OLED (\(128\times64\) puntos individuales) requiere un búfer de datos dinámico completo en la SRAM de Arduino antes de enviar el refresco de pantalla.</li>
-</ul>
+</details>
+
+
+
 <hr></hr>
-<h3 id="5-estructura-de-evaluación-del-subtema">5. Estructura de Evaluación del Subtema</h3>
-<p>Se propone un esquema de evaluación continua y formativa, siguiendo las directrices del programa de la asignatura:</p>
-<ol>
-<li><strong>Examen Teórico Declarativo (30%):</strong><ul>
-<li>Preguntas sobre la función de las líneas de control de una pantalla de cristal líquido (RS, R/W, E).</li>
-<li>Explicación de las diferencias de velocidad, sincronía y cableado entre la conexión nativa paralela de la LCD frente al bus I2C con expansor de puertos.</li>
-</ul>
-</li>
-<li><strong>Reportes Técnicos de Prácticas de Laboratorio (40%):</strong><ul>
-<li>Evaluados mediante una rúbrica formal que analice la conjetura de diseño del circuito, el algoritmo (diagrama de flujo), el código documentado con comentarios, la limpieza en el prototipado físico y las conclusiones analíticas sobre la eficiencia del código.</li>
-</ul>
-</li>
-<li><strong>Proyecto de Integración Aplicado (30%):</strong><ul>
-<li>Diseño de una interfaz hombre-máquina (HMI) compacta que combine un teclado matricial para entrada de datos y una pantalla LCD/OLED para retroalimentación visual al usuario (ej. un control de temperatura programable o una chapa electrónica).</li>
-</ul>
-</li>
-</ol>
-<hr></hr>
-<p>🔍 ¿Qué te parece este diseño temático? Si gustas, puedo generar el código completo de bajo nivel en lenguaje C/C++ para que los estudiantes aprendan a escribir caracteres personalizados directamente en los registros CGRAM de la pantalla LCD sin utilizar funciones de biblioteca.\
-2.3 Codificadores de posición.</p>
+<h3 id="">#</h3>
 
                                 
                                 </section>
@@ -1205,7 +1217,7 @@ void loop() {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"icon":"rotate","title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"next":{"title":"Tema 2: Sensores","level":"1.3","depth":1,"path":"chapters/capitulo2/README.md","ref":"chapters/capitulo2/README.md","articles":[{"title":"2.1 Sintaxis Markdown en GitBook","level":"1.3.1","depth":2,"path":"chapters/capitulo2/sintaxis.md","ref":"chapters/capitulo2/sintaxis.md","articles":[]},{"title":"2.2 Configuración avanzada (book.json)","level":"1.3.2","depth":2,"path":"chapters/capitulo2/configuracion.md","ref":"chapters/capitulo2/configuracion.md","articles":[]}]},"previous":{"title":"1.1 Características generales","level":"1.2.1","depth":2,"path":"capitulo1/1.1-instalacion-del-entorno.md","ref":"capitulo1/1.1-instalacion-del-entorno.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/estructura.md","mtime":"2026-08-10T23:19:22.703Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-10T23:20:52.221Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"icon":"rotate","title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"next":{"title":"Tema 2: Sensores","level":"1.3","depth":1,"path":"chapters/capitulo2/README.md","ref":"chapters/capitulo2/README.md","articles":[{"title":"2.1 Sintaxis Markdown en GitBook","level":"1.3.1","depth":2,"path":"chapters/capitulo2/sintaxis.md","ref":"chapters/capitulo2/sintaxis.md","articles":[]},{"title":"2.2 Configuración avanzada (book.json)","level":"1.3.2","depth":2,"path":"chapters/capitulo2/configuracion.md","ref":"chapters/capitulo2/configuracion.md","articles":[]}]},"previous":{"title":"1.1 Características generales","level":"1.2.1","depth":2,"path":"capitulo1/1.1-instalacion-del-entorno.md","ref":"capitulo1/1.1-instalacion-del-entorno.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/estructura.md","mtime":"2026-08-18T23:29:19.674Z","type":"markdown"},"gitbook":{"version":"6.2.2","time":"2026-08-18T23:30:39.764Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
