@@ -4,7 +4,7 @@ icon: rotate
 
 # 1.2 Circuitería alternativa para entrada/salida
 
-### 2.1 Generalidades.
+### 1.2.1 Generalidades.
 
 El uso de microcontroladores en el ámbito académico universitario es fundamental para la enseñanza de **arquitecturas de cómputo, lenguajes de interfaz y sistemas embebidos**. Estos dispositivos, definidos como computadoras completas en un solo chip de silicio, permiten interactuar con el mundo físico mediante sensores y actuadores. La cantidad de microcontroladores que se encuentran en el mercado es amplia, por lo que a continuación se presenta un análisis de los principales microcontroladores que se utilizan en el ambito académico. Los microcontroladores más utilizados en las universidades se seleccionan por su **bajo costo, amplia documentación y facilidad de programación**. Se utilizarán como referencia las hojas técnicas de cada uno de ellos (data sheet)
 
@@ -224,7 +224,7 @@ Ahora que ya tenemos nuestra plataforma de trabajo es importante establecer una 
 
 Una simulación exitosa no demuestra integridad eléctrica. El prototipo debe incluir desacoplo, reset, tierra correcta y límites de corriente.
 
-### 2.2 Displays LED, LCD y otros dispositivos de visualización.
+### 1.2.2 Displays LED, LCD y otros dispositivos de visualización.
 
 #### Diodos Emisores de Luz (LED) y Barras de LEDs.
 
@@ -519,25 +519,85 @@ Con el análisis de ambos enfoques, aprendemos no solo a codificar, sino que se 
 
 </details>
 
-### 3. Estrategia Didáctica: De la Teoría al Ecosistema Arduino
+***
 
-Para garantizar un aprendizaje significativo, se propone un modelo didáctico de **abstracción progresiva**:
+### 1.2.3 Codificadores de posición.
 
-1. **Fase 1: Explicación de Registros y Tiempos de Bus:** Estudiar cómo interactúan las señales RS, R/W y E en un ciclo de escritura físico. Analizar por qué se requieren retardos mínimos de microsegundos entre instrucciones para evitar ignorar la bandera de listo (_Busy Flag_) de la LCD.
-2. **Fase 2: Transición al Código Arduino Estándar:** Mostrar cómo las bibliotecas de código abierto (ej. `LiquidCrystal` o `LiquidCrystal_I2C`) encapsulan estas secuencias de temporización complejas dentro de funciones de alto nivel muy intuitivas como `lcd.begin()`, `lcd.print()` o `lcd.setCursor()`.
-3. **Fase 3: Contraste Crítico de Rendimiento:** Evaluar con los estudiantes la pérdida de velocidad de procesamiento y el espacio de memoria que representan las bibliotecas frente a la manipulación directa de registros de hardware.
+A diferencia de los sensores binarios simples (como los interruptores de límite) que solo detectan si una variable superó un umbral, los **codificadores** (o _encoder_) son sensores analógicos diseñados para codificar una magnitud de desplazamiento físico en una respuesta digital que varía en múltiples pasos a lo largo de su rango de medición \[20]. Son componentes fundamentales en aplicaciones industriales, sistemas mecatrónicos y en la realimentación de servomotores para indicar posición angular y velocidad \[21]. \[[LBA INDUSTRIAL](https://www.lbaindustrial.com.mx/que-es-un-encoder/)]
+
+**Características**
+
+* **Alta resolución**: Mide movimientos muy pequeños con precisión exacta.
+* **Respuesta rápida**: Entrega datos en tiempo real al sistema de control.
+* **Señal digital o analógica**: Facilita la conexión con autómatas y computadoras.
+* **Diseño robusto**: Soporta polvo, vibraciones y temperaturas altas.
+
+<figure><img src="../../.gitbook/assets/imagen40a EncoderEjemplos.png" alt=""><figcaption><p>Figura 1.2.27 Ejemplos de encoders (Tomado de <a href="https://www.servomotorsadjust.com/encoders/">https://www.servomotorsadjust.com/encoders/</a>)</p></figcaption></figure>
+
+**¿Cómo funciona un encoder?**
+
+Un _encoder_ se compone básicamente de un disco conectado a un eje giratorio. El disco esta hecho de vidrio o plástico y se encuentra "codificado" con unas partes transparentes y otras opacas que bloquean el paso de la luz emitida por la fuente de luz (típicamente emisores infrarrojos). En la mayoría de los casos, estás áreas bloqueadas (codificadas) están arregladas en forma radial.
+
+<figure><img src="../../.gitbook/assets/imagen40 Encoder1.png" alt=""><figcaption><p>Figura 1.2.28 Elementos de un <em>encoder</em> (Tomado de <a href="https://www.lbaindustrial.com.mx/que-es-un-encoder/">https://www.lbaindustrial.com.mx/que-es-un-encoder/</a>)</p></figcaption></figure>
+
+A medida que el eje rota, el emisor infrarrojo emite luz que es recibida por el sensor óptico (o foto-transistor) generando los pulsos digitales a medida que la luz cruza a través del disco o es bloqueada en diferentes secciones de este. Esto produce una secuencia que puede ser usada para controlar el radio de giro, la dirección del movimiento e incluso la velocidad. \[[LBA INDUSTRIAL](https://www.lbaindustrial.com.mx/que-es-un-encoder/)]
+
+**Clasificación por Principio y Tipo de Salida**
+
+1. **Codificadores Absolutos**: Entregan un patrón de bits único y específico para cada posición física o ángulo del eje, manteniendo la lectura correcta incluso si el sistema se apaga y se vuelve a encender.
+   1. **Estructura**: Físicamente constan de un disco codificado binariamente montado sobre un eje giratorio, ubicado entre un emisor óptico (como un diodo LED infrarrojo) y un receptor emparejado (como un fototransistor).&#x20;
+   2. **El Problema del Código Binario Natural**: Si el disco se codifica en binario natural, pequeñas desalineaciones físicas en los sensores ópticos durante la transición entre dos posiciones adyacentes pueden provocar que cambien varios bits a la vez. Si el bit más significativo cambia una fracción de milisegundo antes que los otros, el sistema interpretará una lectura errónea instantánea y catastrófica (por ejemplo, un error momentáneo de hasta 180° en la lectura de la posición).
+   3. **La Solución mediante Código Gray**: Para solucionar este problema, se emplea estrictamente el Código Gray, un sistema de codificación binaria donde solo un bit cambia entre posiciones consecutivas. Esto elimina cualquier posibilidad de lectura transitoria aberrante debida a tolerancias mecánicas. ([Código Gray](https://www.youtube.com/watch?v=ZPkotAUWYiA))
+
+```
+  Ángulo    Binario Natural    Código Gray     ¿Cuántos bits cambian?
+   0°            000              000                   -
+  45°            001              001                 1 bit
+  90°            010              011                 1 bit (Evita paso por 010 en transición)
+```
+
+2. **Codificadores Incrementales** (Encoder Rotativo) No proporcionan una lectura de posición única al encenderse; en su lugar, generan un tren de pulsos digitales conforme el eje gira.&#x20;
+   1. **Señales en Cuadratura (A y B)**: Un codificador incremental rotativo genera dos señales digitales cuadradas, denominadas A y B, las cuales están desfasadas físicamente por 90° eléctricos.&#x20;
+   2. **Detección del Sentido de Giro**: Gracias a este desfase de 90° en cuadratura, el microcontrolador puede identificar la dirección de rotación comparando el estado de ambas señales:&#x20;
+      1. Si se detecta un flanco de subida en la señal A y la señal B se encuentra en estado **BAJO**, el sentido de giro es **horario (CW)**.
+      2. Si al ocurrir el flanco de subida en A, la señal B ya se encuentra en estado **ALTO**, el sentido de giro es **antihorario (CCW)**.
+   3. **Riesgo de Error Sistemático**: Los codificadores incrementales son estables e inmunes al ruido eléctrico, pero si el microcontrolador pierde u omite la lectura de algún pulso, se acumulará un **error sistemático de medición**. Por lo tanto, el sistema debe ser referenciado periódicamente a un punto cero físico conocido (proceso de calibración o "zeroing")
+
+<figure><img src="../../.gitbook/assets/imagen40b EncoderSentido.png" alt=""><figcaption><p>Figura 1.2.29 Señales de cuadratura (Tomado de <a href="https://www.servomotorsadjust.com/encoders/">https://www.servomotorsadjust.com/encoders/</a>)</p></figcaption></figure>
+
+3. **Otros Sensores de Posición Lineales.** En el ámbito de la automatización se estudian alternativas lineales como:
+   * **Transductores Resistivos Lineales (LRT / Potenciómetros)**: Dispositivos basados en una resistencia con un cursor deslizante acoplado al movimiento mecánico, que entregan una salida de voltaje analógica de 0 a 10 V proporcional a la posición. Su resolución en el microcontrolador depende directamente del conversor analógico a digital (ADC) de la CPU.
+   * **Transformadores Diferenciales Variables Lineales (LVDT)**: Transductores de posición que generan una señal eléctrica proporcional a la ubicación de un núcleo de hierro de alta permeabilidad que se desplaza sin contacto dentro de devanados primarios y secundarios.
+
+<details>
+
+<summary><mark style="color:$danger;"><strong>Para saber más de los encoders !!!</strong></mark></summary>
+
+En el siguiente video puedes conocer y observar los diferentes tipos de encoders, su funcionamiento y aplicaciones:
+
+[¿Cómo funciona un ENCODER? Lineal y Rotativo, Incremental y Absoluto](https://www.youtube.com/watch?v=QJww3qTlf2g\&t=6s)
+
+Video de la empresa JAES Company, disponible en la plataforma Youtube
+
+</details>
 
 ***
 
 ### 4. Prácticas de Laboratorio Propuestas con Arduino
 
-#### Práctica A: Conmutación y Multiplexación de Displays de 7 Segmentos (Ánodo Común)
+<details>
 
-* **Objetivo:** Desarrollar un contador decimal de dos dígitos utilizando la técnica de multiplexación por software para comprender el manejo de la persistencia de la visión (_POV_).
-* **Hardware:** Placa Arduino, 2 displays de 7 segmentos de ánodo común, 8 resistores de \\(330\ \Omega\\) (bus de datos), 2 transistores PNP BC558, 2 resistores de \\(1\text{ k}\Omega\\) (bases de transistores), 1 potenciómetro (para variar la velocidad del conteo).
+<summary><mark style="color:$success;"><strong>Conmutación y Multiplexación de Displays de 7 Segmentos (Ánodo Común)</strong></mark></summary>
+
+* **Objetivo:** Desarrollar un contador decimal de dos dígitos utilizando la técnica de multiplexación por software.
+* **Hardware:** Placa Arduino, 2 displays de 7 segmentos de ánodo común, 14 resistores de 330 Ω (bus de datos), 2 resistores de 220 Ω (selector de display).
+* **Diagrama de conexión propuesto**:
+
+<figure><img src="../../.gitbook/assets/imagen31b DiagramaDisplayTinkercad.png" alt="" width="375"><figcaption><p>Figura 1.30 Diagrama de conexión en Tinkercad </p></figcaption></figure>
+
 * **Código de Ejemplo (Multiplexado Directo):**
 
-```
+```cpp
 // Códigos de 7 segmentos para dígitos 0-9 (Ánodo común, lógicos en BAJO encienden)
 const uint8_t digitos[] = {
   0xC0, // 0
@@ -591,73 +651,19 @@ void loop() {
 }
 ```
 
-***
+</details>
 
-#### Práctica B: Monitoreo de Temperatura y Visualización en LCD 16x2 mediante Bus I2C
+<details>
 
-* **Objetivo:** Interconectar un sensor de temperatura analógico LM35 con un display LCD de caracteres utilizando el bus serial I2C para optimizar el uso de terminales.
-* **Hardware:** Placa Arduino, adaptador I2C PCF8574, pantalla LCD 16x2, sensor analógico LM35.
-* **Código de Ejemplo (Arduino):**
+<summary></summary>
 
-```
-#include <Wire.h>
-#include <LiquidCrystal_I2C.h> // Biblioteca basada en el chip PCF8574
 
-// Inicializar la pantalla en dirección hexadecimal 0x27, de 16 columnas por 2 filas
-LiquidCrystal_I2C lcd(0x27, 16, 2);
-const int pinSensor = A0;
 
-void setup() {
-  lcd.init();          // Inicializa el controlador del display
-  lcd.backlight();     // Enciende la retroiluminación LED
-  lcd.setCursor(0, 0); // Establece posición inicial (columna, fila)
-  lcd.print("SISTEMAS PROG.");
-  delay(1500);
-  lcd.clear();         // Limpieza de pantalla
-}
+</details>
 
-void loop() {
-  // Lectura analógica del sensor LM35 (10 mV/°C)
-  int lecturaADC = analogRead(pinSensor);
-  float milivoltiostem = (lecturaADC * 5000.0) / 1024.0;
-  float temperatura = milivoltiostem / 10.0; // Conversión directa a grados Celsius
 
-  // Actualización del display sin parpadeos innecesarios
-  lcd.setCursor(0, 0);
-  lcd.print("Temp. Ambiente:");
-
-  lcd.setCursor(4, 1);
-  lcd.print(temperatura, 1); // Imprime el valor flotante con un decimal
-  lcd.print(" C  ");
-
-  delay(500); // Muestreo periódico de la variable
-}
-```
 
 ***
 
-#### Práctica C (Avanzada): Visualización Gráfica y OLED mediante Protocolo I2C
-
-* **Objetivo:** Introducir tecnologías de visualización de estado sólido modernas (pantallas orgánicas de alta resolución) para aplicaciones de instrumentación avanzadas.
-* **Hardware:** Placa Arduino, pantalla OLED de 0.96 pulgadas con controlador **SSD1306** (comunicación I2C).
-* **Enfoque Didáctico:** Comparar cómo la memoria RAM de datos de la OLED (\\(128\times64\\) puntos individuales) requiere un búfer de datos dinámico completo en la SRAM de Arduino antes de enviar el refresco de pantalla.
-
-***
-
-### 5. Estructura de Evaluación del Subtema
-
-Se propone un esquema de evaluación continua y formativa, siguiendo las directrices del programa de la asignatura:
-
-1. **Examen Teórico Declarativo (30%):**
-   * Preguntas sobre la función de las líneas de control de una pantalla de cristal líquido (RS, R/W, E).
-   * Explicación de las diferencias de velocidad, sincronía y cableado entre la conexión nativa paralela de la LCD frente al bus I2C con expansor de puertos.
-2. **Reportes Técnicos de Prácticas de Laboratorio (40%):**
-   * Evaluados mediante una rúbrica formal que analice la conjetura de diseño del circuito, el algoritmo (diagrama de flujo), el código documentado con comentarios, la limpieza en el prototipado físico y las conclusiones analíticas sobre la eficiencia del código.
-3. **Proyecto de Integración Aplicado (30%):**
-   * Diseño de una interfaz hombre-máquina (HMI) compacta que combine un teclado matricial para entrada de datos y una pantalla LCD/OLED para retroalimentación visual al usuario (ej. un control de temperatura programable o una chapa electrónica).
-
-***
-
-🔍 ¿Qué te parece este diseño temático? Si gustas, puedo generar el código completo de bajo nivel en lenguaje C/C++ para que los estudiantes aprendan a escribir caracteres personalizados directamente en los registros CGRAM de la pantalla LCD sin utilizar funciones de biblioteca.\
-2.3 Codificadores de posición.
+####
 
