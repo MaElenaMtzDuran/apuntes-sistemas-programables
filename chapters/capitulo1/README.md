@@ -32,12 +32,12 @@ icon: microchip
 
 ### Recursos
 
-* [Practicas](1.3-PracticasC1.md)
+* [Practicas](1.3-practicasC1.md)
 
 ### Evaluaciones
 
-* [Evaluaciones](1.4-EvaluacionesC1.md)
+* [Evaluaciones](1.4-evaluacionesC1.md)
 
 ### Fuentes
 
-* [Practicas](1.5-FuentesC1.md)
+* [Fuentes de información](1.5-fuentes-de-informacionC1.md)
