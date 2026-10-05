@@ -2,8 +2,8 @@
 
 * [Introducción](README.md)
 * [Tema 1: Microcontroladores](chapters/capitulo1/README.md)
-  * [1.1 Características generales](capitulo1/1.1-instalacion-del-entorno.md)
-  * [1.2 Circuitería alternativa para entrada/salida](chapters/capitulo1/estructura.md)
+  * [1.1 Características generales](chapters/capitulo1/1.1-Caracteristicas-Generales.md)
+  * [1.2 Circuitería alternativa para entrada/salida](chapters/capitulo1/1.2-Circuiteria-Alternativa.md)
   * [1.3 Prácticas](chapters/capitulo1/practicasC1.md)
   * [1.4 Evaluaciones](chapters/capitulo1/evaluacionesC1.md)
   * [1.5 Fuentes de información](chapters/capitulo1/fuentesC1.md)
