@@ -1,10 +1,10 @@
-# Capítulo 6: Glosario
+# Glosario
 
 Definiciones breves de los términos técnicos usados a lo largo de este libro de ejemplo.
 
 ### Artefacto (artifact)
 
-Archivo generado por una ejecución de GitHub Actions (por ejemplo, `manual.pdf` o `manual.epub`) que queda disponible para descargar desde la pestaña *Actions* del repositorio.
+Archivo generado por una ejecución de GitHub Actions (por ejemplo, `manual.pdf` o `manual.epub`) que queda disponible para descargar desde la pestaña _Actions_ del repositorio.
 
 ### `book.json`
 
@@ -12,7 +12,7 @@ Archivo de configuración de GitBook: título, autor, idioma, plugins y opciones
 
 ### Change request
 
-Propuesta de cambio en el editor visual de GitBook, equivalente conceptualmente a un *pull request* de Git. Al fusionarla, GitBook genera un commit en la rama sincronizada.
+Propuesta de cambio en el editor visual de GitBook, equivalente conceptualmente a un _pull request_ de Git. Al fusionarla, GitBook genera un commit en la rama sincronizada.
 
 ### CI/CD (Integración y despliegue continuos)
 
@@ -64,4 +64,4 @@ Unidad de contenido en GitBook.com equivalente a "un libro" o "una documentació
 
 ### `SUMMARY.md`
 
-Archivo raíz que define el orden y la jerarquía de los capítulos del libro; es la única fuente de verdad que usa GitBook para construir la navegación. Ver [1.2 Estructura del proyecto](../capitulo1/estructura.md).
+Archivo raíz que define el orden y la jerarquía de los capítulos del libro; es la única fuente de verdad que usa GitBook para construir la navegación. Ver [1.2 Estructura del proyecto](../../capitulo1/1.2-circuiteria-alternativa-para-entrada-salida.md).

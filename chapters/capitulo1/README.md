@@ -27,12 +27,11 @@ icon: microchip
 
 ### Desarrollo
 
-* [1.1 Características generales](../../capitulo1/1.1-instalacion-del-entorno.md)
-* [1.2 Circuitería alternativa para entrada/salida](estructura.md)
+* [1.1 Características generales](1.1-Caracteristicas-Generales.md)
+* [1.2 Circuitería alternativa para entrada/salida](../../capitulo1/1.2-circuiteria-alternativa-para-entrada-salida.md)
 
 ### Recursos
 
 ### Actividades de aprendizaje
 
 ### Evaluación
-

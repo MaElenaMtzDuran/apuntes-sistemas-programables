@@ -4,7 +4,7 @@ icon: book-open-lines
 
 # Fuentes consultadas
 
-\[1][^1] F. S. Espinosa, _El Microcontrolador ATMega328P de Microchip: Programación en Ensamblador, Lenguaje C y un enlace con Arduino_. Huajuapan de León, Oaxaca: Univ. Tecnológica de la Mixteca, 2021.
+\[1] F. S. Espinosa, _El Microcontrolador ATMega328P de Microchip: Programación en Ensamblador, Lenguaje C y un enlace con Arduino_. Huajuapan de León, Oaxaca: Univ. Tecnológica de la Mixteca, 2021.
 
 \[2] F. R. Domínguez, E. P. Municio, and L. J. L. Pérez, _Microcontrolador PIC16F84. Desarrollo de proyectos. 3_<sup>_a_</sup>_&#x20;edición_. Ra-Ma Editorial, 2009.
 
@@ -50,7 +50,7 @@ icon: book-open-lines
 
 ### Estructura de carpetas del repositorio
 
-* [1.2 Estructura del proyecto](../capitulo1/estructura.md)
+* [1.2 Estructura del proyecto](../../capitulo1/1.2-circuiteria-alternativa-para-entrada-salida.md)
 * [README principal, sección 1](../../#1-estructura-del-repositorio)
 
 ### Glosario de términos
@@ -79,5 +79,3 @@ icon: book-open-lines
 ### Sintaxis Markdown
 
 * [2.1 Sintaxis Markdown en GitBook](../capitulo2/sintaxis.md)
-
-[^1]: Ref1
