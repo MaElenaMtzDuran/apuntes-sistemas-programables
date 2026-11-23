@@ -2,44 +2,31 @@
 
 ### Competencias a desarrollar
 
-* Identifica las características eléctricas de un microcontrolador.
-* Conoce la arquitectura interna del microcontrolador.
-* Comprende la estructura de registros del microcontrolador.
-* Analiza dispositivos de entrada/salida y puertos del microcontrolador.
+* Utiliza lenguajes ensambladores en la programación del microcontrolador.
+* Programa microcontroladores utilizando puertos de E/S.
+* Construye y comprueba circuitos con microcontrolador.
 
 ### Temario a desarrollar
 
-1.  Características generales.
-
-    1.1 Introducción    \
-    1.2 Familias    \
-    1.3 Ancho de buses    \
-    1.4 Memoria
-2.    Circuitería alternativa para entrada/salida    \
-    2.1 Generalidades.
-
-    2.2 Displays LED, LCD y otros dispositivos de visualización.    \
-    2.3 Codificadores de posición.
+* 4.1 Modelo de programación
+* 4.2 Estructura de los registros del CPU
+* 4.3 Modos de direccionamiento
+* 4.4 Conjunto de instrucciones
+* 4.5 Lenguajes ensambladores
+* 4.6 Codificación
 
 ### Desarrollo
 
-
+<!-- Agrega aquí los enlaces a las secciones del tema y regístralas también en SUMMARY.md -->
 
 ### Recursos
 
+* [4.8 Prácticas](4.8-practicas.md)
 
+### Evaluaciones
 
-### Actividades de aprendizaje
+* [4.9 Evaluaciones](4.9-evaluaciones.md)
 
-## En este capítulo
+### Fuentes
 
-* [4.1 Flujo de revisión con pull requests](revision-cambios.md)
-* [4.2 Buenas prácticas de redacción](buenas-practicas.md)
-
-## Objetivos de aprendizaje
-
-Al terminar este capítulo, el lector podrá:
-
-* Proponer cambios a un capítulo sin afectar directamente la rama `main`.
-* Revisar y aprobar cambios de otros colaboradores antes de que se publiquen.
-* Aplicar un conjunto de convenciones de estilo consistentes en todo el libro.
+* [4.10 Fuentes de información](4.10-fuentes-de-informacion.md)

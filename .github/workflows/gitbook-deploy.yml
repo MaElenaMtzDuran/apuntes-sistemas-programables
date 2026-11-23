@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Verificar enlaces internos e imágenes
+        run: python3 scripts/verificar-enlaces.py
+
       - name: Instalar HonKit
         # HonKit es el fork mantenido de GitBook (gitbook-cli fue
         # descontinuado por su autor original en 2019 y ya no genera

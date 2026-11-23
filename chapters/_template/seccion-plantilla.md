@@ -27,7 +27,7 @@ Desarrolla el contenido aquí. Algunos elementos comunes de Markdown/GitBook:
 
   > **Nota:** usa este tipo de bloque para advertencias, consejos o información adicional.
 
-- Enlace a otra página del libro: [Instalación del entorno](../capitulo1/instalacion.md)
+- Enlace a otra página del libro: [1.1 Características generales](../capitulo1/1.1-caracteristicas-generales.md)
 
 ## Resumen (opcional)
 
