@@ -21,6 +21,12 @@
 
 ### Recursos
 
+* [4.8 Prácticas](4.8-practicas.md)
+
 ### Evaluaciones
 
+* [4.9 Evaluaciones](4.9-evaluaciones.md)
+
 ### Fuentes
+
+* [4.10 Fuentes de información](4.10-fuentes-de-informacion.md)

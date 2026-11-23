@@ -31,6 +31,12 @@
 
 ### Recursos
 
+* [3.8 Prácticas](3.8-practicas.md)
+
 ### Evaluaciones
 
+* [3.9 Evaluaciones](3.9-evaluaciones.md)
+
 ### Fuentes
+
+* [3.10 Fuentes de información](3.10-fuentes-de-informacion.md)

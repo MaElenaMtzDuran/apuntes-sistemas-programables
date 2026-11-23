@@ -20,6 +20,12 @@
 
 ### Recursos
 
+* [6.8 Prácticas](6.8-practicas.md)
+
 ### Evaluaciones
 
+* [6.9 Evaluaciones](6.9-evaluaciones.md)
+
 ### Fuentes
+
+* [6.10 Fuentes de información](6.10-fuentes-de-informacion.md)
