@@ -1,12 +1,26 @@
-# Capítulo 5: Preguntas frecuentes
+# Tema 5: Puertos y buses de comunicación para microcontroladores
 
-Este capítulo de ejemplo reúne las dudas más comunes al trabajar con esta plantilla: desde la instalación de HonKit hasta la sincronización con GitHub y GitBook.
+### Competencias a desarrollar
 
-## En este capítulo
+* Identifica y analiza los elementos esenciales de los puertos y buses de comunicación.
+* Implementa aplicaciones que impliquen el manejo de puertos y buses de comunicación.
 
-- [5.1 Preguntas generales](faq-general.md)
-- [5.2 Solución de problemas](solucion-problemas.md)
+### Temario a desarrollar
 
-## Cómo usar este capítulo
+* 5.1 Tipos de puertos
+* 5.2 Programación de puertos
+* 5.3 Aplicaciones de puertos
+* 5.4 Estándares de buses
+* 5.5 Manejo del bus
+* 5.6 Aplicaciones de buses
+* 5.7 Comunicación
 
-Cada pregunta es una entrada independiente (`###`) para que puedas enlazarla directamente desde otras páginas del libro, por ejemplo: [¿Qué versión de Node.js debo usar?](faq-general.md#que-version-de-nodejs-debo-usar). Si agregas una pregunta nueva, mantenla en la sección que corresponda y actualiza el índice de arriba si creas un archivo adicional.
+### Desarrollo
+
+<!-- Agrega aquí los enlaces a las secciones del tema y regístralas también en SUMMARY.md -->
+
+### Recursos
+
+### Evaluaciones
+
+### Fuentes

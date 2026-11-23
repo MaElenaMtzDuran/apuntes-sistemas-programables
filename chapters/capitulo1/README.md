@@ -27,17 +27,17 @@ icon: microchip
 
 ### Desarrollo
 
-* [1.1 Características generales](1.1-Caracteristicas-Generales.md)
-* [1.2 Circuitería alternativa para entrada/salida](1.2-Circuiteria-Alternativa.md)
+* [1.1 Características generales](1.1-caracteristicas-generales.md)
+* [1.2 Circuitería alternativa para entrada/salida](1.2-circuiteria-alternativa.md)
 
 ### Recursos
 
-* [Practicas](1.3-practicasC1.md)
+* [1.3 Prácticas](1.3-practicas.md)
 
 ### Evaluaciones
 
-* [Evaluaciones](1.4-evaluacionesC1.md)
+* [1.4 Evaluaciones](1.4-evaluaciones.md)
 
 ### Fuentes
 
-* [Fuentes de información](1.5-fuentes-de-informacionC1.md)
+* [1.5 Fuentes de información](1.5-fuentes-de-informacion.md)

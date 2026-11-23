@@ -24,7 +24,7 @@ El programa oficial aborda de manera integral los componentes y la metodología 
 
 ### Programa oficial.
 
-El contenido de la asignatura esta descrito en el programa oficial que se encuentra en [Programa oficial](https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables/blob/main/chapters/Sistemas%20Programables%20SCC-1023%20ISC.pdf)
+El contenido de la asignatura esta descrito en el programa oficial que se encuentra en [Programa oficial](.gitbook/assets/programa-oficial-SCC-1023.pdf)
 
 El temario completo es el siguiente:
 
@@ -191,12 +191,12 @@ El desarrollo de los siguientes apuntes electrónicos consideran una **adaptaci�
 
 Para más detalles, consulta también:
 
-* [Tema 1: Microcontroladores](chapters/capitulo1/)
-* [Tema 2: Sensores](chapters/capitulo2/)
-* [Tema 3: Actuadores](chapters/capitulo3/)
-* [Tema 4: Programación de microcontroladores](chapters/capitulo4/)
-* [Tema 5: Puertos y buses de comunicación para microcontroladores](chapters/capitulo9/)
-* [Tema 6: Interfaces](chapters/capitulo10/)
-* [Preguntas frecuentes](chapters/capitulo5/)
-* [Glosario](chapters/capitulo6/)
-* [Fuentes consultadas](chapters/capitulo7/)
+* [Tema 1: Microcontroladores](chapters/capitulo1/README.md)
+* [Tema 2: Sensores](chapters/capitulo2/README.md)
+* [Tema 3: Actuadores](chapters/capitulo3/README.md)
+* [Tema 4: Programación de microcontroladores](chapters/capitulo4/README.md)
+* [Tema 5: Puertos y buses de comunicación para microcontroladores](chapters/capitulo5/README.md)
+* [Tema 6: Interfaces](chapters/capitulo6/README.md)
+* [Preguntas frecuentes](chapters/preguntas-frecuentes/README.md)
+* [Glosario](chapters/glosario/README.md)
+* [Fuentes consultadas](chapters/fuentes/README.md)

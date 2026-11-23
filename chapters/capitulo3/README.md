@@ -1,39 +1,36 @@
 # Tema 3: Actuadores
 
-Competencias a desarrollar
+### Competencias a desarrollar
 
-* Identifica las características eléctricas de un microcontrolador.
-* Conoce la arquitectura interna del microcontrolador.
-* Comprende la estructura de registros del microcontrolador.
-* Analiza dispositivos de entrada/salida y puertos del microcontrolador.
+* Aplica principios teóricos de electromagnetismo para analizar actuadores.
+* Identifica y diferencia los actuadores eléctricos, mecánicos e hidráulicos.
+* Explica con propiedad la función de los actuadores y el papel de estos en la industria.
+* Ensambla los circuitos respectivos empleando sensores y actuadores.
 
 ### Temario a desarrollar
 
-1.  Características generales.
-
-    1.1 Introducción    \
-    1.2 Familias    \
-    1.3 Ancho de buses    \
-    1.4 Memoria
-2.    Circuitería alternativa para entrada/salida    \
-    2.1 Generalidades.
-
-    2.2 Displays LED, LCD y otros dispositivos de visualización.    \
-    2.3 Codificadores de posición.
+* 3.1 Eléctricos
+  * 3.1.1 Tipos
+  * 3.1.2 Funcionamiento
+  * 3.1.3 Características
+  * 3.1.4 Modo de comunicación
+* 3.2 Mecánicos
+  * 3.2.1 Tipos
+  * 3.2.2 Funcionamiento
+  * 3.2.3 Características
+  * 3.2.4 Modo de comunicación
+* 3.3 Hidráulicos
+  * 3.3.1 Tipos
+  * 3.3.2 Funcionamiento
+  * 3.3.3 Características
+  * 3.3.4 Modo de comunicación
 
 ### Desarrollo
 
-
+<!-- Agrega aquí los enlaces a las secciones del tema y regístralas también en SUMMARY.md -->
 
 ### Recursos
 
+### Evaluaciones
 
-
-### Actividades de aprendizaje
-
-###
-
-Contenido de este capítulo:
-
-* [3.1 Generar PDF y EPUB](exportacion.md)
-* [3.2 Integración continua con GitHub](integracion-continua.md)
+### Fuentes
