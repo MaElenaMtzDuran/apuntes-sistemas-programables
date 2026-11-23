@@ -24,7 +24,11 @@ El programa oficial aborda de manera integral los componentes y la metodología 
 
 ### Programa oficial.
 
-El contenido de la asignatura esta descrito en el programa oficial que se encuentra en [Programa oficial](.gitbook/assets/programa-oficial-SCC-1023.pdf)
+El contenido de la asignatura está descrito en el programa oficial, que puedes consultar o descargar a continuación:
+
+{% file src=".gitbook/assets/programa-oficial-SCC-1023.pdf" %}
+Programa oficial de Sistemas Programables (SCC-1023), TecNM
+{% endfile %}
 
 El temario completo es el siguiente:
 

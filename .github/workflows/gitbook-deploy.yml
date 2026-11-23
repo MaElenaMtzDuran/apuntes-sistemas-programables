@@ -32,6 +32,9 @@ jobs:
         # Ver: https://github.com/honkit/honkit
         run: npm install -g honkit
 
+      - name: Instalar complementos del libro (bloques de GitBook)
+        run: npm install
+
       - name: Instalar Calibre (requerido para exportar PDF/EPUB)
         run: sudo apt-get update && sudo apt-get install -y calibre
 

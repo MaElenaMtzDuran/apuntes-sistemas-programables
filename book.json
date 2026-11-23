@@ -8,6 +8,9 @@
     "readme": "README.md",
     "summary": "SUMMARY.md"
   },
+  "plugins": [
+    "gitbook-blocks"
+  ],
   "pluginsConfig": {
     "fontsettings": {
       "theme": "white",

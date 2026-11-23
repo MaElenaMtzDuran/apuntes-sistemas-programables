@@ -3,3 +3,4 @@ _book/
 dist/
 *.log
 .DS_Store
+package-lock.json

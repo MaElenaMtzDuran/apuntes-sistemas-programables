@@ -1,0 +1,8 @@
+{
+  "name": "apuntes-sistemas-programables",
+  "private": true,
+  "description": "Dependencias de compilación del libro con HonKit",
+  "dependencies": {
+    "honkit-plugin-gitbook-blocks": "file:./plugins/honkit-plugin-gitbook-blocks"
+  }
+}
