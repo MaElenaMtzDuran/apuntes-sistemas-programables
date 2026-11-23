@@ -1,0 +1,8 @@
+{
+  "name": "honkit-plugin-gitbook-blocks",
+  "version": "1.0.0",
+  "description": "Interpreta en HonKit los bloques de GitBook ({% file %}, {% embed %}, {% hint %}, {% content-ref %}) para que el libro compile igual que en GitBook.",
+  "main": "index.js",
+  "engines": { "honkit": ">=3.0.0" },
+  "license": "MIT"
+}

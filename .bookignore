@@ -1,3 +1,5 @@
 # Archivos que HonKit no debe publicar
 chapters/_template/
 scripts/
+plugins/
+package.json

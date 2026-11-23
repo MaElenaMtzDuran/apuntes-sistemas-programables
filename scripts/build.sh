@@ -28,6 +28,14 @@ BOOK_DIR="$ROOT_DIR/_book"
 cd "$ROOT_DIR"
 mkdir -p "$OUTPUT_DIR"
 
+echo "==> Instalando complementos locales del libro (bloques de GitBook)..."
+if [ ! -e "$ROOT_DIR/node_modules/honkit-plugin-gitbook-blocks" ]; then
+  npm install --no-audit --no-fund
+fi
+# HonKit busca los complementos junto a su propia instalación; NODE_PATH le
+# indica que también revise node_modules/ del libro.
+export NODE_PATH="$ROOT_DIR/node_modules${NODE_PATH:+:$NODE_PATH}"
+
 echo "==> Verificando que HonKit esté instalado..."
 if ! command -v honkit >/dev/null 2>&1; then
   echo "ERROR: HonKit no está instalado. Ejecuta: npm install -g honkit" >&2

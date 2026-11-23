@@ -13,6 +13,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATRON = re.compile(
     r'!?\[[^\]]*\]\(<?([^)>]+?)>?(?:\s+"[^"]*")?\)'  # [texto](ruta) e imágenes
     r'|src="([^"]+)"|href="([^"]+)"'                 # <img src> y <a href>
+    r'|\{%\s*(?:file|content-ref)\s+(?:src|url)="([^"]+)"'  # bloques de GitBook
 )
 IGNORAR = {'.git', '_book', 'node_modules', 'dist'}
 
