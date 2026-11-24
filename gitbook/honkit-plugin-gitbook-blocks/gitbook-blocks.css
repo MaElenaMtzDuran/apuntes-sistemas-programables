@@ -9,3 +9,10 @@
 .gb-hint-warning{border-color:#f39c12;background:#fff8ec}
 .gb-hint-danger{border-color:#e74c3c;background:#fdf0ef}
 .gb-hint>p:last-child{margin-bottom:0}
+/* Colores de texto de GitBook (<mark style="color:$success;">): GitBook los muestra como texto de color, sin fondo amarillo */
+mark[style*="color:$"]{background:none;padding:0}
+mark[style*="color:$success"]{color:#1a9d5a}
+mark[style*="color:$danger"]{color:#d63c3c}
+mark[style*="color:$warning"]{color:#d9822b}
+mark[style*="color:$info"]{color:#3884ff}
+mark[style*="color:$primary"]{color:#346ddb}
