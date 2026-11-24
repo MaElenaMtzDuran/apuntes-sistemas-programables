@@ -576,82 +576,377 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="13-prácticas">1.3 Prácticas</h1>
-<h3 id="131-prácticas-de-laboratorio-propuestas-con-arduino">1.3.1 Prácticas de Laboratorio Propuestas con Arduino</h3>
-<details>
+<h2 id="131-markgpio-botón-y-parpadeo-no-bloqueante-arduino-uno"><mark style="color:$success;"><strong>1.3.1</strong></mark> <mark style="color:$success;">&lt;/mark&gt;<mark style="color:$success;">GPIO, botón y parpadeo no bloqueante (Arduino Uno)</mark></mark></h2>
+<h3 id="objetivo"><strong>Objetivo</strong></h3>
+<p>Configurar entradas y salidas digitales en la Arduino Uno (ATmega328P); leer un botón y controlar dos LED, distinguiendo entrada, salida y antirrebote básico, primero con funciones Arduino y después con acceso directo a registros del ATmega328P.</p>
+<h3 id="material-y-equipo-">Material y equipo <a href="#material-y-equipo" id="material-y-equipo"></a></h3>
+<ul>
+<li>Arduino Uno Rev3 (o compatible con ATmega328P) y cable USB;</li>
+<li>Protoboard;</li>
+<li>2 LED, 2 resistencias de 330 Ω;</li>
+<li>Botón, resistencia de 10 kΩ (o uso de la resistencia de pull-up interna del ATmega328P);</li>
+<li>Cables de puente;</li>
+<li>Multímetro.</li>
+</ul>
+<h3 id="marco-teórico-breve-">Marco teórico breve <a href="#marco-terico-breve" id="marco-terico-breve"></a></h3>
+<p><code>pinMode(pin, OUTPUT/INPUT)</code> configura la dirección de un pin; internamente escribe el bit correspondiente del registro <code>DDRx</code> del puerto al que pertenece ese pin. Un botón mecánico rebota; una transición puede parecer varias. Se usará una espera corta sólo para antirrebote y <code>millis()</code> (no <code>delay()</code>) para el parpadeo no bloqueante.</p>
+<h3 id="esquema-descrito-">Esquema descrito <a href="#esquema-descrito" id="esquema-descrito"></a></h3>
+<ol>
+<li>LED1: pin digital <strong>D8</strong> → resistencia de 330 Ω → ánodo LED1; cátodo a GND.</li>
+<li>LED2: pin digital <strong>D9</strong> → resistencia de 330 Ω → ánodo LED2; cátodo a GND.</li>
+<li>Botón: un terminal a pin digital <strong>D2</strong>, el otro terminal a GND; usar la resistencia de pull-up interna del ATmega328P (<code>INPUT_PULLUP</code>) o, alternativamente, una resistencia externa de 10 kΩ de D2 a +5 V con el botón hacia GND.</li>
+<li>Alimentación de la placa por el propio cable USB; no se requiere fuente externa ni circuito de reset discreto, ya que la Arduino Uno los integra.</li>
+</ol>
+<figure><img src="../../.gitbook/assets/image (4).png" alt="" width="366"></img><figcaption><p>Figura 1.30 Diagrama de conexión en Tinkercad Leds-Botón</p></figcaption></figure>
 
-<summary><mark style="color:$success;"><strong>Conmutación y Multiplexación de Displays de 7 Segmentos (Ánodo Común)</strong></mark></summary>
+<h3 id="procedimiento-">Procedimiento <a href="#procedimiento" id="procedimiento"></a></h3>
+<ol>
+<li>Abrir el Arduino IDE y crear un nuevo sketch; seleccionar la placa "Arduino Uno" y el puerto serie correspondiente.</li>
+<li>Configurar D2 como entrada con pull-up, y D8/D9 como salidas mediante <code>pinMode()</code>.</li>
+<li>Implementar el parpadeo de LED1 cada 500 ms usando <code>millis()</code> (no bloqueante) y la detección de flanco del botón para alternar LED2 con antirrebote por tiempo.</li>
+<li>Compilar (verificar) y revisar los mensajes del compilador en la consola del IDE.</li>
+<li>Cargar el programa por USB (el bootloader de la Uno gestiona la programación sin necesidad de un programador ICSP externo).</li>
+<li>Medir con el multímetro la tensión en D8/D9 en alto y en bajo.</li>
+<li>Registrar el periodo real de parpadeo de LED1 contra un cronómetro y calcular el error respecto a 500 ms.</li>
+<li><strong>Bonus de registros:</strong> repetir el paso 2 sustituyendo <code>pinMode()</code>/<code>digitalWrite()</code> por manipulación directa de <code>DDRB</code>, <code>PORTB</code> y <code>PIND</code> (ver código de registros abajo) y confirmar que el comportamiento observado es idéntico.</li>
+</ol>
+<h3 id="código-de-ejemplo-arduino-ide-funciones-de-alto-nivel"><strong>Código de ejemplo (Arduino IDE, funciones de alto nivel)</strong></h3>
+<pre><code class="lang-cpp"><span class="hljs-type">const</span> <span class="hljs-type">uint8_t</span> PIN_LED1 = <span class="hljs-number">8</span>;
+<span class="hljs-type">const</span> <span class="hljs-type">uint8_t</span> PIN_LED2 = <span class="hljs-number">9</span>;
+<span class="hljs-type">const</span> <span class="hljs-type">uint8_t</span> PIN_BOTON = <span class="hljs-number">2</span>;
 
-* **Objetivo:** Desarrollar un contador decimal de dos dígitos utilizando la técnica de multiplexación por software.
-* **Hardware:** Placa Arduino, 2 displays de 7 segmentos de ánodo común, 14 resistores de 330 Ω (bus de datos), 2 resistores de 220 Ω (selector de display).
-* **Diagrama de conexión propuesto**:
+<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> ultimoCambio = <span class="hljs-number">0</span>;
+<span class="hljs-type">const</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> PERIODO_MS = <span class="hljs-number">500</span>;
+<span class="hljs-type">bool</span> estadoLed1 = <span class="hljs-literal">false</span>;
+<span class="hljs-type">int</span> anterior = HIGH;
+<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> ultimoAntirrebote = <span class="hljs-number">0</span>;
+<span class="hljs-type">const</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> ANTIRREBOTE_MS = <span class="hljs-number">30</span>;
 
-<figure><img src="../../.gitbook/assets/imagen31b DiagramaDisplayTinkercad.png" alt="" width="375"></img><figcaption><p>Figura 1.30 Diagrama de conexión en Tinkercad </p></figcaption></figure>
-
-* **Código de Ejemplo (Multiplexado Directo):**
-
-```cpp
-// Códigos de 7 segmentos para dígitos 0-9 (Ánodo común, lógicos en BAJO encienden)
-const uint8_t digitos[] = {
-  0xC0, // 0
-  0xF9, // 1
-  0xA4, // 2
-  0xB0, // 3
-  0x99, // 4
-  0x92, // 5
-  0x82, // 6
-  0xF8, // 7
-  0x80, // 8
-  0x90  // 9
-};
-
-const int pinDigit1 = 10; // Habilitador del dígito izquierdo (decenas)
-const int pinDigit2 = 11; // Habilitador del dígito derecho (unidades)
-int contador = 0;
-unsigned long tiempoAnterior = 0;
-
-void setup() {
-  // Configurar puerto D completo como salida para los segmentos (pines 0 a 7 de Arduino)
-  DDRD = 0xFF;
-  pinMode(pinDigit1, OUTPUT);
-  pinMode(pinDigit2, OUTPUT);
-  digitalWrite(pinDigit1, HIGH); // Apagados inicialmente
-  digitalWrite(pinDigit2, HIGH);
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-built_in">pinMode</span>(PIN_LED1, OUTPUT);
+  <span class="hljs-built_in">pinMode</span>(PIN_LED2, OUTPUT);
+  <span class="hljs-built_in">pinMode</span>(PIN_BOTON, INPUT_PULLUP);   <span class="hljs-comment">// botón a GND, pull-up interno activado</span>
 }
 
-void loop() {
-  // Incrementar contador cada 500 ms de manera no bloqueante
-  if (millis() - tiempoAnterior &gt;= 500) {
-    tiempoAnterior = millis();
-    contador = (contador + 1) % 100;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> ahora = <span class="hljs-built_in">millis</span>();
+
+  <span class="hljs-comment">// Parpadeo no bloqueante de LED1</span>
+  <span class="hljs-keyword">if</span> (ahora - ultimoCambio &gt;= PERIODO_MS) {
+    ultimoCambio = ahora;
+    estadoLed1 = !estadoLed1;
+    <span class="hljs-built_in">digitalWrite</span>(PIN_LED1, estadoLed1);
   }
 
-  // Desglose de dígitos
-  int decenas = contador / 10;
-  int unidades = contador % 10;
-
-  // Mostrar Decenas
-  PORTD = digitos[decenas];       // Carga dato en el bus
-  digitalWrite(pinDigit1, LOW);   // Enciende display decenas (PNP activa en LOW)
-  delay(5);                       // Retardo para persistencia visual
-  digitalWrite(pinDigit1, HIGH);  // Apaga display decenas para evitar sombras
-
-  // Mostrar Unidades
-  PORTD = digitos[unidades];      // Carga dato en el bus
-  digitalWrite(pinDigit2, LOW);   // Enciende display unidades
-  delay(5);                       // Retardo para persistencia visual
-  digitalWrite(pinDigit2, HIGH);  // Apaga display unidades
+  <span class="hljs-comment">// Lectura de botón con antirrebote por tiempo</span>
+  <span class="hljs-type">int</span> actual = <span class="hljs-built_in">digitalRead</span>(PIN_BOTON);
+  <span class="hljs-keyword">if</span> (actual != anterior &amp;&amp; (ahora - ultimoAntirrebote) &gt; ANTIRREBOTE_MS) {
+    ultimoAntirrebote = ahora;
+    <span class="hljs-keyword">if</span> (actual == LOW) {              <span class="hljs-comment">// flanco de bajada: botón presionado</span>
+      <span class="hljs-built_in">digitalWrite</span>(PIN_LED2, !<span class="hljs-built_in">digitalRead</span>(PIN_LED2));
+    }
+    anterior = actual;
+  }
 }
-```
+</code></pre>
+<p><strong>Código equivalente por acceso directo a registros (competencia de registros)</strong></p>
+<pre><code class="lang-cpp"><span class="hljs-comment">// Equivalente de bajo nivel: D8/D9 pertenecen a PORTB (PB0, PB1); D2 pertenece a PORTD (PD2)</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span> </span>{
+  DDRB |= (<span class="hljs-number">1</span> &lt;&lt; PB0) | (<span class="hljs-number">1</span> &lt;&lt; PB1);   <span class="hljs-comment">// D8, D9 como salida</span>
+  DDRD &amp;= ~(<span class="hljs-number">1</span> &lt;&lt; PD2);               <span class="hljs-comment">// D2 como entrada</span>
+  PORTD |= (<span class="hljs-number">1</span> &lt;&lt; PD2);               <span class="hljs-comment">// pull-up interno en D2</span>
+}
 
-</details>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-type">static</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> ultimoCambio = <span class="hljs-number">0</span>;
+  <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> ahora = <span class="hljs-built_in">millis</span>();
+  <span class="hljs-keyword">if</span> (ahora - ultimoCambio &gt;= <span class="hljs-number">500</span>) {
+    ultimoCambio = ahora;
+    PORTB ^= (<span class="hljs-number">1</span> &lt;&lt; PB0);              <span class="hljs-comment">// alterna D8 directamente en el registro</span>
+  }
+  <span class="hljs-keyword">if</span> (!(PIND &amp; (<span class="hljs-number">1</span> &lt;&lt; PD2))) {         <span class="hljs-comment">// lectura directa del pin D2</span>
+    PORTB ^= (<span class="hljs-number">1</span> &lt;&lt; PB1);
+    <span class="hljs-built_in">delay</span>(<span class="hljs-number">30</span>);                        <span class="hljs-comment">// antirrebote simple para el ejemplo de registros</span>
+  }
+}
+</code></pre>
+<h3 id="resultados-y-cuestionario-">Resultados y cuestionario <a href="#resultados-y-cuestionario" id="resultados-y-cuestionario"></a></h3>
+<p>Los resultados de la práctica deben incluir una tabla de tensión de alimentación, niveles alto/bajo medidos en D8/D9, periodo de LED1 medido y número de cambios de LED2 por diez pulsaciones, en ambas versiones (funciones Arduino y registros directos).</p>
+<ol>
+<li>¿Qué bit de <code>DDRB</code> controla la dirección del pin D8 y cómo se determinó?</li>
+<li>¿Por qué <code>INPUT_PULLUP</code> evita la resistencia externa de 10 kΩ y qué registro activa internamente?</li>
+<li>¿Cuál es el error porcentual del periodo medido frente a los 500 ms programados?</li>
+<li>¿Qué limitación tiene el antirrebote por espera fija (<code>delay(30)</code>) frente a uno basado en <code>millis()</code>?</li>
+<li>¿Cómo se rediseñaría este parpadeo usando el Timer0/Timer1 del ATmega328P y una interrupción, en vez de sondear <code>millis()</code>?</li>
+</ol>
+<h2 id="132-adquisición-adc-y-transmisión-serie-arduino-uno"><mark style="color:$success;"><strong>1.3.2 Adquisición ADC y transmisión serie (Arduino Uno)</strong></mark></h2>
+<h3 id="objetivo-">Objetivo <a href="#objetivo" id="objetivo"></a></h3>
+<p>Muestrear una tensión analógica con el ADC de 10 bits del ATmega328P, convertirla a milivoltios y transmitir el resultado por el puerto serie a una terminal (Monitor Serie del IDE), primero con <code>analogRead()</code> y después con acceso directo a los registros <code>ADMUX</code>/<code>ADCSRA</code>.</p>
+<h3 id="material-y-equipo-">Material y equipo <a href="#material-y-equipo" id="material-y-equipo"></a></h3>
+<ul>
+<li>Montaje base de la práctica 1 (Arduino Uno);</li>
+<li>Potenciómetro de 10 kΩ;</li>
+<li>Cable USB (la misma conexión USB provee la comunicación serie con la PC, sin adaptador externo);</li>
+<li>Arduino IDE con el Monitor Serie, multímetro.</li>
+</ul>
+<h3 id="marco-teórico-breve-">Marco teórico breve <a href="#marco-terico-breve" id="marco-terico-breve"></a></h3>
+<p>El potenciómetro produce 0–5 V. El ADC del ATmega328P usa por defecto AVCC (≈5 V en la Uno) como referencia y entrega un valor de 0 a 1023 (10 bits). <code>analogRead()</code> selecciona el canal, espera la adquisición e inicia la conversión internamente, escribiendo los registros <code>ADMUX</code> y <code>ADCSRA</code>. La comunicación serie por USB usa el puerto UART0 del ATmega328P a través del chip convertidor USB-serie integrado en la placa; no se requiere un adaptador USB-UART aparte como en un microcontrolador aislado.</p>
+<h3 id="esquema-descrito-">Esquema descrito <a href="#esquema-descrito" id="esquema-descrito"></a></h3>
+<ol>
+<li>Potenciómetro: extremos a 5V y GND; cursor al pin analógico <strong>A0</strong>.</li>
+<li>Ninguna conexión adicional de UART es necesaria: la comunicación serie usa el mismo cable USB con el que se programa la placa.</li>
+<li>Mantener el montaje de LED/botón de la práctica 1 si se desea reutilizar la placa.</li>
+</ol>
+<figure><img src="../../.gitbook/assets/image (5).png" alt="" width="370"></img><figcaption><p>Figura 1.31 Diagrama de conexión en Tinkercad Potenciómetro</p></figcaption></figure>
 
-<details>
+<h3 id="procedimiento-">Procedimiento <a href="#procedimiento" id="procedimiento"></a></h3>
+<ol>
+<li>Conectar el cursor del potenciómetro a A0.</li>
+<li>En el sketch, leer A0 con <code>analogRead()</code> cada 250 ms.</li>
+<li>Calcular milivoltios con aritmética de 32 bits: <code>mV = (adc * 5000UL) / 1023UL</code>.</li>
+<li>Enviar por <code>Serial</code> el valor crudo del ADC y los milivoltios calculados, a 9600 baudios.</li>
+<li>Abrir el Monitor Serie del IDE a 9600 baudios y registrar cinco posiciones del potenciómetro.</li>
+<li>Medir las mismas posiciones con el multímetro y calcular el error absoluto y porcentual.</li>
+<li>Repetir promediando 16 muestras (oversampling) y comparar la estabilidad de la lectura.</li>
+<li><strong>Bonus de registros:</strong> sustituir <code>analogRead()</code> por una rutina propia que configure <code>ADMUX</code> (canal 0, referencia AVCC) y <code>ADCSRA</code> (habilitación, prescaler, inicio de conversión y espera de la bandera <code>ADIF</code>), y comparar el resultado con el de <code>analogRead()</code>.</li>
+</ol>
+<h3 id="código-de-ejemplo-arduino-ide-funciones-de-alto-nivel-">Código de ejemplo (Arduino IDE, funciones de alto nivel) <a href="#cdigo-de-ejemplo-arduino-ide-funciones-de-alto-niv" id="cdigo-de-ejemplo-arduino-ide-funciones-de-alto-niv"></a></h3>
+<pre><code class="lang-c++"><span class="hljs-type">const</span> <span class="hljs-type">uint8_t</span> PIN_POT = A0;
 
-<summary></summary>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span> </span>{
+  Serial.<span class="hljs-built_in">begin</span>(<span class="hljs-number">9600</span>);
+}
 
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-type">uint32_t</span> suma = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-type">uint8_t</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">16</span>; i++) {
+    suma += <span class="hljs-built_in">analogRead</span>(PIN_POT);
+    <span class="hljs-built_in">delay</span>(<span class="hljs-number">1</span>);
+  }
+  <span class="hljs-type">uint16_t</span> adc = (<span class="hljs-type">uint16_t</span>)(suma / <span class="hljs-number">16</span>);
+  <span class="hljs-type">uint16_t</span> mv = (<span class="hljs-type">uint16_t</span>)(((<span class="hljs-type">uint32_t</span>)adc * <span class="hljs-number">5000UL</span>) / <span class="hljs-number">1023UL</span>);
 
+  Serial.<span class="hljs-built_in">print</span>(<span class="hljs-string">"ADC="</span>);
+  Serial.<span class="hljs-built_in">print</span>(adc);
+  Serial.<span class="hljs-built_in">print</span>(<span class="hljs-string">", V="</span>);
+  Serial.<span class="hljs-built_in">print</span>(mv);
+  Serial.<span class="hljs-built_in">println</span>(<span class="hljs-string">" mV"</span>);
 
-</details>
+  <span class="hljs-built_in">delay</span>(<span class="hljs-number">250</span>);
+}
+</code></pre>
+<p>Código equivalente por acceso directo a registros (competencia de registros)</p>
+<pre><code class="lang-cpp"><span class="hljs-comment">// Lectura de A0 (ADC0) manipulando ADMUX/ADCSRA directamente, sin analogRead()</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span> </span>{
+  Serial.<span class="hljs-built_in">begin</span>(<span class="hljs-number">9600</span>);
+  ADMUX = (<span class="hljs-number">1</span> &lt;&lt; REFS0);              <span class="hljs-comment">// Referencia AVCC, canal ADC0 (A0)</span>
+  ADCSRA = (<span class="hljs-number">1</span> &lt;&lt; ADEN) | (<span class="hljs-number">1</span> &lt;&lt; ADPS2) | (<span class="hljs-number">1</span> &lt;&lt; ADPS1) | (<span class="hljs-number">1</span> &lt;&lt; ADPS0); <span class="hljs-comment">// ADC on, prescaler 128</span>
+}
+
+<span class="hljs-function"><span class="hljs-type">uint16_t</span> <span class="hljs-title">leerADC0</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> </span>{
+  ADCSRA |= (<span class="hljs-number">1</span> &lt;&lt; ADSC);             <span class="hljs-comment">// inicia conversión</span>
+  <span class="hljs-keyword">while</span> (ADCSRA &amp; (<span class="hljs-number">1</span> &lt;&lt; ADSC)) { }   <span class="hljs-comment">// espera a que termine</span>
+  <span class="hljs-keyword">return</span> ADC;                        <span class="hljs-comment">// registro combinado ADCL/ADCH</span>
+}
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-type">uint16_t</span> adc = <span class="hljs-built_in">leerADC0</span>();
+  <span class="hljs-type">uint16_t</span> mv = (<span class="hljs-type">uint16_t</span>)(((<span class="hljs-type">uint32_t</span>)adc * <span class="hljs-number">5000UL</span>) / <span class="hljs-number">1023UL</span>);
+  Serial.<span class="hljs-built_in">print</span>(<span class="hljs-string">"ADC(reg)="</span>);
+  Serial.<span class="hljs-built_in">print</span>(adc);
+  Serial.<span class="hljs-built_in">print</span>(<span class="hljs-string">", V="</span>);
+  Serial.<span class="hljs-built_in">print</span>(mv);
+  Serial.<span class="hljs-built_in">println</span>(<span class="hljs-string">" mV"</span>);
+  <span class="hljs-built_in">delay</span>(<span class="hljs-number">250</span>);
+}
+</code></pre>
+<h3 id="resultados-y-cuestionario-">Resultados y cuestionario <a href="#resultados-y-cuestionario" id="resultados-y-cuestionario"></a></h3>
+<p>Tabla mínima: voltaje multímetro, código teórico, código medido (<code>analogRead()</code> y registros directos), mV calculados, error absoluto y porcentual, desviación antes/después del promedio de 16 muestras.</p>
+<ol>
+<li>¿Por qué se usa <code>uint32_t</code> en la multiplicación para convertir a milivoltios?</li>
+<li>¿Cuál es el máximo error de cuantización ideal de un ADC de 10 bits con referencia de 5 V?</li>
+<li>¿Cómo afecta una fuente con alta impedancia a la lectura del ADC del ATmega328P?</li>
+<li>¿Qué bits de <code>ADMUX</code> seleccionan el canal analógico y cuáles seleccionan la referencia?</li>
+<li>¿Qué cambiaría en el código de registros si se usara una referencia interna de 1.1 V (<code>INTERNAL</code>) en vez de AVCC?</li>
+</ol>
+<h2 id="133-temporizador-interrupción-y-lcd-16×2-arduino-uno"><mark style="color:$success;"><strong>1.3.3 T</strong></mark><mark style="color:$success;">emporizador, interrupción y LCD 16×2 (Arduino Uno)</mark></h2>
+<h3 id="objetivo-">Objetivo <a href="#objetivo" id="objetivo"></a></h3>
+<p>Generar una base de tiempo con el Timer1 del ATmega328P en modo de interrupción y mostrar en un LCD 16×2 un contador de segundos, sin usar <code>delay()</code> para la temporización principal, contrastando la implementación con <code>attachInterrupt()</code>/registros directos.</p>
+<h3 id="material-y-equipo-">Material y equipo <a href="#material-y-equipo" id="material-y-equipo"></a></h3>
+<ul>
+<li>Arduino Uno y montaje base;</li>
+<li>LCD 16×2 compatible HD44780;</li>
+<li>Potenciómetro de 10 kΩ para contraste;</li>
+<li>Resistencia para retroiluminación según el módulo (300 Ω);</li>
+<li>Biblioteca <code>LiquidCrystal</code> (incluida en el Arduino IDE);</li>
+<li>Cable USB; analizador lógico u osciloscopio opcional.</li>
+</ul>
+<h3 id="marco-teórico-breve-">Marco teórico breve <a href="#marco-terico-breve" id="marco-terico-breve"></a></h3>
+<p>Con el reloj de 16 MHz de la Arduino Uno, el Timer1 (16 bits) con prescaler 1:64 recibe 250 kHz, es decir, un tick cada 4 µs; para 10 ms se requieren 2 500 cuentas, por lo que la precarga en modo comparación (<code>OCR1A</code>) es 2 499 (cuenta desde 0). Cien interrupciones forman un segundo. La interrupción sólo actualiza contadores; la escritura del LCD se realiza en <code>loop()</code>.</p>
+<h3 id="esquema-descrito-">Esquema descrito <a href="#esquema-descrito" id="esquema-descrito"></a></h3>
+<p>LCD en modo 4 bits, usando la biblioteca <code>LiquidCrystal</code> con el mapeo <code>LiquidCrystal lcd(RS, E, D4, D5, D6, D7)</code>:</p>
+<ul>
+<li>VSS→GND, VDD→5V.</li>
+<li>VO→cursor del potenciómetro de contraste; extremos a 5V y GND.</li>
+<li>RS→pin digital <strong>7</strong>; E→pin digital <strong>6</strong>; RW→GND.</li>
+<li>D4→pin <strong>5</strong>, D5→pin <strong>4</strong>, D6→pin <strong>3</strong>, D7→pin <strong>2</strong>.</li>
+<li>Retroiluminación (A/K) según especificación del módulo, con resistencia limitadora si es necesaria. Conecta el ánodo a <strong>5V</strong> mediante resistencia de 300 Ω) y el cátodo a <strong>GND.</strong></li>
+</ul>
+<figure><img src="../../.gitbook/assets/image (6).png" alt="" width="563"></img><figcaption><p>Figura 1.32 Diagrama de conexión en Tinkercad Pantalla LCD</p></figcaption></figure>
+
+<h3 id="procedimiento-">Procedimiento <a href="#procedimiento" id="procedimiento"></a></h3>
+<ol>
+<li>Calcular y documentar la precarga de <code>OCR1A</code> para una interrupción cada 10 ms.</li>
+<li>Declarar el objeto <code>LiquidCrystal lcd(7, 6, 5, 4, 3, 2);</code> e inicializarlo con <code>lcd.begin(16, 2)</code>.</li>
+<li>Configurar el Timer1 en modo CTC (Clear Timer on Compare) con <code>OCR1A</code> y habilitar la interrupción <code>TIMER1_COMPA_vect</code> mediante registros (<code>TCCR1B</code>, <code>TIMSK1</code>), ya que el lenguaje Arduino no ofrece una función de alto nivel para temporizadores de hardware equivalente a <code>attachInterrupt()</code> en pines externos.</li>
+<li>Verificar con el analizador lógico u osciloscopio, si está disponible, que el periodo de interrupción es de 10 ms.</li>
+<li>Mostrar <code>Tiempo: n s</code> en el LCD sólo cuando cambie el contador de segundos (no en cada iteración del <code>loop()</code>).</li>
+<li>Cargar el programa y comparar 60 s del contador contra un cronómetro externo.</li>
+<li>Calcular la deriva porcentual y discutir la precisión del resonador cerámico de la Uno frente a un cristal de cuarzo.</li>
+<li>Forzar deliberadamente una operación lenta (por ejemplo, <code>delay(50)</code>) dentro de la rutina de interrupción y explicar por qué esto es incorrecto en una ISR.</li>
+</ol>
+<h3 id="código-de-ejemplo-arduino-ide-con-timer1-por-registros-y-lcd-por-biblioteca-">Código de ejemplo (Arduino IDE, con Timer1 por registros y LCD por biblioteca) <a href="#cdigo-de-ejemplo-arduino-ide-con-timer1-por-regist" id="cdigo-de-ejemplo-arduino-ide-con-timer1-por-regist"></a></h3>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;LiquidCrystal.h&gt;</span></span>
+
+<span class="hljs-function">LiquidCrystal <span class="hljs-title">lcd</span><span class="hljs-params">(<span class="hljs-number">7</span>, <span class="hljs-number">6</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>)</span></span>;
+
+<span class="hljs-keyword">volatile</span> <span class="hljs-type">uint8_t</span> ticks10ms = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">volatile</span> <span class="hljs-type">uint16_t</span> segundos = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">volatile</span> <span class="hljs-type">uint8_t</span> actualizar = <span class="hljs-number">0</span>;
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">configurarTimer1</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> </span>{
+  <span class="hljs-built_in">noInterrupts</span>();
+  TCCR1A = <span class="hljs-number">0</span>;
+  TCCR1B = <span class="hljs-number">0</span>;
+  TCNT1  = <span class="hljs-number">0</span>;
+  OCR1A  = <span class="hljs-number">2499</span>;                       <span class="hljs-comment">// 10 ms con prescaler 1:64 a 16 MHz</span>
+  TCCR1B |= (<span class="hljs-number">1</span> &lt;&lt; WGM12);              <span class="hljs-comment">// modo CTC</span>
+  TCCR1B |= (<span class="hljs-number">1</span> &lt;&lt; CS11) | (<span class="hljs-number">1</span> &lt;&lt; CS10); <span class="hljs-comment">// prescaler 64</span>
+  TIMSK1 |= (<span class="hljs-number">1</span> &lt;&lt; OCIE1A);             <span class="hljs-comment">// habilita interrupción por comparación</span>
+  <span class="hljs-built_in">interrupts</span>();
+}
+
+<span class="hljs-built_in">ISR</span>(TIMER1_COMPA_vect) {
+  <span class="hljs-keyword">if</span> (++ticks10ms &gt;= <span class="hljs-number">100</span>) {
+    ticks10ms = <span class="hljs-number">0</span>;
+    segundos++;
+    actualizar = <span class="hljs-number">1</span>;
+  }
+}
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span> </span>{
+  lcd.<span class="hljs-built_in">begin</span>(<span class="hljs-number">16</span>, <span class="hljs-number">2</span>);
+  lcd.<span class="hljs-built_in">print</span>(<span class="hljs-string">"Tiempo:"</span>);
+  <span class="hljs-built_in">configurarTimer1</span>();
+}
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">if</span> (actualizar) {
+    <span class="hljs-built_in">noInterrupts</span>();
+    <span class="hljs-type">uint16_t</span> copia = segundos;
+    actualizar = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">interrupts</span>();
+
+    lcd.<span class="hljs-built_in">setCursor</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+    lcd.<span class="hljs-built_in">print</span>(copia);
+    lcd.<span class="hljs-built_in">print</span>(<span class="hljs-string">" s   "</span>);
+  }
+}
+</code></pre>
+<h3 id="resultados-y-cuestionario-">Resultados y cuestionario <a href="#resultados-y-cuestionario" id="resultados-y-cuestionario"></a></h3>
+<p>El reporte de análisis de resultados debe incluir cálculo de la precarga de <code>OCR1A</code>, evidencia del periodo de interrupción (captura de osciloscopio o razonamiento si no está disponible), error a 60 s, foto/captura del LCD y análisis de concurrencia entre la ISR y <code>loop()</code>.</p>
+<ol>
+<li>¿Por qué <code>segundos</code> y <code>actualizar</code> se declaran <code>volatile</code>?</li>
+<li>¿Por qué se copia <code>segundos</code> con las interrupciones temporalmente deshabilitadas (<code>noInterrupts()</code>/<code>interrupts()</code>)?</li>
+<li>¿Qué sucedería si se llamara a <code>lcd.print()</code> dentro de la rutina <code>ISR(TIMER1_COMPA_vect)</code>?</li>
+<li>¿Cómo se recalcula el valor de <code>OCR1A</code> si se usara un prescaler de 1:8 en vez de 1:64?</li>
+<li>¿Qué diferencia hay entre usar <code>attachInterrupt()</code> sobre un pin externo (D2/D3) y usar una interrupción de temporizador como <code>TIMER1_COMPA_vect</code> para esta aplicación, y por qué se eligió la segunda? (<a href="https://github.com/arduino/reference-en/blob/master/Language/Functions/External%20Interrupts/attachInterrupt.adoc" target="_blank">Arduino, referencia de <code>attachInterrupt()</code></a>)</li>
+</ol>
+<h2 id="134-conmutación-y-multiplexación-de-displays-de-7-segmentos-ánodo-común"><mark style="color:$success;"><strong>1.3.4 Conmutación y Multiplexación de Displays de 7 Segmentos (Ánodo Común)</strong></mark></h2>
+<h3 id="objetivo"><strong>Objetivo</strong></h3>
+<p>Desarrollar un contador decimal de dos dígitos utilizando la técnica de multiplexación por software.</p>
+<h3 id="material-y-equipo-">Material y equipo <a href="#material-y-equipo" id="material-y-equipo"></a></h3>
+<ul>
+<li>Placa Arduino, </li>
+<li>2 displays de 7 segmentos de ánodo común, </li>
+<li>14 resistores de 330 Ω (bus de datos), </li>
+<li>2 resistores de 220 Ω (selector de display).</li>
+</ul>
+<ul>
+<li><strong>Diagrama de conexión propuesto</strong>:</li>
+</ul>
+<figure><img src="../../.gitbook/assets/image (3).png" alt="" width="375"></img><figcaption><p>Figura 1.31 Diagrama de conexión en Tinkercad</p></figcaption></figure>
+
+<h3 id="procedimiento-">Procedimiento <a href="#procedimiento" id="procedimiento"></a></h3>
+<ol>
+<li>Conectar los display's de acuerdo al esquema anexo.</li>
+<li>Abrir el Arduino IDE y crear un nuevo sketch; seleccionar la placa "Arduino Uno" y cargar el código anexo.</li>
+<li>Compilar (verificar) y revisar los mensajes del compilador en la consola del IDE.</li>
+<li>Cargar el programa por USB.</li>
+<li>Registrar el periodo real de conteo de cada uno de los display's y el margen de error.</li>
+</ol>
+<h3 id="código-de-ejemplo-multiplexado-directo"><strong>Código de Ejemplo (Multiplexado Directo):</strong></h3>
+<pre><code class="lang-cpp"><span class="hljs-comment">// Códigos de 7 segmentos para dígitos 0-9 (Ánodo común, lógicos en BAJO encienden)</span>
+<span class="hljs-type">const</span> <span class="hljs-type">uint8_t</span> digitos[] = {
+  <span class="hljs-number">0xC0</span>, <span class="hljs-comment">// 0</span>
+  <span class="hljs-number">0xF9</span>, <span class="hljs-comment">// 1</span>
+  <span class="hljs-number">0xA4</span>, <span class="hljs-comment">// 2</span>
+  <span class="hljs-number">0xB0</span>, <span class="hljs-comment">// 3</span>
+  <span class="hljs-number">0x99</span>, <span class="hljs-comment">// 4</span>
+  <span class="hljs-number">0x92</span>, <span class="hljs-comment">// 5</span>
+  <span class="hljs-number">0x82</span>, <span class="hljs-comment">// 6</span>
+  <span class="hljs-number">0xF8</span>, <span class="hljs-comment">// 7</span>
+  <span class="hljs-number">0x80</span>, <span class="hljs-comment">// 8</span>
+  <span class="hljs-number">0x90</span>  <span class="hljs-comment">// 9</span>
+};
+
+<span class="hljs-type">const</span> <span class="hljs-type">int</span> pinDigit1 = <span class="hljs-number">10</span>; <span class="hljs-comment">// Habilitador del dígito izquierdo (decenas)</span>
+<span class="hljs-type">const</span> <span class="hljs-type">int</span> pinDigit2 = <span class="hljs-number">11</span>; <span class="hljs-comment">// Habilitador del dígito derecho (unidades)</span>
+<span class="hljs-type">int</span> contador = <span class="hljs-number">0</span>;
+<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> tiempoAnterior = <span class="hljs-number">0</span>;
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-comment">// Configurar puerto D completo como salida para los segmentos (pines 0 a 7 de Arduino)</span>
+  DDRD = <span class="hljs-number">0xFF</span>;
+  <span class="hljs-built_in">pinMode</span>(pinDigit1, OUTPUT);
+  <span class="hljs-built_in">pinMode</span>(pinDigit2, OUTPUT);
+  <span class="hljs-built_in">digitalWrite</span>(pinDigit1, HIGH); <span class="hljs-comment">// Apagados inicialmente</span>
+  <span class="hljs-built_in">digitalWrite</span>(pinDigit2, HIGH);
+}
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-comment">// Incrementar contador cada 500 ms de manera no bloqueante</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">millis</span>() - tiempoAnterior &gt;= <span class="hljs-number">500</span>) {
+    tiempoAnterior = <span class="hljs-built_in">millis</span>();
+    contador = (contador + <span class="hljs-number">1</span>) % <span class="hljs-number">100</span>;
+  }
+
+  <span class="hljs-comment">// Desglose de dígitos</span>
+  <span class="hljs-type">int</span> decenas = contador / <span class="hljs-number">10</span>;
+  <span class="hljs-type">int</span> unidades = contador % <span class="hljs-number">10</span>;
+
+  <span class="hljs-comment">// Mostrar Decenas</span>
+  PORTD = digitos[decenas];       <span class="hljs-comment">// Carga dato en el bus</span>
+  <span class="hljs-built_in">digitalWrite</span>(pinDigit1, LOW);   <span class="hljs-comment">// Enciende display decenas (PNP activa en LOW)</span>
+  <span class="hljs-built_in">delay</span>(<span class="hljs-number">5</span>);                       <span class="hljs-comment">// Retardo para persistencia visual</span>
+  <span class="hljs-built_in">digitalWrite</span>(pinDigit1, HIGH);  <span class="hljs-comment">// Apaga display decenas para evitar sombras</span>
+
+  <span class="hljs-comment">// Mostrar Unidades</span>
+  PORTD = digitos[unidades];      <span class="hljs-comment">// Carga dato en el bus</span>
+  <span class="hljs-built_in">digitalWrite</span>(pinDigit2, LOW);   <span class="hljs-comment">// Enciende display unidades</span>
+  <span class="hljs-built_in">delay</span>(<span class="hljs-number">5</span>);                       <span class="hljs-comment">// Retardo para persistencia visual</span>
+  <span class="hljs-built_in">digitalWrite</span>(pinDigit2, HIGH);  <span class="hljs-comment">// Apaga display unidades</span>
+}
+</code></pre>
+<h3 id="resultados-y-cuestionario-">Resultados y cuestionario <a href="#resultados-y-cuestionario" id="resultados-y-cuestionario"></a></h3>
+<p>El reporte de análisis de resultados debe incluir cálculo de la precarga de <code>OCR1A</code>, evidencia del periodo de interrupción (captura de osciloscopio o razonamiento si no está disponible), error a 60 s, foto/captura del LCD y análisis de concurrencia entre la ISR y <code>loop()</code>.</p>
+<ol>
+<li>¿Por qué <code>segundos</code> y <code>actualizar</code> se declaran <code>volatile</code>?</li>
+<li>¿Por qué se copia <code>segundos</code> con las interrupciones temporalmente deshabilitadas (<code>noInterrupts()</code>/<code>interrupts()</code>)?</li>
+<li>¿Qué sucedería si se llamara a <code>lcd.print()</code> dentro de la rutina <code>ISR(TIMER1_COMPA_vect)</code>?</li>
+<li>¿Cómo se recalcula el valor de <code>OCR1A</code> si se usara un prescaler de 1:8 en vez de 1:64?</li>
+<li>¿Qué diferencia hay entre usar <code>attachInterrupt()</code> sobre un pin externo (D2/D3) y usar una interrupción de temporizador como <code>TIMER1_COMPA_vect</code> para esta aplicación, y por qué se eligió la segunda? (<a href="https://github.com/arduino/reference-en/blob/master/Language/Functions/External%20Interrupts/attachInterrupt.adoc" target="_blank">Arduino, referencia de <code>attachInterrupt()</code></a>)</li>
+</ol>
 
                                 
                                 </section>
@@ -693,7 +988,7 @@ void loop() {
     </div>
 
     
-    <script type="application/json" id="honkit-page-context">{"page":{"title":"1.3 Prácticas","level":"1.2.3","depth":2,"next":{"title":"1.4 Evaluaciones","level":"1.2.4","depth":2,"path":"chapters/capitulo1/1.4-evaluaciones.md","ref":"chapters/capitulo1/1.4-evaluaciones.md","articles":[]},"previous":{"title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"path":"chapters/capitulo1/1.2-circuiteria-alternativa.md","ref":"chapters/capitulo1/1.2-circuiteria-alternativa.md","articles":[]},"dir":"ltr"},"config":{"plugins":["gitbook-blocks"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"gitbook-blocks":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/1.3-practicas.md","mtime":"2026-11-24T17:34:26.017Z","type":"markdown"},"gitbook":{"version":"7.0.1","time":"2026-11-24T17:36:12.435Z"},"basePath":"../..","book":{"language":""}}</script>
+    <script type="application/json" id="honkit-page-context">{"page":{"title":"1.3 Prácticas","level":"1.2.3","depth":2,"next":{"title":"1.4 Evaluaciones","level":"1.2.4","depth":2,"path":"chapters/capitulo1/1.4-evaluaciones.md","ref":"chapters/capitulo1/1.4-evaluaciones.md","articles":[]},"previous":{"title":"1.2 Circuitería alternativa para entrada/salida","level":"1.2.2","depth":2,"path":"chapters/capitulo1/1.2-circuiteria-alternativa.md","ref":"chapters/capitulo1/1.2-circuiteria-alternativa.md","articles":[]},"dir":"ltr"},"config":{"plugins":["gitbook-blocks"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"gitbook-blocks":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/1.3-practicas.md","mtime":"2026-11-24T21:22:14.340Z","type":"markdown"},"gitbook":{"version":"7.0.1","time":"2026-11-24T21:24:15.346Z"},"basePath":"../..","book":{"language":""}}</script>
 </div>
 
         
