@@ -13,6 +13,7 @@ icon: sensor-triangle-exclamation
 
 ### Temario a desarrollar
 
+* 2.0 Introducción: fundamentos de sensores
 * 2.1 Ópticos
   * 2.1.1 Tipos
   * 2.1.2 Funcionamiento
@@ -36,6 +37,7 @@ icon: sensor-triangle-exclamation
 
 ### Desarrollo
 
+* [2.0 Introducción](2.0-introduccion.md)
 * [2.1 Ópticos](2.1-opticos.md)
 * [2.2 Temperatura](2.2-temperatura.md)
 * [2.3 Presión](2.3-presion.md)

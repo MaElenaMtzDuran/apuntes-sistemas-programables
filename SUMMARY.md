@@ -8,6 +8,7 @@
   * [1.4 Evaluaciones](chapters/capitulo1/1.4-evaluaciones.md)
   * [1.5 Fuentes de información](chapters/capitulo1/1.5-fuentes-de-informacion.md)
 * [Tema 2: Sensores](chapters/capitulo2/README.md)
+  * [2.0 Introducción](chapters/capitulo2/2.0-introduccion.md)
   * [2.1 Ópticos](chapters/capitulo2/2.1-opticos.md)
   * [2.2 Temperatura](chapters/capitulo2/2.2-temperatura.md)
   * [2.3 Presión](chapters/capitulo2/2.3-presion.md)
