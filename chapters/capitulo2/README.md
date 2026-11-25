@@ -1,3 +1,7 @@
+---
+icon: sensor-triangle-exclamation
+---
+
 # Tema 2: Sensores
 
 ### Competencias a desarrollar
@@ -48,3 +52,5 @@
 ### Fuentes
 
 * [2.7 Fuentes de información](2.7-fuentes-de-informacion.md)
+
+**Nota de alineación curricular importante.** En el programa oficial vigente de la asignatura publicado por el Tecnológico Nacional de México, **Sensores es el Tema 1** de la asignatura; Actuadores es el Tema 2 y Microcontroladores el Tema 3. En el desarrollo de estos apuntes electrónicos, por decisión didáctica, Microcontroladores se presenta primero como “Tema 1”, para que el estudiante conozca la plataforma Arduino Uno y la estructura de registros del ATmega328P antes de conectar sensores.&#x20;
