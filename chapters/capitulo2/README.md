@@ -32,7 +32,10 @@
 
 ### Desarrollo
 
-<!-- Agrega aquí los enlaces a las secciones del tema y regístralas también en SUMMARY.md -->
+* [2.1 Ópticos](2.1-opticos.md)
+* [2.2 Temperatura](2.2-temperatura.md)
+* [2.3 Presión](2.3-presion.md)
+* [2.4 Proximidad](2.4-proximidad.md)
 
 ### Recursos
 
