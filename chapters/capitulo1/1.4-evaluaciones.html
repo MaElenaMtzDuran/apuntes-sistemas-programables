@@ -576,6 +576,319 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="14-evaluaciones">1.4 Evaluaciones</h1>
+<p>Para la evaluación de contenidos se presentan las siguientes actividades:</p>
+<h3 id="instrumento-1-examen-escrito">Instrumento 1: Examen escrito.</h3>
+<p><strong>Valor:</strong> 40 puntos.\
+<strong>Tiempo:</strong> 70 minutos.\
+<strong>Criterio:</strong> 24 puntos de opción múltiple y 16 de desarrollo.</p>
+<h4 id="parte-i-opción-múltiple-12-reactivos-×-2-puntos-">Parte I. Opción múltiple (12 reactivos × 2 puntos) <a href="#parte-i-opcin-mltiple-12-reactivos--2-puntos" id="parte-i-opcin-mltiple-12-reactivos--2-puntos"></a></h4>
+<ol>
+<li>¿Qué distingue esencialmente a un MCU clásico? <ol>
+<li>Sólo contiene ALU. </li>
+<li><em><mark style="color:$primary;"><strong>Integra CPU, memoria y periféricos.</strong></mark></em> </li>
+<li>Requiere RAM externa.</li>
+<li>Ejecuta únicamente ensamblador.</li>
+</ol>
+</li>
+<li>En Harvard:<ol>
+<li>Programa y datos comparten obligatoriamente un bus; </li>
+<li>No existe RAM; </li>
+<li><em><mark style="color:$primary;"><strong>Programa y datos tienen espacios/caminos separados;</strong></mark></em> </li>
+<li>Cada periférico tiene CPU.</li>
+</ol>
+</li>
+<li>En PIC16F887, <code>TRISB</code> se usa para:<ol>
+<li>Seleccionar ADC; </li>
+<li><em><mark style="color:$primary;"><strong>Configurar dirección de PORTB;</strong></mark></em> </li>
+<li>Borrar Flash; </li>
+<li>Fijar baud.</li>
+</ol>
+</li>
+<li>Antes de leer un canal ADC se debe considerar:<ol>
+<li>Sólo el color del cable; </li>
+<li><em><mark style="color:$primary;"><strong>Tiempo de adquisición y referencia;</strong></mark></em> </li>
+<li>El baud UART; </li>
+<li>La pila.</li>
+</ol>
+</li>
+<li>¿Qué interfaz usa normalmente SCL y SDA?<ol>
+<li>UART; </li>
+<li>SPI; </li>
+<li><em><mark style="color:$primary;"><strong>I²C;</strong></mark></em> </li>
+<li>PWM.</li>
+</ol>
+</li>
+<li>El propósito principal del watchdog es:<ol>
+<li>Elevar frecuencia; </li>
+<li><em><mark style="color:$primary;"><strong>Recuperar el sistema ante bloqueo;</strong></mark></em> </li>
+<li>Convertir señales; </li>
+<li>Ampliar Flash.</li>
+</ol>
+</li>
+<li>¿Qué componente debe manejar directamente un motor DC?<ol>
+<li>Un pin GPIO sin protección; </li>
+<li><em><mark style="color:$primary;"><strong>Un driver/transistor dimensionado;</strong></mark></em> </li>
+<li>El cristal; </li>
+<li>MCLR.</li>
+</ol>
+</li>
+<li>¿Qué afirmación sobre fuses/configuration bits es correcta?<ol>
+<li>Son variables normales de RAM; </li>
+<li><em><mark style="color:$primary;"><strong>Configuran opciones como reloj y WDT;</strong></mark></em> </li>
+<li>Sólo afectan comentarios; </li>
+<li>Se borran en cada reset.</li>
+</ol>
+</li>
+<li>Una ventaja típica de SPI es:<ol>
+<li>Sólo dos líneas para infinitos nodos sin selección; </li>
+<li><em><mark style="color:$primary;"><strong>Alta velocidad y full-duplex;</strong></mark></em> </li>
+<li>Niveles RS-232 nativos; </li>
+<li>No necesita reloj.</li>
+</ol>
+</li>
+<li>Si un ADC ideal de 10 bits usa 5 V, su LSB aproximado es:<ol>
+<li>0.488 V; </li>
+<li>48.8 mV; </li>
+<li><em><mark style="color:$primary;"><strong>4.88 mV;</strong></mark></em> </li>
+<li>0.00488 mV.</li>
+</ol>
+</li>
+<li>¿Qué memoria retiene pequeñas configuraciones y admite escritura eléctrica?<ol>
+<li>SRAM; </li>
+<li><em><mark style="color:$primary;"><strong>EEPROM;</strong></mark></em> </li>
+<li>Registro W; </li>
+<li>Pila.</li>
+</ol>
+</li>
+<li>Una simulación exitosa:<ol>
+<li>Garantiza EMC; </li>
+<li>Elimina la necesidad de datasheet; </li>
+<li><em><mark style="color:$primary;"><strong>Valida parte de la lógica, no todo el comportamiento físico;</strong></mark></em> </li>
+<li>Demuestra producción.</li>
+</ol>
+</li>
+</ol>
+<h4 id="parte-ii-desarrollo-4-reactivos-×-4-puntos-">Parte II. Desarrollo (4 reactivos × 4 puntos) <a href="#parte-ii-desarrollo-4-reactivos--4-puntos" id="parte-ii-desarrollo-4-reactivos--4-puntos"></a></h4>
+<ol>
+<li>Compare microcontrolador y microprocesador para un termostato a batería. Incluya integración, consumo y tiempo real.</li>
+</ol>
+<p><em><mark style="color:$primary;"><strong>Integración (1), consumo (1), determinismo/E/S (1), conclusión justificada a favor del MCU salvo requisito extraordinario (1).</strong></mark></em></p>
+<ol>
+<li>Dibuje textualmente el mapa de memoria del PIC16F887 e identifique reset, interrupción, programa, SFR, GPR y EEPROM.</li>
+</ol>
+<p><em><mark style="color:$primary;"><strong><code>0000h</code></strong></mark><mark style="color:$primary;"><strong> </strong></mark><mark style="color:$primary;"><strong>reset (0.5),</strong></mark><mark style="color:$primary;"><strong> </strong></mark><mark style="color:$primary;"><strong><code>0004h</code></strong></mark><mark style="color:$primary;"><strong> </strong></mark><mark style="color:$primary;"><strong>interrupción (0.5), programa hasta</strong></mark><mark style="color:$primary;"><strong> </strong></mark><mark style="color:$primary;"><strong><code>1FFFh</code></strong></mark><mark style="color:$primary;"><strong> </strong></mark><mark style="color:$primary;"><strong>(1), SFR/GPR por bancos (1), EEPROM separada vía registros (1).</strong></mark></em></p>
+<ol>
+<li>Diseñe el criterio de selección para un nodo con dos sensores I²C, UART, cuatro ADC y Wi-Fi. Justifique familia y dos riesgos.</li>
+</ol>
+<p><em><mark style="color:$primary;"><strong>Requisitos cuantificados (1), elección coherente —por ejemplo ESP32 por radio integrada— (1), contraste con alternativa (1), riesgos como consumo/radio/ADC/herramientas (1).</strong></mark></em></p>
+<ol>
+<li>Explique un plan de diagnóstico cuando un LED no parpadea en hardware aunque sí lo hace en simulación.</li>
+</ol>
+<p><em><mark style="color:$primary;"><strong>Alimentación/desacoplo (1), configuración de reloj/reset (1), dirección/función analógica y polaridad de pin (1), medición incremental con multímetro/osciloscopio/programador (1).</strong></mark></em></p>
+<h3 id="instrumento-2-rúbrica-de-análisis-de-datasheet-y-exposición-">Instrumento 2: rúbrica de análisis de datasheet y exposición <a href="#id-12-instrumento-2-rbrica-de-anlisis-de-datasheet-y" id="id-12-instrumento-2-rbrica-de-anlisis-de-datasheet-y"></a></h3>
+<p><strong>Producto:</strong> ficha técnica comparativa y exposición. <strong>Valor total:</strong> 100 puntos.</p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Peso</th>
+<th>Excelente</th>
+<th>Competente</th>
+<th>Básico</th>
+<th>Insuficiente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exactitud técnica</td>
+<td>25%</td>
+<td>Datos correctos, unidades y condiciones</td>
+<td>1–2 imprecisiones menores</td>
+<td>Omite condiciones importantes</td>
+<td>Errores que invalidan decisión</td>
+</tr>
+<tr>
+<td>Uso de fuentes</td>
+<td>15%</td>
+<td>Datasheets primarios, páginas/secciones y URL</td>
+<td>Fuentes primarias sin localización completa</td>
+<td>Predominan fuentes secundarias</td>
+<td>Sin trazabilidad</td>
+</tr>
+<tr>
+<td>Arquitectura y memoria</td>
+<td>15%</td>
+<td>Explica buses, CPU, mapa, SFR/GPR</td>
+<td>Explicación correcta con omisiones menores</td>
+<td>Descripción superficial</td>
+<td>Confunde conceptos</td>
+</tr>
+<tr>
+<td>Selección y trade-offs</td>
+<td>20%</td>
+<td>Matriz ponderada, márgenes y riesgos</td>
+<td>Decisión razonada</td>
+<td>Decisión con evidencia limitada</td>
+<td>Selección por popularidad</td>
+</tr>
+<tr>
+<td>Aplicación práctica</td>
+<td>10%</td>
+<td>Vincula periféricos con requisitos y circuito</td>
+<td>Vinculación mayormente correcta</td>
+<td>Ejemplo incompleto</td>
+<td>No aplica conceptos</td>
+</tr>
+<tr>
+<td>Comunicación visual/oral</td>
+<td>10%</td>
+<td>Clara, dentro del tiempo, diagramas legibles</td>
+<td>Comprensible</td>
+<td>Desorden o exceso de texto</td>
+<td>Incomprensible</td>
+</tr>
+<tr>
+<td>Respuesta crítica</td>
+<td>5%</td>
+<td>Responde con evidencia y reconoce límites</td>
+<td>Responde adecuadamente</td>
+<td>Respuestas vagas</td>
+<td>No sustenta</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conversión por criterio:</strong> </p>
+<ul>
+<li>Excelente = 100% del peso; </li>
+<li>Competente = 80%; </li>
+<li>Básico = 70%; </li>
+<li>Insuficiente = 69% o menos.</li>
+</ul>
+<p><strong>Condición de autenticidad:</strong> una cifra sin fuente verificable no puede obtener nivel Excelente.\
+<strong>Retroalimentación:</strong> registrar dos fortalezas, dos mejoras y una prueba adicional que el equipo debería ejecutar.</p>
+<h3 id="instrumento-3-rúbrica-de-evaluación-de-las-prácticas-con-arduino-">Instrumento 3: rúbrica de evaluación de las prácticas con Arduino <a href="#id-13-instrumento-3-rbrica-de-evaluacin-de-las-prctic" id="id-13-instrumento-3-rbrica-de-evaluacin-de-las-prctic"></a></h3>
+<p><strong>Producto:</strong> reporte de laboratorio de cada una de las prácticas de la sección 1.3 Prácticas (Práctica 1: GPIO y antirrebote; Práctica 2: ADC y transmisión serie; Práctica 3: temporizador, interrupción y LCD; Práctica 4: Conmutación y Multiplexación de Displays de 7 Segmentos (Ánodo Común)), todas desarrolladas sobre Arduino Uno. </p>
+<p><strong>Valor total:</strong> 100 puntos por práctica. Se aplica de manera idéntica a las cuatro prácticas para permitir comparar el progreso del estudiante a lo largo de la sección 1.3; la calificación final del tema puede promediar las tres aplicaciones de esta rúbrica.</p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Peso</th>
+<th>Excelente</th>
+<th>Competente</th>
+<th>Básico</th>
+<th>Insuficiente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Montaje del circuito</td>
+<td>15%</td>
+<td>Conexiones correctas, orden y rotulado claros, coinciden con el esquema de la práctica</td>
+<td>1–2 desviaciones menores sin afectar el resultado</td>
+<td>Montaje funcional pero desordenado o sin rotular</td>
+<td>No coincide con el esquema o no enciende</td>
+</tr>
+<tr>
+<td>Funcionamiento del sketch (alto nivel)</td>
+<td>20%</td>
+<td>El programa con funciones Arduino (<code>pinMode</code>, <code>digitalWrite</code>, <code>analogRead</code>, <code>attachInterrupt</code> / temporizador según la práctica) cumple el objetivo sin errores</td>
+<td>Funciona con 1–2 defectos menores no críticos</td>
+<td>Funciona parcialmente o requiere ayuda para operar</td>
+<td>No compila o no cumple el objetivo de la práctica</td>
+</tr>
+<tr>
+<td>Acceso directo a registros (bonus de competencia)</td>
+<td>20%</td>
+<td>Implementa y explica correctamente la versión por registros (<code>DDRx</code> / <code>PORTx</code> / <code>PINx</code>, <code>ADMUX</code> / <code>ADCSRA</code>, <code>TCCRx</code> / <code>TIMSKx</code> según corresponda) y la compara con la versión de alto nivel</td>
+<td>Implementa la versión por registros con explicación incompleta</td>
+<td>Copia el código de registros sin poder explicar qué bit modifica cada instrucción</td>
+<td>No incluye ni intenta la versión por registros</td>
+</tr>
+<tr>
+<td>Mediciones y análisis de error</td>
+<td>20%</td>
+<td>Tabla completa de mediciones, cálculo correcto de error absoluto/porcentual y discusión de causas (antirrebote, cuantización ADC, deriva del reloj, según la práctica)</td>
+<td>Mediciones completas con análisis de error superficial</td>
+<td>Mediciones incompletas o sin comparación contra un valor de referencia</td>
+<td>Sin mediciones o sin análisis numérico</td>
+</tr>
+<tr>
+<td>Reporte de laboratorio</td>
+<td>15%</td>
+<td>Sigue el formato común (apartado E), redacción clara, evidencias fotográficas/capturas del IDE y del circuito</td>
+<td>Sigue el formato con 1–2 apartados incompletos</td>
+<td>Formato incompleto o evidencias insuficientes</td>
+<td>No entrega el formato solicitado</td>
+</tr>
+<tr>
+<td>Respuestas al cuestionario</td>
+<td>10%</td>
+<td>Todas las preguntas de "Resultados y cuestionario" respondidas con evidencia técnica correcta</td>
+<td>La mayoría respondidas correctamente</td>
+<td>Respuestas superficiales o incompletas</td>
+<td>No responde o respuestas incorrectas</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conversión por criterio:</strong> </p>
+<ul>
+<li>Insuficiente = 69% o menos.</li>
+<li>Básico = 70%; </li>
+<li>Competente = 80%; </li>
+<li>Excelente = 100% del peso; </li>
+</ul>
+<p><strong>Condición de autenticidad:</strong> una medición o valor de error sin evidencia (captura, foto o dato del multímetro) no puede obtener nivel Excelente en "Mediciones y análisis de error".\
+<strong>Nota sobre la competencia de registros:</strong> el criterio "Acceso directo a registros" pondera 20% precisamente porque, al usar Arduino como plataforma de trabajo, es el criterio que garantiza que el estudiante no pierda la competencia oficial "Comprende la estructura de registros del microcontrolador" pese a trabajar con una capa de abstracción de alto nivel.\
+<strong>Retroalimentación:</strong> registrar dos fortalezas, dos áreas de mejora y una prueba adicional (por ejemplo, un caso límite o una entrada de ruido) que el estudiante debería ejecutar antes de la siguiente práctica.</p>
+<h4 id="tabla-de-ponderación-final-de-las-tres-prácticas-">Tabla de ponderación final de las tres prácticas <a href="#tabla-de-ponderacin-final-de-las-tres-prcticas" id="tabla-de-ponderacin-final-de-las-tres-prcticas"></a></h4>
+<p>La calificación del bloque de prácticas de la sección 1.3 se integra con las cuatro aplicaciones del Instrumento 3 (rúbrica de 100 puntos por práctica), ponderadas de forma distinta porque cada práctica añade complejidad técnica sobre la anterior: la Práctica 1 fija las bases de entrada/salida digital, la Práctica 2 añade conversión analógica y comunicación serie, la Práctica 3 integra temporización por hardware, interrupciones y un periférico de salida adicional (LCD) y la Práctica 4 integra hardware y salida adicional (Display).</p>
+<table>
+<thead>
+<tr>
+<th>Práctica</th>
+<th>Contenido evaluado</th>
+<th>Peso dentro del bloque de prácticas</th>
+<th>Calificación (rúbrica × peso)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Práctica 1: GPIO, botón y parpadeo no bloqueante</td>
+<td>Entrada/salida digital, antirrebote, <code>millis()</code>, registros <code>DDRB</code> / <code>PORTB</code> / <code>PIND</code></td>
+<td>20%</td>
+<td>Nota Práctica 1 × 0.20</td>
+</tr>
+<tr>
+<td>Práctica 2: adquisición ADC y transmisión serie</td>
+<td>ADC de 10 bits, cálculo de milivoltios, <code>Serial</code> / UART, registros <code>ADMUX</code> / <code>ADCSRA</code></td>
+<td>25%</td>
+<td>Nota Práctica 2 × 0.25</td>
+</tr>
+<tr>
+<td>Práctica 3: temporizador, interrupción y LCD 16×2</td>
+<td>Timer1 en modo CTC, interrupción <code>TIMER1_COMPA_vect</code>, biblioteca <code>LiquidCrystal</code>, concurrencia ISR / <code>loop()</code></td>
+<td>30%</td>
+<td>Nota Práctica 3 × 0.30</td>
+</tr>
+<tr>
+<td>Práctica 4: Conmutación y Multiplexación de Displays de 7 Segmentos (Ánodo Común)</td>
+<td>Multiplexación por software</td>
+<td>25%</td>
+<td>Nota Práctica 4 × 0.25</td>
+</tr>
+<tr>
+<td><strong>Total del bloque de prácticas</strong></td>
+<td>—</td>
+<td><strong>100%</strong></td>
+<td><strong>Suma de las cuatro filas anteriores</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fórmula de la calificación del bloque:</strong></p>
+<pre><code>Calificación prácticas = (0.20 × N1) + (0.25 × N2) + (0.30 × N3) + (0.25 × N4)
+</code></pre><p>donde <code>N1</code>, <code>N2</code> , <code>N3</code>  y <code>N4</code> son las calificaciones (sobre 100) obtenidas por cada práctica al aplicar el Instrumento 3.</p>
+<p><strong>Criterio de aprobación del bloque:</strong> se sugiere exigir una calificación mínima individual de 60/100 en cada práctica, además del promedio ponderado, para evitar que un desempeño sobresaliente en una práctica compense una práctica no realizada o reprobada en otra.</p>
 
                                 
                                 </section>
@@ -617,7 +930,7 @@
     </div>
 
     
-    <script type="application/json" id="honkit-page-context">{"page":{"title":"1.4 Evaluaciones","level":"1.2.4","depth":2,"next":{"title":"1.5 Fuentes de información","level":"1.2.5","depth":2,"path":"chapters/capitulo1/1.5-fuentes-de-informacion.md","ref":"chapters/capitulo1/1.5-fuentes-de-informacion.md","articles":[]},"previous":{"title":"1.3 Prácticas","level":"1.2.3","depth":2,"path":"chapters/capitulo1/1.3-practicas.md","ref":"chapters/capitulo1/1.3-practicas.md","articles":[]},"dir":"ltr"},"config":{"plugins":["gitbook-blocks"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"gitbook-blocks":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/1.4-evaluaciones.md","mtime":"2026-11-24T23:28:17.292Z","type":"markdown"},"gitbook":{"version":"7.0.1","time":"2026-11-24T23:29:35.897Z"},"basePath":"../..","book":{"language":""}}</script>
+    <script type="application/json" id="honkit-page-context">{"page":{"icon":"list-check","title":"1.4 Evaluaciones","level":"1.2.4","depth":2,"next":{"title":"1.5 Fuentes de información","level":"1.2.5","depth":2,"path":"chapters/capitulo1/1.5-fuentes-de-informacion.md","ref":"chapters/capitulo1/1.5-fuentes-de-informacion.md","articles":[]},"previous":{"title":"1.3 Prácticas","level":"1.2.3","depth":2,"path":"chapters/capitulo1/1.3-practicas.md","ref":"chapters/capitulo1/1.3-practicas.md","articles":[]},"dir":"ltr"},"config":{"plugins":["gitbook-blocks"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"gitbook-blocks":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo1/1.4-evaluaciones.md","mtime":"2026-11-25T00:30:45.979Z","type":"markdown"},"gitbook":{"version":"7.0.1","time":"2026-11-25T00:32:12.926Z"},"basePath":"../..","book":{"language":""}}</script>
 </div>
 
         
