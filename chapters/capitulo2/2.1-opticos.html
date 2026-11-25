@@ -628,6 +628,133 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="21-ópticos">2.1 Ópticos</h1>
+<h3 id="210-fundamentos-de-sensores">2.1.0 Fundamentos de sensores</h3>
+<h4 id="¿qué-es-un-sensor-">¿Qué es un sensor? <a href="#id-21-qu-es-un-sensor" id="id-21-qu-es-un-sensor"></a></h4>
+<p>Un <strong>sensor</strong> es el elemento de un sistema de medición que responde directamente a una magnitud física, química o biológica —el <strong>mensurando</strong>— y entrega una señal relacionada con ella, normalmente eléctrica. El <em>Vocabulario Internacional de Metrología</em> (VIM) define el sensor como el “elemento de un sistema de medida directamente afectado por un fenómeno, cuerpo o sustancia portador de la magnitud a medir”, y el <strong>mensurando</strong> como la magnitud que se desea medir (<a href="https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf" target="_blank">BIPM, JCGM 200:2012, VIM</a>). En un sistema programable, el sensor es la “puerta de entrada” del mundo físico hacia el microcontrolador: sin él no hay interfaz máquina-máquina posible.</p>
+<p><img src="../../.gitbook/assets/https-quimicosonador.files.wordpress.com-2012-03-esquema-sensor.png.png" alt="Imagen 2.1 Estructura de un sensor (https://quimicosonador.files.wordpress.com/2012/03/esquema-sensor.png)"></img></p>
+<h4 id="transductor-y-sensor-">Transductor y sensor <a href="#id-22-transductor-y-sensor" id="id-22-transductor-y-sensor"></a></h4>
+<p>Un <strong>transductor</strong> es cualquier dispositivo que convierte una forma de energía o una magnitud en otra con una relación determinada (por ejemplo, temperatura en voltaje, presión en resistencia, voltaje en desplazamiento). Todo sensor es un transductor de entrada, pero no todo transductor es un sensor: un altavoz o un motor son transductores de salida.</p>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Transductor</th>
+<th>Sensor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Definición</td>
+<td>Convierte una magnitud o energía en otra</td>
+<td>Elemento directamente afectado por el mensurando</td>
+</tr>
+<tr>
+<td>Dirección</td>
+<td>Entrada o salida</td>
+<td>Siempre de entrada (medición)</td>
+</tr>
+<tr>
+<td>Ejemplos</td>
+<td>Termopar, altavoz, piezoeléctrico, motor</td>
+<td>Termistor NTC, LDR, BME280, HC-SR04</td>
+</tr>
+<tr>
+<td>En el sistema programable</td>
+<td>Puede ser sensor o actuador</td>
+<td>Alimenta al ADC o a una interfaz digital</td>
+</tr>
+</tbody>
+</table>
+<p>En la práctica comercial, la palabra “sensor” suele designar un <strong>módulo completo</strong>:</p>
+<p> <kbd>elemento sensor</kbd> + <kbd>acondicionamiento</kbd> + <kbd>conversión</kbd> + <kbd>interfaz</kbd></p>
+<p>Por ejemplo, el BME280 integra los elementos sensores de humedad, presión y temperatura, el ADC y las interfaces I²C/SPI en un encapsulado de 2.5 mm × 2.5 mm (<a href="https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf" target="_blank">Bosch Sensortec, BME280 Data sheet</a>).</p>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""></img><figcaption><p>Imagen 2.2 Sensor BME280 Bosh de humedad, presión y temperatura</p></figcaption></figure>
+
+<h4 id="cadena-de-medición-">Cadena de medición <a href="#id-23-cadena-de-medicin" id="id-23-cadena-de-medicin"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Eslabón de la cadena</th>
+<th>Ejemplo para medir temperatura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Mensurando</td>
+<td>Temperatura del aire o de un líquido</td>
+</tr>
+<tr>
+<td>2. Elemento sensor</td>
+<td>NTC, LM35</td>
+</tr>
+<tr>
+<td>3. Acondicionamiento</td>
+<td>Divisor de voltaje, amplificador operacional, filtro, protección</td>
+</tr>
+<tr>
+<td>4. Conversión A/D</td>
+<td>ADC de 10 bits del ATmega328P o ADC integrado en el sensor</td>
+</tr>
+<tr>
+<td>5. Microcontrolador</td>
+<td>ATmega328P de la Arduino Uno</td>
+</tr>
+<tr>
+<td>6. Procesamiento y comunicación</td>
+<td>Calibración, filtrado, envío por Serial o I²C, pantalla</td>
+</tr>
+</tbody>
+</table>
+<p>Cada eslabón añade error: </p>
+<ul>
+<li>El sensor tiene tolerancia y deriva; </li>
+<li>El acondicionamiento, ganancia y offset; </li>
+<li>El ADC, cuantización y error de referencia; </li>
+<li>El software, redondeo.</li>
+</ul>
+<h4 id="clasificación-">Clasificación <a href="#id-24-clasificacin" id="id-24-clasificacin"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Clases</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Energía</td>
+<td><strong>Activos</strong> (generan su propia señal, autogeneradores) / <strong>Pasivos</strong> (moduladores, requieren excitación externa)</td>
+<td>Termopar, fotodiodo en modo fotovoltaico, piezoeléctrico / NTC, LDR, galga extensométrica</td>
+</tr>
+<tr>
+<td>Tipo de salida</td>
+<td><strong>Analógica</strong> (voltaje, corriente, resistencia continua) / <strong>Digital</strong> (niveles lógicos, tren de pulsos, protocolo serie)</td>
+<td>LM35, MPX5010, GP2Y0A21 / DS18B20, DHT22, BME280, HC-SR04</td>
+</tr>
+<tr>
+<td>Variable física</td>
+<td>Temperatura, luz, distancia/proximidad, movimiento, presión, humedad, gas, fuerza, campo magnético</td>
+<td>Revisar los subtemas 2.1, 2.2, 2.3 y 2.4</td>
+</tr>
+<tr>
+<td>Principio</td>
+<td>Resistivo, capacitivo, inductivo, piezoeléctrico, termoeléctrico, fotoeléctrico, efecto Hall, ultrasónico, electroquímico</td>
+<td>NTC, humedad capacitiva, proximidad inductiva, termopar, fotodiodo, DRV5053, HC-SR04, MQ-2</td>
+</tr>
+<tr>
+<td>Contacto</td>
+<td>Con contacto / Sin contacto</td>
+<td>Termopar en contacto / pirómetro IR, ultrasónico</td>
+</tr>
+<tr>
+<td>Salida respecto a la variable</td>
+<td>Continua (medición) / Binaria (detección, umbral)</td>
+<td>NTC / PIR HC-SR501, sensor inductivo NPN</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nota</strong>: en la literatura en español, “<em><strong>activo</strong></em>” se usa a veces con el sentido opuesto (sensor “activo” = el que necesita alimentación). Para el desarrollo de estos apuntes se adopta el criterio energético: <strong>activo = autogenerador</strong>, <strong>pasivo = modulador</strong>, y se pide al estudiante declarar el criterio usado en cada reporte.</p>
 <h3 id="211-tipos">2.1.1 Tipos</h3>
 <h3 id="212-funcionamiento">2.1.2 Funcionamiento</h3>
 <h3 id="213-características">2.1.3 Características</h3>
@@ -673,7 +800,7 @@
     </div>
 
     
-    <script type="application/json" id="honkit-page-context">{"page":{"title":"2.1 Ópticos","level":"1.3.1","depth":2,"next":{"title":"2.2 Temperatura","level":"1.3.2","depth":2,"path":"chapters/capitulo2/2.2-temperatura.md","ref":"chapters/capitulo2/2.2-temperatura.md","articles":[]},"previous":{"title":"Tema 2: Sensores","level":"1.3","depth":1,"path":"chapters/capitulo2/README.md","ref":"chapters/capitulo2/README.md","articles":[{"title":"2.1 Ópticos","level":"1.3.1","depth":2,"path":"chapters/capitulo2/2.1-opticos.md","ref":"chapters/capitulo2/2.1-opticos.md","articles":[]},{"title":"2.2 Temperatura","level":"1.3.2","depth":2,"path":"chapters/capitulo2/2.2-temperatura.md","ref":"chapters/capitulo2/2.2-temperatura.md","articles":[]},{"title":"2.3 Presión","level":"1.3.3","depth":2,"path":"chapters/capitulo2/2.3-presion.md","ref":"chapters/capitulo2/2.3-presion.md","articles":[]},{"title":"2.4 Proximidad","level":"1.3.4","depth":2,"path":"chapters/capitulo2/2.4-proximidad.md","ref":"chapters/capitulo2/2.4-proximidad.md","articles":[]},{"title":"2.5 Prácticas","level":"1.3.5","depth":2,"path":"chapters/capitulo2/2.5-practicas.md","ref":"chapters/capitulo2/2.5-practicas.md","articles":[]},{"title":"2.6 Evaluaciones","level":"1.3.6","depth":2,"path":"chapters/capitulo2/2.6-evaluaciones.md","ref":"chapters/capitulo2/2.6-evaluaciones.md","articles":[]},{"title":"2.7 Fuentes de información","level":"1.3.7","depth":2,"path":"chapters/capitulo2/2.7-fuentes-de-informacion.md","ref":"chapters/capitulo2/2.7-fuentes-de-informacion.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["gitbook-blocks"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"gitbook-blocks":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo2/2.1-opticos.md","mtime":"2026-11-25T20:05:06.756Z","type":"markdown"},"gitbook":{"version":"7.0.1","time":"2026-11-25T20:06:30.637Z"},"basePath":"../..","book":{"language":""}}</script>
+    <script type="application/json" id="honkit-page-context">{"page":{"title":"2.1 Ópticos","level":"1.3.1","depth":2,"next":{"title":"2.2 Temperatura","level":"1.3.2","depth":2,"path":"chapters/capitulo2/2.2-temperatura.md","ref":"chapters/capitulo2/2.2-temperatura.md","articles":[]},"previous":{"title":"Tema 2: Sensores","level":"1.3","depth":1,"path":"chapters/capitulo2/README.md","ref":"chapters/capitulo2/README.md","articles":[{"title":"2.1 Ópticos","level":"1.3.1","depth":2,"path":"chapters/capitulo2/2.1-opticos.md","ref":"chapters/capitulo2/2.1-opticos.md","articles":[]},{"title":"2.2 Temperatura","level":"1.3.2","depth":2,"path":"chapters/capitulo2/2.2-temperatura.md","ref":"chapters/capitulo2/2.2-temperatura.md","articles":[]},{"title":"2.3 Presión","level":"1.3.3","depth":2,"path":"chapters/capitulo2/2.3-presion.md","ref":"chapters/capitulo2/2.3-presion.md","articles":[]},{"title":"2.4 Proximidad","level":"1.3.4","depth":2,"path":"chapters/capitulo2/2.4-proximidad.md","ref":"chapters/capitulo2/2.4-proximidad.md","articles":[]},{"title":"2.5 Prácticas","level":"1.3.5","depth":2,"path":"chapters/capitulo2/2.5-practicas.md","ref":"chapters/capitulo2/2.5-practicas.md","articles":[]},{"title":"2.6 Evaluaciones","level":"1.3.6","depth":2,"path":"chapters/capitulo2/2.6-evaluaciones.md","ref":"chapters/capitulo2/2.6-evaluaciones.md","articles":[]},{"title":"2.7 Fuentes de información","level":"1.3.7","depth":2,"path":"chapters/capitulo2/2.7-fuentes-de-informacion.md","ref":"chapters/capitulo2/2.7-fuentes-de-informacion.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["gitbook-blocks"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fontsettings":{"theme":"white","family":"sans","size":2},"gitbook-blocks":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Ma. Elena Martínez Durán","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Noto Sans","paperSize":"letter","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"epub":{"css":[]},"title":"Apuntes Sistemas Programables (SCC-1023)","language":"es","links":{"sidebar":{"Repositorio en GitHub":"https://github.com/MaElenaMtzDuran/apuntes-sistemas-programables"}},"gitbook":"*","description":"Apuntes electrónicos para la asignatura de Sistemas Programables (SCC-1023) de la carrera de Ingeniería en Sistemas Computacionales del TecNM."},"file":{"path":"chapters/capitulo2/2.1-opticos.md","mtime":"2026-11-25T21:02:17.376Z","type":"markdown"},"gitbook":{"version":"7.0.1","time":"2026-11-25T21:03:27.083Z"},"basePath":"../..","book":{"language":""}}</script>
 </div>
 
         
